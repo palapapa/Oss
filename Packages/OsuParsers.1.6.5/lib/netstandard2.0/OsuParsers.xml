@@ -1,0 +1,330 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OsuParsers</name>
+    </assembly>
+    <members>
+        <member name="M:OsuParsers.Beatmaps.Beatmap.BeatLengthAt(System.Int32)">
+            <summary>
+            Returns nearest beat length from the given offset.
+            </summary>
+            <param name="offset">Time in song. Should be in milliseconds.</param>
+            <returns></returns>
+        </member>
+        <member name="M:OsuParsers.Beatmaps.Beatmap.Write(System.String)">
+            <summary>
+            Writes this <see cref="T:OsuParsers.Beatmaps.Beatmap"/> to the specified path.
+            </summary>
+        </member>
+        <member name="M:OsuParsers.Beatmaps.Objects.Mania.ManiaNote.SetColumn(System.Int32,System.Int32)">
+            <summary>
+            Sets column of this object.
+            </summary>
+            <param name="count">Total number of columns of this beatmap. Usually it's CircleSize.</param>
+            <param name="column">Index of the column you want to set. Should start from 0. e.g. index of first column is 0.</param>
+        </member>
+        <member name="M:OsuParsers.Beatmaps.Objects.Mania.ManiaNote.GetColumn(System.Int32)">
+            <summary>
+            Returns column of this object.
+            </summary>
+            <param name="count">Total number of columns of this beatmap. Usually it's CircleSize.</param>
+        </member>
+        <member name="M:OsuParsers.Database.CollectionDatabase.Write(System.String)">
+            <summary>
+            Writes this <see cref="T:OsuParsers.Database.CollectionDatabase"/> to the specified path.
+            </summary>
+        </member>
+        <member name="M:OsuParsers.Database.OsuDatabase.Write(System.String)">
+            <summary>
+            Writes this <see cref="T:OsuParsers.Database.OsuDatabase"/> to the specified path.
+            </summary>
+        </member>
+        <member name="M:OsuParsers.Database.PresenceDatabase.Write(System.String)">
+            <summary>
+            Writes this <see cref="T:OsuParsers.Database.PresenceDatabase"/> to the specified path.
+            </summary>
+        </member>
+        <member name="M:OsuParsers.Database.ScoresDatabase.Write(System.String)">
+            <summary>
+            Writes this <see cref="T:OsuParsers.Database.ScoresDatabase"/> to the specified path.
+            </summary>
+        </member>
+        <member name="M:OsuParsers.Decoders.BeatmapDecoder.Decode(System.String)">
+            <summary>
+            Parses .osu file.
+            </summary>
+            <param name="path">Path to the .osu file.</param>
+            <returns>A usable beatmap.</returns>
+        </member>
+        <member name="M:OsuParsers.Decoders.BeatmapDecoder.Decode(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Parses .osu file.
+            </summary>
+            <param name="lines">Array of text lines containing beatmap data.</param>
+            <returns>A usable beatmap.</returns>
+        </member>
+        <member name="M:OsuParsers.Decoders.BeatmapDecoder.Decode(System.IO.Stream)">
+            <summary>
+            Parses .osu file.
+            </summary>
+            <param name="stream">Stream containing beatmap data.</param>
+            <returns>A usable beatmap.</returns>
+        </member>
+        <member name="M:OsuParsers.Decoders.DatabaseDecoder.DecodeOsu(System.String)">
+            <summary>
+            Parses osu!.db file.
+            </summary>
+            <param name="path">Path to the osu!.db file.</param>
+            <returns>A usable <see cref="T:OsuParsers.Database.OsuDatabase"/>.</returns>
+        </member>
+        <member name="M:OsuParsers.Decoders.DatabaseDecoder.DecodeOsu(System.IO.Stream)">
+            <summary>
+            Parses osu!.db file.
+            </summary>
+            <param name="stream">Stream containing osu!.db data.</param>
+            <returns>A usable <see cref="T:OsuParsers.Database.OsuDatabase"/>.</returns>
+        </member>
+        <member name="M:OsuParsers.Decoders.DatabaseDecoder.DecodeCollection(System.String)">
+            <summary>
+            Parses collection.db file.
+            </summary>
+            <param name="path">Path to the collection.db file.</param>
+            <returns>A usable <see cref="T:OsuParsers.Database.CollectionDatabase"/>.</returns>
+        </member>
+        <member name="M:OsuParsers.Decoders.DatabaseDecoder.DecodeCollection(System.IO.Stream)">
+            <summary>
+            Parses collection.db file.
+            </summary>
+            <param name="stream">Stream containing collection.db data.</param>
+            <returns>A usable <see cref="T:OsuParsers.Database.CollectionDatabase"/>.</returns>
+        </member>
+        <member name="M:OsuParsers.Decoders.DatabaseDecoder.DecodeScores(System.String)">
+            <summary>
+            Parses scores.db file.
+            </summary>
+            <param name="path">Path to the scores.db file.</param>
+            <returns>A usable <see cref="T:OsuParsers.Database.ScoresDatabase"/>.</returns>
+        </member>
+        <member name="M:OsuParsers.Decoders.DatabaseDecoder.DecodeScores(System.IO.Stream)">
+            <summary>
+            Parses scores.db file.
+            </summary>
+            <param name="stream">Stream containing scores.db data.</param>
+            <returns>A usable <see cref="T:OsuParsers.Database.ScoresDatabase"/>.</returns>
+        </member>
+        <member name="M:OsuParsers.Decoders.DatabaseDecoder.DecodePresence(System.String)">
+            <summary>
+            Parses presence.db file.
+            </summary>
+            <param name="path">Path to the presence.db file.</param>
+            <returns>A usable <see cref="T:OsuParsers.Database.PresenceDatabase"/>.</returns>
+        </member>
+        <member name="M:OsuParsers.Decoders.DatabaseDecoder.DecodePresence(System.IO.Stream)">
+            <summary>
+            Parses presence.db file.
+            </summary>
+            <param name="stream">Stream containing presence.db data.</param>
+            <returns>A usable <see cref="T:OsuParsers.Database.PresenceDatabase"/>.</returns>
+        </member>
+        <member name="M:OsuParsers.Decoders.ReplayDecoder.Decode(System.String)">
+            <summary>
+            Parses .osr file.
+            </summary>
+            <param name="path">Path to the .osr file.</param>
+            <returns>A usable <see cref="T:OsuParsers.Replays.Replay"/>.</returns>
+        </member>
+        <member name="M:OsuParsers.Decoders.ReplayDecoder.Decode(System.IO.Stream)">
+            <summary>
+            Parses .osr file.
+            </summary>
+            <param name="stream">Stream containing replay data.</param>
+            <returns>A usable <see cref="T:OsuParsers.Replays.Replay"/>.</returns>
+        </member>
+        <member name="M:OsuParsers.Decoders.SkinDecoder.Decode(System.String)">
+            <summary>
+            Parses skin.ini file.
+            </summary>
+            <param name="path">Path to the skin.ini file.</param>
+            <returns>A usable skin.</returns>
+        </member>
+        <member name="M:OsuParsers.Decoders.SkinDecoder.Decode(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Parses skin.ini file.
+            </summary>
+            <param name="lines">Array of text lines containing skin.ini data.</param>
+            <returns>A usable skin.</returns>
+        </member>
+        <member name="M:OsuParsers.Decoders.SkinDecoder.Decode(System.IO.Stream)">
+            <summary>
+            Parses skin.ini file.
+            </summary>
+            <param name="stream">Stream containing skin.ini data.</param>
+            <returns>A usable skin.</returns>
+        </member>
+        <member name="M:OsuParsers.Decoders.StoryboardDecoder.Decode(System.String)">
+            <summary>
+            Parses .osb file.
+            </summary>
+            <param name="path">Path to the .osb file.</param>
+            <returns>A usable storyboard.</returns>
+        </member>
+        <member name="M:OsuParsers.Decoders.StoryboardDecoder.Decode(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Parses .osb file.
+            </summary>
+            <param name="lines">Array of text lines containing storyboard data.</param>
+            <returns>A usable storyboard.</returns>
+        </member>
+        <member name="M:OsuParsers.Decoders.StoryboardDecoder.Decode(System.IO.Stream)">
+            <summary>
+            Parses .osb file.
+            </summary>
+            <param name="stream">Stream containing storyboard data.</param>
+            <returns>A usable storyboard.</returns>
+        </member>
+        <member name="M:OsuParsers.Replays.Replay.Write(System.String)">
+            <summary>
+            Writes this <see cref="T:OsuParsers.Replays.Replay"/> to the specified path.
+            </summary>
+        </member>
+        <member name="M:OsuParsers.Skins.Skin.Write(System.String)">
+            <summary>
+            Writes this <see cref="T:OsuParsers.Skins.Skin"/> to the specified path.
+            </summary>
+        </member>
+        <member name="M:OsuParsers.Storyboards.Storyboard.GetLayer(OsuParsers.Enums.Storyboards.StoryboardLayer)">
+            <summary>
+            Returns specified storyboard layer.
+            </summary>
+        </member>
+        <member name="M:OsuParsers.Storyboards.Storyboard.Write(System.String)">
+            <summary>
+            Writes this <see cref="T:OsuParsers.Storyboards.Storyboard"/> to the specified path.
+            </summary>
+        </member>
+        <member name="T:SevenZip.DataErrorException">
+            <summary>
+            The exception that is thrown when an error in input stream occurs during decoding.
+            </summary>
+        </member>
+        <member name="T:SevenZip.InvalidParamException">
+            <summary>
+            The exception that is thrown when the value of an argument is outside the allowable range.
+            </summary>
+        </member>
+        <member name="M:SevenZip.ICodeProgress.SetProgress(System.Int64,System.Int64)">
+            <summary>
+            Callback progress.
+            </summary>
+            <param name="inSize">
+            input size. -1 if unknown.
+            </param>
+            <param name="outSize">
+            output size. -1 if unknown.
+            </param>
+        </member>
+        <member name="M:SevenZip.ICoder.Code(System.IO.Stream,System.IO.Stream,System.Int64,System.Int64,SevenZip.ICodeProgress)">
+            <summary>
+            Codes streams.
+            </summary>
+            <param name="inStream">
+            input Stream.
+            </param>
+            <param name="outStream">
+            output Stream.
+            </param>
+            <param name="inSize">
+            input Size. -1 if unknown.
+            </param>
+            <param name="outSize">
+            output Size. -1 if unknown.
+            </param>
+            <param name="progress">
+            callback progress reference.
+            </param>
+            <exception cref="T:SevenZip.DataErrorException">
+            if input stream is not valid
+            </exception>
+        </member>
+        <member name="T:SevenZip.CoderPropID">
+            <summary>
+            Provides the fields that represent properties idenitifiers for compressing.
+            </summary>
+        </member>
+        <member name="F:SevenZip.CoderPropID.DefaultProp">
+            <summary>
+            Specifies default property.
+            </summary>
+        </member>
+        <member name="F:SevenZip.CoderPropID.DictionarySize">
+            <summary>
+            Specifies size of dictionary.
+            </summary>
+        </member>
+        <member name="F:SevenZip.CoderPropID.UsedMemorySize">
+            <summary>
+            Specifies size of memory for PPM*.
+            </summary>
+        </member>
+        <member name="F:SevenZip.CoderPropID.Order">
+            <summary>
+            Specifies order for PPM methods.
+            </summary>
+        </member>
+        <member name="F:SevenZip.CoderPropID.BlockSize">
+            <summary>
+            Specifies Block Size.
+            </summary>
+        </member>
+        <member name="F:SevenZip.CoderPropID.PosStateBits">
+            <summary>
+            Specifies number of postion state bits for LZMA (0 &lt;= x &lt;= 4).
+            </summary>
+        </member>
+        <member name="F:SevenZip.CoderPropID.LitContextBits">
+            <summary>
+            Specifies number of literal context bits for LZMA (0 &lt;= x &lt;= 8).
+            </summary>
+        </member>
+        <member name="F:SevenZip.CoderPropID.LitPosBits">
+            <summary>
+            Specifies number of literal position bits for LZMA (0 &lt;= x &lt;= 4).
+            </summary>
+        </member>
+        <member name="F:SevenZip.CoderPropID.NumFastBytes">
+            <summary>
+            Specifies number of fast bytes for LZ*.
+            </summary>
+        </member>
+        <member name="F:SevenZip.CoderPropID.MatchFinder">
+            <summary>
+            Specifies match finder. LZMA: "BT2", "BT4" or "BT4B".
+            </summary>
+        </member>
+        <member name="F:SevenZip.CoderPropID.MatchFinderCycles">
+            <summary>
+            Specifies the number of match finder cyckes.
+            </summary>
+        </member>
+        <member name="F:SevenZip.CoderPropID.NumPasses">
+            <summary>
+            Specifies number of passes.
+            </summary>
+        </member>
+        <member name="F:SevenZip.CoderPropID.Algorithm">
+            <summary>
+            Specifies number of algorithm.
+            </summary>
+        </member>
+        <member name="F:SevenZip.CoderPropID.NumThreads">
+            <summary>
+            Specifies the number of threads.
+            </summary>
+        </member>
+        <member name="F:SevenZip.CoderPropID.EndMarker">
+            <summary>
+            Specifies mode with end marker.
+            </summary>
+        </member>
+    </members>
+</doc>
