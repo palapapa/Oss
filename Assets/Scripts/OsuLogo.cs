@@ -4,17 +4,23 @@ using UnityEngine.UI;
 
 public class OsuLogo : MonoBehaviour
 {
-    public GameObject popUpButtonsLogo;
-    public Button play;
+    public GameObject PopUpButtonsLogo;
+    public Button Play;
+    public Button Options;
+    public Button Exit;
     private Animator animator;
+    private Animator popUpButtonsAnimator;
+    private Animator[] popUpButtonsAnimators;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
+        popUpButtonsAnimator = PopUpButtonsLogo.GetComponent<Animator>();
+        popUpButtonsAnimators = PopUpButtonsLogo.GetComponentsInChildren<Animator>();
     }
     public void ClickOsuLogo()
     {
-        popUpButtonsLogo.SetActive(true);
-        play.GetComponent<Animator>().SetTrigger("LogoPressed");
+        PopUpButtonsLogo.SetActive(true);
+        popUpButtonsAnimator.SetTrigger("LogoPressed");
     }
 }
