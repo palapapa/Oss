@@ -8,13 +8,17 @@ public class OsuLogo : MonoBehaviour
     public Button Play;
     public Button Options;
     public Button Exit;
-    private Animator animator;
+    public Animator Animator;
+    public OsuLogo Instance;
     private Animator popUpButtonsAnimator;
     private Animator[] popUpButtonsAnimators;
 
+    private OsuLogo()
+    {
+        Instance = this;
+    }
     private void Start()
     {
-        animator = GetComponent<Animator>();
         popUpButtonsAnimator = PopUpButtonsLogo.GetComponent<Animator>();
         popUpButtonsAnimators = PopUpButtonsLogo.GetComponentsInChildren<Animator>();
     }
@@ -22,5 +26,13 @@ public class OsuLogo : MonoBehaviour
     {
         PopUpButtonsLogo.SetActive(true);
         popUpButtonsAnimator.SetTrigger("LogoPressed");
+    }
+    private void Awake()
+    {
+        SetLogoBpm(this, 160);//placeholder
+    }
+    public static void SetLogoBpm(OsuLogo ol, int bpm)
+    {
+        ol.Instance.Animator.speed = bpm / 180.0f;//dependent on animation clip OsuLogoPulsating
     }
 }
