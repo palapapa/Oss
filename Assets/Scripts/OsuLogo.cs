@@ -21,6 +21,7 @@ public class OsuLogo : MonoBehaviour
     {
         popUpButtonsAnimator = PopUpButtonsLogo.GetComponent<Animator>();
         popUpButtonsAnimators = PopUpButtonsLogo.GetComponentsInChildren<Animator>();
+        AudioUtilities.PlayAudio(Audios.Instance.Triangles);
     }
     public void ClickOsuLogo()
     {
@@ -33,6 +34,6 @@ public class OsuLogo : MonoBehaviour
     }
     public static void SetLogoBpm(OsuLogo ol, int bpm)
     {
-        ol.Instance.Animator.speed = bpm / 180.0f;//dependent on animation clip OsuLogoPulsating
+        ol.Instance.Animator.SetFloat("PulsatingSpeed", bpm / 180.0f);//dependent on animation clip OsuLogoPulsating
     }
 }
