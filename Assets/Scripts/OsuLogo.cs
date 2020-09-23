@@ -21,7 +21,6 @@ public class OsuLogo : MonoBehaviour
     {
         popUpButtonsAnimator = PopUpButtonsLogo.GetComponent<Animator>();
         popUpButtonsAnimators = PopUpButtonsLogo.GetComponentsInChildren<Animator>();
-        AudioUtilities.PlayAudio(Audios.Instance.Triangles);
     }
     public void ClickOsuLogo()
     {
