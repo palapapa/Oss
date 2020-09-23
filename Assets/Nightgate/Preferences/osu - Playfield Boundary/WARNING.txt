@@ -1,0 +1,7 @@
+
+WARNING
+
+The score will be dimmed during gameplay when this option is used.
+
+
+(preference set in “UI - Gameplay Score Dimmig”)

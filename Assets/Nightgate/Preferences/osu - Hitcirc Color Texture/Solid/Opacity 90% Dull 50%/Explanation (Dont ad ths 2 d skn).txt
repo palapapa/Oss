@@ -1,0 +1,5 @@
+EXPLANATION:
+
+This hit circle is quite opaque (solid, not clear) 
+and it darkens beatmap circle colours by 50% when used.
+(Beatmap colours are shaded black by 50%)
