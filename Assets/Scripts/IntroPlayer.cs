@@ -12,6 +12,7 @@ public class IntroPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        VideoPlayer.Prepare();
         VideoPlayer.prepareCompleted += (VideoPlayer source) =>
         {
             AudioUtilities.PlayAudio(Audios.Instance.Triangles);
@@ -21,7 +22,6 @@ public class IntroPlayer : MonoBehaviour
             VideoPlayer.targetCameraAlpha = 0;
             Fade.GetComponent<Animator>().SetTrigger("Fading");
             BeforeImageReadyBlack.color = new Color(0, 0, 0, 0);
-            Destroy(this.gameObject);
         };
         VideoPlayer.Play();
     }
