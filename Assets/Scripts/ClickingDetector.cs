@@ -16,7 +16,7 @@ public class ClickingDetector : MonoBehaviour
             RaycastHit2D hitInfo = Physics2D.GetRayIntersection(ray);
             if (hitInfo.collider != null)
             {
-                ILeftClickable clicked = InterfaceUtilities.GetInterface<ILeftClickable>(hitInfo.collider.gameObject);
+                ILeftClickable clicked = Utilities.GetInterface<ILeftClickable>(hitInfo.collider.gameObject);
                 if (clicked != null)
                 {
                     clicked.OnLeftClick();

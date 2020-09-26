@@ -1,0 +1,576 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>System.Geometry</name>
+    </assembly>
+    <members>
+        <member name="M:System.Geometry.Angle.OfLineInDegrees(System.Geometry.Line)">
+            Angle of a line path.
+            
+            @param line The line path to find the angle of.
+            @returns Angle of the line path, in degrees.
+        </member>
+        <member name="M:System.Geometry.Angle.splitDecimal(System.Single)">
+            Split a decimal into its whole and fractional parts as strings.
+            
+            Example: get whole and fractional parts of 42.056
+            ```
+            makerjs.splitDecimal(42.056); //returns ["42", "056"]
+            ```
+            
+            @param n The number to split.
+            @returns Array of 2 strings when n contains a decimal point, or an array of one string when n is an integer.
+        </member>
+        <member name="M:System.Geometry.Angle.NoRevolutions(System.Single)">
+            Ensures an angle is not greater than 360
+            
+            @param angleInDegrees Angle in degrees.
+            @returns Same polar angle but not greater than 360 degrees.
+        </member>
+        <member name="M:System.Geometry.Angle.OfPointInRadians(System.Numerics.Vector2,System.Numerics.Vector2)">
+            Angle of a line through a point, in radians.
+            
+            @param pointToFindAngle The point to find the angle.
+            @param origin Point of origin of the angle.
+            @returns Angle of the line throught the point, in radians.
+        </member>
+        <member name="M:System.Geometry.Angle.Mirror(System.Single,System.Boolean,System.Boolean)">
+            <summary>
+            Mirror an angle on either or both x and y axes.
+            </summary>
+            <param name="angleInDegrees">The angle to mirror.</param>
+            <param name="mirrorX">Boolean to mirror on the x axis.</param>
+            <param name="mirrorY">Boolean to mirror on the y axis.</param>
+            <returns>Mirrored angle.</returns>
+        </member>
+        <member name="M:System.Geometry.Angle.OfArcEnd(System.Geometry.Arc)">
+            <summary>
+            Get an arc's end angle, ensured to be greater than its start angle.
+            </summary>
+            <param name="arc">An arc path object.</param>
+            <returns>End angle of arc</returns>
+        </member>
+        <member name="M:System.Geometry.Angle.OfArcMiddle(System.Geometry.Arc,System.Single)">
+            Get the angle in the middle of an arc's start and end angles.
+            
+            @param arc An arc path object.
+            @param ratio Optional number between 0 and 1 specifying percentage between start and end angles.
+            @returns Middle angle of arc.
+        </member>
+        <member name="M:System.Geometry.Angle.OfArcSpan(System.Geometry.Arc)">
+            Total angle of an arc between its start and end angles.
+            
+            @param arc The arc to measure.
+            @returns Angle of arc.
+        </member>
+        <member name="F:System.Geometry.Arc.Radius">
+            <summary>
+            The radius of the circle.
+            </summary>
+        </member>
+        <member name="F:System.Geometry.Arc.StartAngle">
+            <summary>
+            The angle (in degrees) to begin drawing the arc, in polar (counter-clockwise) direction.
+            </summary>
+        </member>
+        <member name="F:System.Geometry.Arc.EndAngle">
+            <summary>
+            The angle (in degrees) to end drawing the arc, in polar (counter-clockwise) direction. May be less than start angle if it past 360.
+            </summary>
+        </member>
+        <member name="M:System.Geometry.Arc.#ctor(System.Numerics.Vector2,System.Numerics.Vector2,System.Boolean)">
+            Class for arc path, created from 2 points and optional bool flag indicating clockwise.
+            
+            @param pointA First end point of the arc.
+            @param pointB Second end point of the arc.
+            @param clockwise bool flag to indicate clockwise direction.
+        </member>
+        <member name="M:System.Geometry.Arc.FromPoints(System.Numerics.Vector2,System.Numerics.Vector2,System.Numerics.Vector2)">
+            Class for arc path, created from 3 points.
+            
+            @param pointA First end point of the arc.
+            @param pointB Middle point on the arc.
+            @param pointC Second end point of the arc.
+        </member>
+        <member name="P:System.Geometry.Arc.Length">
+            <summary>
+            Returns the length of this Arc.
+            </summary>
+        </member>
+        <member name="P:System.Geometry.Arc.End">
+            <summary>
+            Get an arc's end angle, ensured to be greater than its start angle.
+            </summary>
+        </member>
+        <member name="M:System.Geometry.Arc.IsAngleOnArc(System.Single,System.Boolean)">
+            <summary>
+            Check if a given angle is between an arc's start and end angles.
+            </summary>
+            <param name="arc">Arc to test against.</param>
+            <param name="angleInQuestion">The angle to test.</param>
+            <param name="exclusive">Flag to exclude equaling the start or end angles.</param>
+            <returns>Boolean true if angle is between (or equal to) the arc's start and end angles.</returns>
+        </member>
+        <member name="T:System.Geometry.Bezier">
+            <summary>
+            Represents Bezier Curve.
+            </summary>
+        </member>
+        <member name="P:System.Geometry.Bezier.Points">
+            <summary>
+            Gets the points of the curve.
+            </summary>
+        </member>
+        <member name="M:System.Geometry.Bezier.#ctor(System.Numerics.Vector2,System.Numerics.Vector2,System.Numerics.Vector2,System.Numerics.Vector2)">
+            <summary>
+            Creates a Cubic Bezier Curve.
+            </summary>
+        </member>
+        <member name="M:System.Geometry.Bezier.#ctor(System.Numerics.Vector2,System.Numerics.Vector2,System.Numerics.Vector2)">
+            <summary>
+            Creates a Quadratic Bezier Curve.
+            </summary>
+        </member>
+        <member name="M:System.Geometry.Bezier.#ctor(System.Numerics.Vector2,System.Numerics.Vector2)">
+            <summary>
+            Constructs a curve along a straight line.
+            </summary>
+            <param name="p1">Start of the line.</param>
+            <param name="p2">End of the line.</param>
+        </member>
+        <member name="M:System.Geometry.Bezier.#ctor(System.Numerics.Vector2[])">
+            <summary>
+            Creates a Bezier Curve.
+            </summary>
+        </member>
+        <member name="M:System.Geometry.Bezier.#ctor(System.Collections.Generic.IList{System.Numerics.Vector2})">
+            <summary>
+            Creates a Bezier Curve.
+            </summary>
+        </member>
+        <member name="P:System.Geometry.Bezier.Length">
+            <summary>
+            Calculates the length of this Bezier curve.
+            Length is calculated using numerical approximation,
+            specifically the Legendre-Gauss quadrature algorithm.
+            </summary>
+        </member>
+        <member name="M:System.Geometry.Bezier.Position(System.Single)">
+            <summary>
+            Calculates a point on the curve, for a given t value between 0 and 1 (inclusive).
+            </summary>
+        </member>
+        <member name="M:System.Geometry.Bezier.Tangent(System.Single)">
+            <summary>
+            Calculates the curve tangent at the specified t value. Note that this yields a not-normalized vector {x: dx, y: dy}.
+            </summary>
+        </member>
+        <member name="M:System.Geometry.Bezier.Normal(System.Single)">
+            <summary>
+            Calculates the curve normal at the specified t value. Note that this yields a normalized vector {x: nx, y: ny}.
+            </summary>
+        </member>
+        <member name="M:System.Geometry.Bezier.Raise">
+            <summary>
+            Raises the Bezier curve.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:System.Geometry.Bezier.Hull(System.Single)">
+            <summary>
+            Generates all hull points, at all iterations, for an on-curve point at the specified t-value.
+            For quadratic curves, this generates a point[6], and for cubic curves, this generates a point[10],
+            where the first iteration is [0,1,2] and [0,1,2,3] respectively, the second iteration is [3,4]
+            and [4,5,6] respectively, the third iteration is [5] (the on-curve point for quadratic curves)
+            and [7,8] respectively, and the fourth iteration (for cubic curves only) is [9].
+            </summary>
+        </member>
+        <member name="M:System.Geometry.Bezier.Split(System.Single)">
+            <summary>
+            Splits a curve at t into two new curves that together are equivalent to the original curve.
+            </summary>
+        </member>
+        <member name="M:System.Geometry.Bezier.Split(System.Single,System.Single)">
+            <summary>
+            Splits the curve on t1, after which the resulting second subcurve is split on (a scaled) t2, yielding a new curve that is equivalent to the original curve over the interval [t1, t2].
+            </summary>
+        </member>
+        <member name="M:System.Geometry.Bezier.Extrema">
+            <summary>
+            Calculates all the extrema on a curve. Extrema are calculated for each dimension,
+            rather than for the full curve, so that the result is not the number of convex/concave transitions,
+            but the number of those transitions for each separate dimension.
+            
+            This function yields an object {x: [num, num, ...], y: [num, num, ...], values: [...]} where each
+            dimension lists the array of t values at which an extremum occurs, and the values property is the aggregate of the t values across all dimensions.
+            
+            These points can be used to determine the reach of a curve.
+            </summary>
+            <returns>Returns extrema.</returns>
+        </member>
+        <member name="P:System.Geometry.Bezier.BoundingBox">
+            <summary>
+            Calculates the bounding box for this curve, based on its hull coordinates and its extrema.
+            </summary>
+            <returns>Returns the bounding box.</returns>
+        </member>
+        <member name="M:System.Geometry.Bezier.Overlaps(System.Geometry.Bezier,System.Geometry.Bezier)">
+            <summary>
+            Gets weather the two curves overlap (intersect).
+            </summary>
+            <param name="curve1">Curve 1</param>
+            <param name="curve2">Curve 2</param>
+            <returns>Returns True the the two intersect.</returns>
+        </member>
+        <member name="M:System.Geometry.Bezier.Offset(System.Single,System.Single)">
+            <summary>
+            Returns a point on the curve at t=, offset along its normal by a distance d.
+            </summary>
+            <param name="t"></param>
+            <param name="d"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Geometry.Bezier.Offset(System.Single)">
+            <summary>
+            Creates a new curve, offset along the curve normals, at distance d.
+            Note that deep magic lies here and the offset curve of a Bezier curve cannot ever be another Bezier curve.
+            As such, this function "cheats" and yields an array of curves which, taken together, form a single continuous curve equivalent to what a theoretical offset curve would be.
+            </summary>
+            <param name="d"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Geometry.Bezier.IsSimple">
+            <summary>
+            Gets whether the curve is "simple" or not.
+            </summary>
+        </member>
+        <member name="M:System.Geometry.Bezier.Outline(System.Single)">
+            <summary>
+            This generates a curve's outline at distance d along the curve normal and anti-normal. The result is an array of curves that taken together form the outline path for this curve. The caps are cubic beziers with the control points oriented to form a straight line.
+            </summary>
+            <param name="d">Distance.</param>
+            <returns>A PolyBezier corresponding with the outline of the bezier curve.</returns>
+        </member>
+        <member name="M:System.Geometry.Bezier.Reduce(System.Double)">
+            <summary>
+            Reduces a curve to a collection of "simple" subcurves, where a simpleness is defined as having all control points on the same side of the baseline (cubics having the additional constraint that the control-to-end-point lines may not cross), and an angle between the end point normals no greater than 60 degrees.
+            The main reason this function exists is to make it possible to scale curves.As mentioned in the offset function, curves cannot be offset without cheating, and the cheating is implemented in this function.The array of simple curves that this function yields can safely be scaled.
+            </summary>
+        </member>
+        <member name="M:System.Geometry.Bezier.Scale(System.Single)">
+            <summary>
+            Scales a curve with respect to the intersection between the end point normals.
+            Note that this will only work if that point exists, which is only guaranteed for simple segments.
+            </summary>
+            <param name="d">Distance</param>
+            <returns>Scaled bezier if it's simple, null otherwise.</returns>
+        </member>
+        <member name="M:System.Geometry.Bezier.Intersects(System.Geometry.Line)">
+            <summary>
+            Finds the intersections between this curve an some line. The intersections are an array of t values on this curve.
+            
+            Curves are first aligned(translation/rotation) such that the curve's first coordinate is (0,0), and the curve is rotated so that the intersecting line coincides with the x-axis. Doing so turns "intersection finding" into plain "root finding".
+            
+            As a root finding solution, the roots are computed symbolically for both quadratic and cubic curves, using the standard square root function which you might remember from high school, and the absolutely not standard Cardano's algorithm for solving the cubic root function.
+            </summary>
+            <param name="line">The line</param>
+            <returns>An array of t values on this curve.</returns>
+        </member>
+        <member name="M:System.Geometry.Bezier.Intersects(System.Geometry.Bezier,System.Single)">
+             <summary>
+             Finds the intersections between this curve and another.
+             Intersections are yielded as a List of <see cref="T:System.Geometry.Pair`1" />, where the Left float corresponds to the t value on this curve, and the Right float corresponds to the t value on the other curve.
+            
+             Curve/curve intersection uses an interative process, where curves are subdivided at the midpoint, and bounding box overlap checks are performed between the resulting smaller curves. Any overlap is marked as a pair to resolve, and the "divide and check overlap" step is repeated. Doing this enough times "homes in" on the actual intersections, such that with infinite divisions, we can get an arbitrarily close approximation of the t values involved. Thankfully, repeating the process a low number of steps is generally good enough to get reliable values (typically 10 steps yields more than acceptable precision).
+             </summary>
+             <param name="curve">Other curve.</param>
+             <param name="threshold">Threshold.</param>
+             <returns>Intersection points.</returns>
+        </member>
+        <member name="M:System.Geometry.Bezier.Align(System.Numerics.Vector2,System.Numerics.Vector2)">
+            <summary>
+            Align this curve to a line defined by two points.
+            </summary>
+            <returns>Aligned Bezier.</returns>
+        </member>
+        <member name="M:System.Geometry.Bezier.Inflections">
+            <summary>
+            Get all 't' values for which this curve inflects.
+            NOTE: this is an expensive operation!
+            </summary>
+            <returns>All 't' values for which this curve inflects</returns>
+        </member>
+        <member name="M:System.Geometry.Bezier.ToString">
+            <summary>
+            Converts the curve into SVG path string.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:System.Geometry.BoundingBox.op_Addition(System.Geometry.BoundingBox,System.Geometry.BoundingBox)">
+            <summary>
+            Increase a measurement by an additional measurement.
+            </summary>
+        </member>
+        <member name="T:System.Geometry.Circle">
+            <summary>
+            Class for circle path.
+            </summary>
+        </member>
+        <member name="F:System.Geometry.Circle.Radius">
+            <summary>
+            The radius of the circle.
+            </summary>
+        </member>
+        <member name="M:System.Geometry.Circle.#ctor(System.Single)">
+             Class for circle path, created from radius. Origin will be [0, 0].
+             
+             Example:
+             ```
+             var c = new Circle(7);
+             ```
+            
+             @param radius The radius of the circle.
+        </member>
+        <member name="M:System.Geometry.Circle.#ctor(System.Numerics.Vector2,System.Single)">
+             Class for circle path, created from origin point and radius.
+            
+             Example:
+             ```
+             var c = new Circle([10, 10], 7);
+             ```
+            
+             @param origin The center point of the circle.
+             @param radius The radius of the circle.
+        </member>
+        <member name="M:System.Geometry.Circle.#ctor(System.Numerics.Vector2,System.Numerics.Vector2)">
+             Class for circle path, created from 2 points.
+            
+             Example:
+             ```
+             var c = new makerjs.paths.Circle([5, 15], [25, 15]);
+             ```
+            
+             @param pointA First point on the circle.
+             @param pointB Second point on the circle.
+        </member>
+        <member name="P:System.Geometry.Circle.Length">
+            **
+        </member>
+        <member name="T:System.Geometry.ExtensionMethods">
+            <summary>
+            Provides a set of extension methods for shape classes.
+            </summary>
+        </member>
+        <member name="M:System.Geometry.Helper.IsLineOverlapping(System.Geometry.Line,System.Geometry.Line,System.Boolean)">
+            Check for line overlapping another line.
+            
+            @param lineA The line to test.
+            @param lineB The line to check for overlap.
+            @param excludeTangents Boolean to exclude exact endpoints and only look for deep overlaps.
+            @returns Boolean true if lineA is overlapped with lineB.
+        </member>
+        <member name="M:System.Geometry.Helper.IsBetweenPoints(System.Numerics.Vector2,System.Geometry.Line,System.Boolean)">
+            <summary>
+            Check if a given point is between a line's end points.
+            </summary>
+            <param name="pointInQuestion">The point to test.</param>
+            <param name="line">Line to test against.</param>
+            <param name="exclusive">Flag to exclude equaling the origin or end points.</param>
+            <returns>Boolean true if point is between (or equal to) the line's origin and end points.</returns>
+        </member>
+        <member name="M:System.Geometry.Helper.IsBetweenArcAngles(System.Geometry.Arc,System.Single,System.Boolean)">
+            <summary>
+            Check if a given angle is between an arc's start and end angles.
+            </summary>
+            <param name="arc">Arc to test against.</param>
+            <param name="angleInQuestion">The angle to test.</param>
+            <param name="exclusive">Flag to exclude equaling the start or end angles.</param>
+            <returns>Boolean true if angle is between (or equal to) the arc's start and end angles.</returns>
+        </member>
+        <member name="M:System.Geometry.Helper.IsBetween(System.Single,System.Single,System.Single,System.Boolean)">
+            <summary>
+            Check if a given number is between two given limits.
+            </summary>
+            <param name="valueInQuestion">The number to test.</param>
+            <param name="limitA">First limit.</param>
+            <param name="limitB">Second limit.</param>
+            <param name="exclusive">Flag to exclude equaling the limits.</param>
+            <returns>Boolean true if value is between (or equal to) the limits.</returns>
+        </member>
+        <member name="M:System.Geometry.Helper.IsAngleEqual(System.Single,System.Single,System.Int32)">
+            Find out if two angles are equal.
+            
+            @param angleA First angle.
+            @param angleB Second angle.
+            @returns true if angles are the same, false if they are not
+        </member>
+        <member name="M:System.Geometry.IntersectHelper.SolveTriangleSSS(System.Single,System.Single,System.Single)">
+            <summary>
+            Solves for the angle of a triangle when you know lengths of 3 sides.
+            </summary>
+            <param name="lengthA">Length of side of triangle, opposite of the angle you are trying to find.</param>
+            <param name="lengthB">Length of any other side of the triangle.</param>
+            <param name="lengthC">Length of the remaining side of the triangle.</param>
+            <returns>Angle opposite of the side represented by the first parameter.</returns>
+        </member>
+        <member name="P:System.Geometry.IPathShape.Length">
+            <summary>
+            Gets the length of the shape.
+            </summary>
+        </member>
+        <member name="M:System.Geometry.IPathShape.Move(System.Numerics.Vector2)">
+            <summary>
+            Moves the shape by amount of offset.
+            </summary>
+            <param name="offset"></param>
+        </member>
+        <member name="T:System.Geometry.Line">
+            <summary>
+            Reperesents a Line-Segment.
+            </summary>
+        </member>
+        <member name="M:System.Geometry.Line.ToString">
+            <summary>
+            Converts this line segment into SVG text.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:System.Geometry.Line.Move(System.Numerics.Vector2)">
+            <summary>
+            Moves the line segment by the offset.
+            </summary>
+            <param name="offset">The offset.</param>
+        </member>
+        <member name="M:System.Geometry.Line.Rotate(System.Single,System.Numerics.Vector2)">
+            <summary>
+            Rotates the line segment around a rotation origin by specifies angle.
+            </summary>
+            <param name="angleInDegrees">Angle in Degrees.</param>
+            <param name="rotationOrigin">Rotation origin.</param>
+        </member>
+        <member name="P:System.Geometry.Line.Length">
+            <summary>
+            Returns the length of the line segment.
+            </summary>
+        </member>
+        <member name="M:System.Geometry.LookUpTable.GetLUT">
+            <summary>
+            Generates a LookUp Table of coordinates on the curve, spaced at parametrically equidistance intervals. If steps is given, the LUT will contain steps+1 coordinates representing the coordinates from t=0 to t=1 at interval 1/steps.
+            </summary>
+            <param name="steps">Number of steps.</param>
+            <returns>Returns a list of vectors.</returns>
+        </member>
+        <member name="M:System.Geometry.LookUpTable.Project(System.Numerics.Vector2,System.Single@,System.Single@)">
+            <summary>
+            Finds the on-curve point closest to the specific off-curve point, using a two-pass projection test based on the curve's LUT.
+            A distance comparison finds the closest match, after which a fine interval around that match is checked to see if a better projection can be found.
+            </summary>
+        </member>
+        <member name="M:System.Geometry.Pair`1.ToString">
+            <summary>
+            Converts the pair to string.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:System.Geometry.Point.FromPolar(System.Single,System.Single)">
+            Get a point from its polar coordinates.
+            
+            @param angleInRadians The angle of the polar coordinate, in radians.
+            @param radius The radius of the polar coordinate.
+            @returns A new point object.
+        </member>
+        <member name="M:System.Geometry.Point.FromArc(System.Geometry.Arc)">
+            Get the two end points of an arc path.
+            
+            @param arc The arc path object.
+            @returns Array with 2 elements: [0] is the point object corresponding to the start angle, [1] is the point object corresponding to the end angle.
+        </member>
+        <member name="M:System.Geometry.Point.IsPointEqual(System.Numerics.Vector2,System.Numerics.Vector2,System.Double)">
+            Find out if two points are equal.
+            
+            @param a First point.
+            @param b Second point.
+            @param withinDistance Optional distance to consider points equal.
+            @returns true if points are the same, false if they are not
+        </member>
+        <member name="M:System.Geometry.Point.FromSlopeIntersection(System.Geometry.Line,System.Geometry.Line,System.Boolean@,System.Boolean)">
+            Calculates the intersection of slopes of two lines.
+            
+            @param lineA First line to use for slope.
+            @param lineB Second line to use for slope.
+            @param options Optional IPathIntersectionOptions.
+            @returns point of intersection of the two slopes, or null if the slopes did not intersect.
+        </member>
+        <member name="M:System.Geometry.Point.FromAngleOnArc(System.Single,System.Geometry.Arc)">
+            Get a point on a circle or arc path, at a given angle.
+            @param angleInDegrees The angle at which you want to find the point, in degrees.
+            @param circle A circle or arc.
+            @returns A new point object.
+        </member>
+        <member name="M:System.Geometry.Point.FromPathEnds(System.Geometry.IPathShape,System.Numerics.Vector2)">
+            Get the two end points of a path.
+            
+            @param pathContext The path object.
+            @returns Array with 2 elements: [0] is the point object corresponding to the origin, [1] is the point object corresponding to the end.
+        </member>
+        <member name="M:System.Geometry.Point.Rotate(System.Numerics.Vector2,System.Single,System.Numerics.Vector2)">
+            Rotate a point.
+            
+            @param pointToRotate The point to rotate.
+            @param angleInDegrees The amount of rotation, in degrees.
+            @param rotationOrigin The center point of rotation.
+            @returns A new point.
+        </member>
+        <member name="T:System.Geometry.Slope">
+            <summary>
+            Represents a Slope of Line.
+            </summary>
+        </member>
+        <member name="F:System.Geometry.Slope.Value">
+            <summary>
+            Value of the Slope.
+            </summary>
+        </member>
+        <member name="F:System.Geometry.Slope.HasValue">
+            <summary>
+            If false, the slope is vertical.
+            </summary>
+        </member>
+        <member name="F:System.Geometry.Slope.YIntercept">
+            <summary>
+            Y-Intercept.
+            </summary>
+        </member>
+        <member name="M:System.Geometry.Slope.Of(System.Geometry.Line)">
+            <summary>
+            Gets the slope of a line.
+            </summary>
+        </member>
+        <member name="M:System.Geometry.Slope.Of(System.Numerics.Vector2,System.Numerics.Vector2)">
+            <summary>
+            Gets the slope of a line.
+            </summary>
+        </member>
+        <member name="M:System.Geometry.Slope.AreEqual(System.Geometry.Slope,System.Geometry.Slope)">
+            <summary>
+            Check for slope equality.
+            </summary>
+            <param name="slopeA">First Slope.</param>
+            <param name="slopeB">Second Slope.</param>
+            <returns>Returns if the two slopes are equal.</returns>
+        </member>
+        <member name="M:System.Geometry.Slope.AreParallel(System.Geometry.Slope,System.Geometry.Slope)">
+            <summary>
+            Checks if slopes are parallel.
+            </summary>
+            <param name="slopeA">First Slope.</param>
+            <param name="slopeB">Second Slope.</param>
+            <returns>True if the slopes are parallel.</returns>
+        </member>
+        <member name="M:System.Geometry.Utils.crt(System.Single)">
+            <summary>
+            Cube root function yielding real roots.
+            </summary>
+        </member>
+    </members>
+</doc>
