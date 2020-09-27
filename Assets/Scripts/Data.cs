@@ -5,6 +5,7 @@ using UnityEngine;
 public class Data : MonoBehaviour
 {
     public static bool IsOptionOpen = false;
+    public static GameObject ActivePanel;
     void Start()
     {
         DontDestroyOnLoad(gameObject);

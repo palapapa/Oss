@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Utilities
+public static class Utilities
 {
     public static float PlayAudio(AudioClip ac)
     {
@@ -57,4 +57,16 @@ public class Utilities
         }
     }
     */
+    //Switch to panel and make all other panels invisible
+    public static void SwitchPanelSingle(this GameObject panel)
+    {
+        GameObject[] panels = GameObject.FindGameObjectsWithTag("Panel");
+        foreach (GameObject p in panels)
+        {
+            p.GetComponent<CanvasGroup>().alpha = 0;
+        }
+        panel.GetComponent<CanvasGroup>().alpha = 1;
+        Data.ActivePanel = panel;
+        panel.transform.SetAsLastSibling();//bring to front
+    }
 }
