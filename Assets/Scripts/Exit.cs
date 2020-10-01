@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Exit : MonoBehaviour
+public class Exit : MonoBehaviour, ILeftClickable
 {
-    public void QuitGame()
+    public void OnLeftClick()
     {
         Application.Quit(0);//todo: add see you next time message
     }

@@ -2,7 +2,7 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class OsuLogo : MonoBehaviour
+public class OsuLogo : MonoBehaviour, ILeftClickable
 {
     public GameObject PopUpButtonsLogo;
     public Button Play;
@@ -22,7 +22,7 @@ public class OsuLogo : MonoBehaviour
         popUpButtonsAnimator = PopUpButtonsLogo.GetComponent<Animator>();
         popUpButtonsAnimators = PopUpButtonsLogo.GetComponentsInChildren<Animator>();
     }
-    public void ClickOsuLogo()
+    public void OnLeftClick()
     {
         PopUpButtonsLogo.SetActive(true);
         popUpButtonsAnimator.SetTrigger("LogoPressed");

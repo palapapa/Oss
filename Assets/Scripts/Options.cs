@@ -2,21 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Options : MonoBehaviour
+public class Options : MonoBehaviour, ILeftClickable
 {
     public GameObject OptionsMenu;
     public static Options Instance;
-    private Animator OptionsMenuAnimator;
+    private Animator optionsMenuAnimator;
 
     void Start()
     {
-        OptionsMenuAnimator = OptionsMenu.GetComponent<Animator>();
+        optionsMenuAnimator = OptionsMenu.GetComponent<Animator>();
     }
-    public void ClickOptions()
+    public void OnLeftClick()
     {
         if (!Data.IsOptionOpen)
         {
-            OptionsMenuAnimator.SetTrigger("OptionsClicked");
+            optionsMenuAnimator.SetTrigger("OptionsClicked");
             Data.IsOptionOpen = true;
         }
     }
@@ -24,7 +24,7 @@ public class Options : MonoBehaviour
     {
         if (Data.IsOptionOpen)
         {
-            OptionsMenuAnimator.SetTrigger("OptionsNotClicked");
+            optionsMenuAnimator.SetTrigger("OptionsNotClicked");
             Data.IsOptionOpen = false;
         }
     }

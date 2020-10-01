@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -60,6 +61,10 @@ public static class Utilities
     //Switch to panel and make all other panels invisible
     public static void SwitchPanelSingle(this GameObject panel)
     {
+        if (!panel.CompareTag("Panel"))
+        {
+            throw new ArgumentException($"Specified panel(\"{panel.name}\") is not tagged with \"Panel\"");
+        }
         GameObject[] panels = GameObject.FindGameObjectsWithTag("Panel");
         foreach (GameObject p in panels)
         {
