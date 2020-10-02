@@ -16,7 +16,8 @@ public class IntroPlayer : MonoBehaviour
         VideoPlayer.Prepare();
         VideoPlayer.prepareCompleted += (VideoPlayer source) =>
         {
-            Utilities.PlayAudio(Audios.Instance.Triangles);
+            AudioSource.PlayClipAtPoint(Audios.Instance.Triangles, Camera.main.transform.position, 0.4f);
+            VideoPlayer.Play();
         };
         VideoPlayer.loopPointReached += (VideoPlayer source) =>
         {
@@ -25,7 +26,6 @@ public class IntroPlayer : MonoBehaviour
             BeforeImageReadyBlack.color = new Color(0, 0, 0, 0);
             OsuLogo.interactable = true;
         };
-        VideoPlayer.Play();
     }
 
     // Update is called once per frame

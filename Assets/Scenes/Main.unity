@@ -362,6 +362,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Triangles: {fileID: 8300000, guid: 645e0042c5552454ab05380346eeb013, type: 3}
+  KeyDown0: {fileID: 8300000, guid: 96b3acb4e495482478dd65cbb45238ff, type: 3}
+  KeyDown1: {fileID: 8300000, guid: 79e3954ee634f01499d43dae58cf6c5e, type: 3}
+  KeyDown2: {fileID: 8300000, guid: 8ab318d2a98ac794e8cf0d9cf980962c, type: 3}
+  KeyDownSounds:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Backspace: {fileID: 8300000, guid: bf0bfa7fd91109149b5dd95568864598, type: 3}
 --- !u!4 &714223357
 Transform:
   m_ObjectHideFlags: 0

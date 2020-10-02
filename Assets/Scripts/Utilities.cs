@@ -5,12 +5,19 @@ using UnityEngine;
 
 public static class Utilities
 {
-    public static float PlayAudio(AudioClip ac)
+    public static GameObject PlayAudioDontDestroy(AudioClip ac)
     {
         GameObject gameObject = new GameObject(ac.name);
         AudioSource audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.PlayOneShot(ac);
-        return Time.time;
+        return gameObject;
+    }
+    public static GameObject PlayAudioDontDestroy(AudioClip ac, float volume)
+    {
+        GameObject gameObject = new GameObject(ac.name);
+        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.PlayOneShot(ac, volume);
+        return gameObject;
     }
     //Get all interfaces T of all Components attacted to GameObject objectToSearch
     public static List<T> GetInterfaces<T>(GameObject objectToSearch) where T : class
