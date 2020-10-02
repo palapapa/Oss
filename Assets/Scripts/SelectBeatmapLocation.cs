@@ -1,12 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SFB;
 
 public class SelectBeatmapLocation : MonoBehaviour, ILeftClickable
 {
     public void OnLeftClick()
     {
-        Data.BeatmapLocation = UnityEditor.EditorUtility.OpenFolderPanel("Select Beatmap Location", @"C:\Users\" + System.Environment.UserName + @"\AppData\Local\osu!", "Songs");
+        string[] path = StandaloneFileBrowser.OpenFolderPanel("Select Beatmap Location(Songs folder)", @"C:\Users\" + System.Environment.UserName + @"\AppData\Local\osu!", false);
+        if (path.Length != 0)
+        {
+            Data.BeatmapLocation = path[0];
+        }
         Debug.Log(Data.BeatmapLocation);
     }
 }

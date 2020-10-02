@@ -24,11 +24,11 @@ public class KeyInputDetector : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Backspace))
             {
-                AudioSource.PlayClipAtPoint(Audios.Instance.Backspace, Camera.main.transform.position, 10.0f);
+                AudioSource.PlayClipAtPoint(Audios.Instance.Backspace, Camera.main.transform.position);
             }
             else
             {
-                AudioSource.PlayClipAtPoint(Audios.Instance.KeyDownSounds[new System.Random().Next(0, Audios.Instance.KeyDownSounds.Length)], Camera.main.transform.position, 10.0f);//plays a random keydown sound
+                AudioSource.PlayClipAtPoint(Audios.Instance.KeyDownSounds[new System.Random().Next(0, Audios.Instance.KeyDownSounds.Length)], Camera.main.transform.position);//plays a random keydown sound
             }
         }
     }

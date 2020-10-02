@@ -362,14 +362,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Triangles: {fileID: 8300000, guid: 645e0042c5552454ab05380346eeb013, type: 3}
-  KeyDown0: {fileID: 8300000, guid: 96b3acb4e495482478dd65cbb45238ff, type: 3}
-  KeyDown1: {fileID: 8300000, guid: 79e3954ee634f01499d43dae58cf6c5e, type: 3}
-  KeyDown2: {fileID: 8300000, guid: 8ab318d2a98ac794e8cf0d9cf980962c, type: 3}
+  KeyDown0: {fileID: 8300000, guid: 6965deda4d93f46469abb01b1a8c14c3, type: 3}
+  KeyDown1: {fileID: 8300000, guid: da44134af098e634c9b89a4299f069ba, type: 3}
+  KeyDown2: {fileID: 8300000, guid: abbc7e259e4bc354cb89fd87ff059a37, type: 3}
   KeyDownSounds:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  Backspace: {fileID: 8300000, guid: bf0bfa7fd91109149b5dd95568864598, type: 3}
+  Backspace: {fileID: 8300000, guid: 407a7e2a1cba38e4681ee9feea1662db, type: 3}
 --- !u!4 &714223357
 Transform:
   m_ObjectHideFlags: 0
@@ -1574,7 +1574,6 @@ GameObject:
   - component: {fileID: 1728696053}
   - component: {fileID: 1728696052}
   - component: {fileID: 1728696051}
-  - component: {fileID: 1728696055}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -1663,18 +1662,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1728696055
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1728696050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c98f02b3577cbb4995c246dc8ec1f32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1731020850
 GameObject:
   m_ObjectHideFlags: 0
