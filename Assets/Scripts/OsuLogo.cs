@@ -9,9 +9,9 @@ public class OsuLogo : MonoBehaviour, ILeftClickable
     public Button Options;
     public Button Exit;
     public Animator Animator;
+    [HideInInspector]
     public OsuLogo Instance;
     private Animator popUpButtonsAnimator;
-    private Animator[] popUpButtonsAnimators;
 
     private OsuLogo()
     {
@@ -20,7 +20,6 @@ public class OsuLogo : MonoBehaviour, ILeftClickable
     private void Start()
     {
         popUpButtonsAnimator = PopUpButtonsLogo.GetComponent<Animator>();
-        popUpButtonsAnimators = PopUpButtonsLogo.GetComponentsInChildren<Animator>();
     }
     public void OnLeftClick()
     {

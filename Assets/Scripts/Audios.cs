@@ -12,13 +12,56 @@ public class Audios : MonoBehaviour
     [HideInInspector]
     public AudioClip[] KeyDownSounds;
     public AudioClip Backspace;
+    public static GameObject Music;
+    public static GameObject SoundEffects;
+    private static bool hasLoaded = false;
     private void Start()
     {
-        DontDestroyOnLoad(this);
+        if (!hasLoaded)
+        {
+            DontDestroyOnLoad(this);
+            hasLoaded = true;
+        }
         KeyDownSounds = new AudioClip[] { KeyDown0, KeyDown1, KeyDown2 };
+        Music = new GameObject("Music");
+        Music.transform.SetParent(transform);
+        SoundEffects = new GameObject("SoundEffects");
+        SoundEffects.transform.SetParent(transform);
     }
-    Audios()
+
+    private Audios()
     {
         Instance = this;
+    }
+    public static GameObject PlayAudio(AudioClip ac)
+    {
+        GameObject gameObject = new GameObject(ac.name);
+        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.PlayOneShot(ac);
+        return gameObject;
+    }
+    public static GameObject PlayAudio(AudioClip ac, float volume)
+    {
+        GameObject gameObject = new GameObject(ac.name);
+        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.PlayOneShot(ac, volume);
+        return gameObject;
+    }
+    public static GameObject PlayAudio(AudioClip ac, float volume, string name)
+    {
+        GameObject gameObject = new GameObject(name);
+        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.PlayOneShot(ac, volume);
+        return gameObject;
+    }
+    public static GameObject PlayAudio(AudioClip ac, float volume, GameObject channel)
+    {
+        AudioSource audioSource = channel.GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = channel.AddComponent<AudioSource>();
+        }
+        audioSource.PlayOneShot(ac, volume);
+        return channel;
     }
 }

@@ -4,9 +4,18 @@ using UnityEngine;
 
 public class KeyInputDetector : MonoBehaviour
 {
+    private static bool hasLoaded = false;
+    private void Start()
+    {
+        if (!hasLoaded)
+        {
+            DontDestroyOnLoad(this);
+            hasLoaded = true;
+        }
+    }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && Data.IsOptionOpen)
+        if (Input.GetKeyDown(KeyCode.Escape) && PlayerData.Instance.IsOptionOpen)
         {
             Options.Instance.CloseOptions();
         }
@@ -24,11 +33,11 @@ public class KeyInputDetector : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Backspace))
             {
-                AudioSource.PlayClipAtPoint(Audios.Instance.Backspace, Camera.main.transform.position);
+                Audios.PlayAudio(Audios.Instance.Backspace, 1.0f, Audios.SoundEffects);
             }
             else
             {
-                AudioSource.PlayClipAtPoint(Audios.Instance.KeyDownSounds[new System.Random().Next(0, Audios.Instance.KeyDownSounds.Length)], Camera.main.transform.position);//plays a random keydown sound
+                Audios.PlayAudio(Audios.Instance.KeyDownSounds[new System.Random().Next(0, Audios.Instance.KeyDownSounds.Length)], 1.0f, Audios.SoundEffects);//plays a random keydown sound
             }
         }
     }

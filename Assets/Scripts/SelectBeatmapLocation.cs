@@ -10,8 +10,12 @@ public class SelectBeatmapLocation : MonoBehaviour, ILeftClickable
         string[] path = StandaloneFileBrowser.OpenFolderPanel("Select Beatmap Location(Songs folder)", @"C:\Users\" + System.Environment.UserName + @"\AppData\Local\osu!", false);
         if (path.Length != 0)
         {
-            Data.BeatmapLocation = path[0];
+            PlayerData.Instance.BeatmapLocation = path[0];
         }
-        Debug.Log(Data.BeatmapLocation);
+        PlayerData.SavePersistentPlayerData();
+    }
+    private void Update()
+    {
+        //Debug.Log(PlayerData.Instance.BeatmapLocation);
     }
 }
