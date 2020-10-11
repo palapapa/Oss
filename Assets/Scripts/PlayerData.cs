@@ -1,6 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Data;
 using System.IO;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
@@ -13,7 +13,8 @@ public class PlayerData : MonoBehaviour
     private bool hasLoaded = false;
     private static string saveFilePath;
     private static PersistentPlayerData persistentPlayerData;
-    void Start()
+
+    private void Start()
     {
         if (!hasLoaded)
         {
@@ -29,20 +30,36 @@ public class PlayerData : MonoBehaviour
         }
         //InvokeRepeating("SavePersistentPlayerData", 0.0f, 60.0f);
     }
+
     public static PersistentPlayerData SavePersistentPlayerData()
     {
         PersistentPlayerData persistentPlayerData = new PersistentPlayerData(Instance);
         using (FileStream fileStream = File.Create(saveFilePath))
         {
-            new BinaryFormatter().Serialize(fileStream, persistentPlayerData);
+            try
+            {
+                new BinaryFormatter().Serialize(fileStream, persistentPlayerData);
+            }
+            catch (SerializationException)
+            {
+                //todo: add pop up notification system
+            }
         }
         return persistentPlayerData;
     }
+
     public static PersistentPlayerData LoadPersistentPlayerData()
     {
         using (FileStream fileStream = File.OpenRead(saveFilePath))
         {
-            persistentPlayerData = (PersistentPlayerData)new BinaryFormatter().Deserialize(fileStream);
+            try
+            {
+                persistentPlayerData = (PersistentPlayerData)new BinaryFormatter().Deserialize(fileStream);
+            }
+            catch (SerializationException)
+            {
+                persistentPlayerData = new PersistentPlayerData(Instance);
+            }
         }
         return persistentPlayerData;
     }

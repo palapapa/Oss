@@ -1,6 +1,6 @@
 ﻿struct vertex_t {
     UNITY_VERTEX_INPUT_INSTANCE_ID
-    float4	position		: POSITION;
+        float4	position		: POSITION;
     float3	normal			: NORMAL;
     float4	color			: COLOR;
     float2	texcoord0		: TEXCOORD0;
@@ -9,17 +9,17 @@
 
 struct pixel_t {
     UNITY_VERTEX_INPUT_INSTANCE_ID
-    UNITY_VERTEX_OUTPUT_STEREO
-    float4	position		: SV_POSITION;
+        UNITY_VERTEX_OUTPUT_STEREO
+        float4	position		: SV_POSITION;
     float4	faceColor		: COLOR;
     float4	outlineColor	: COLOR1;
     float4	texcoord0		: TEXCOORD0;
     float4	param			: TEXCOORD1;		// weight, scaleRatio
     float2	mask			: TEXCOORD2;
-    #if (UNDERLAY_ON || UNDERLAY_INNER)
+#if (UNDERLAY_ON || UNDERLAY_INNER)
     float4	texcoord2		: TEXCOORD3;
     float4	underlayColor	: COLOR2;
-    #endif
+#endif
 };
 
 float4 SRGBToLinear(float4 rgba) {
@@ -51,14 +51,14 @@ pixel_t VertShader(vertex_t input)
     float2 maskUV = (vert.xy - clampedRect.xy) / (clampedRect.zw - clampedRect.xy);
 
     float4 color = input.color;
-    #if (FORCE_LINEAR && !UNITY_COLORSPACE_GAMMA)
+#if (FORCE_LINEAR && !UNITY_COLORSPACE_GAMMA)
     color = SRGBToLinear(input.color);
-    #endif
+#endif
 
     float opacity = color.a;
-    #if (UNDERLAY_ON | UNDERLAY_INNER)
+#if (UNDERLAY_ON | UNDERLAY_INNER)
     opacity = 1.0;
-    #endif
+#endif
 
     float4 faceColor = float4(color.rgb, opacity) * _FaceColor;
     faceColor.rgb *= faceColor.a;
@@ -74,12 +74,12 @@ pixel_t VertShader(vertex_t input)
     output.param = float4(0.5 - weight, 1.3333 * _GradientScale * (_Sharpness + 1) / _TextureWidth, _OutlineWidth * _ScaleRatioA * 0.5, 0);
 
     float2 mask = float2(0, 0);
-    #if UNITY_UI_CLIP_RECT
+#if UNITY_UI_CLIP_RECT
     mask = vert.xy * 2 - clampedRect.xy - clampedRect.zw;
-    #endif
+#endif
     output.mask = mask;
 
-    #if (UNDERLAY_ON || UNDERLAY_INNER)
+#if (UNDERLAY_ON || UNDERLAY_INNER)
     float4 underlayColor = _UnderlayColor;
     underlayColor.rgb *= underlayColor.a;
 
@@ -88,7 +88,7 @@ pixel_t VertShader(vertex_t input)
 
     output.texcoord2 = float4(input.texcoord0 + float2(x, y), input.color.a, 0);
     output.underlayColor = underlayColor;
-    #endif
+#endif
 
     return output;
 }

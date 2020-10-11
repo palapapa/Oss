@@ -6,30 +6,30 @@
     <members>
         <member name="M:System.Geometry.Angle.OfLineInDegrees(System.Geometry.Line)">
             Angle of a line path.
-            
+
             @param line The line path to find the angle of.
             @returns Angle of the line path, in degrees.
         </member>
         <member name="M:System.Geometry.Angle.splitDecimal(System.Single)">
             Split a decimal into its whole and fractional parts as strings.
-            
+
             Example: get whole and fractional parts of 42.056
             ```
             makerjs.splitDecimal(42.056); //returns ["42", "056"]
             ```
-            
+
             @param n The number to split.
             @returns Array of 2 strings when n contains a decimal point, or an array of one string when n is an integer.
         </member>
         <member name="M:System.Geometry.Angle.NoRevolutions(System.Single)">
             Ensures an angle is not greater than 360
-            
+
             @param angleInDegrees Angle in degrees.
             @returns Same polar angle but not greater than 360 degrees.
         </member>
         <member name="M:System.Geometry.Angle.OfPointInRadians(System.Numerics.Vector2,System.Numerics.Vector2)">
             Angle of a line through a point, in radians.
-            
+
             @param pointToFindAngle The point to find the angle.
             @param origin Point of origin of the angle.
             @returns Angle of the line throught the point, in radians.
@@ -52,14 +52,14 @@
         </member>
         <member name="M:System.Geometry.Angle.OfArcMiddle(System.Geometry.Arc,System.Single)">
             Get the angle in the middle of an arc's start and end angles.
-            
+
             @param arc An arc path object.
             @param ratio Optional number between 0 and 1 specifying percentage between start and end angles.
             @returns Middle angle of arc.
         </member>
         <member name="M:System.Geometry.Angle.OfArcSpan(System.Geometry.Arc)">
             Total angle of an arc between its start and end angles.
-            
+
             @param arc The arc to measure.
             @returns Angle of arc.
         </member>
@@ -80,14 +80,14 @@
         </member>
         <member name="M:System.Geometry.Arc.#ctor(System.Numerics.Vector2,System.Numerics.Vector2,System.Boolean)">
             Class for arc path, created from 2 points and optional bool flag indicating clockwise.
-            
+
             @param pointA First end point of the arc.
             @param pointB Second end point of the arc.
             @param clockwise bool flag to indicate clockwise direction.
         </member>
         <member name="M:System.Geometry.Arc.FromPoints(System.Numerics.Vector2,System.Numerics.Vector2,System.Numerics.Vector2)">
             Class for arc path, created from 3 points.
-            
+
             @param pointA First end point of the arc.
             @param pointB Middle point on the arc.
             @param pointC Second end point of the arc.
@@ -200,10 +200,10 @@
             Calculates all the extrema on a curve. Extrema are calculated for each dimension,
             rather than for the full curve, so that the result is not the number of convex/concave transitions,
             but the number of those transitions for each separate dimension.
-            
+
             This function yields an object {x: [num, num, ...], y: [num, num, ...], values: [...]} where each
             dimension lists the array of t values at which an extremum occurs, and the values property is the aggregate of the t values across all dimensions.
-            
+
             These points can be used to determine the reach of a curve.
             </summary>
             <returns>Returns extrema.</returns>
@@ -268,9 +268,9 @@
         <member name="M:System.Geometry.Bezier.Intersects(System.Geometry.Line)">
             <summary>
             Finds the intersections between this curve an some line. The intersections are an array of t values on this curve.
-            
+
             Curves are first aligned(translation/rotation) such that the curve's first coordinate is (0,0), and the curve is rotated so that the intersecting line coincides with the x-axis. Doing so turns "intersection finding" into plain "root finding".
-            
+
             As a root finding solution, the roots are computed symbolically for both quadratic and cubic curves, using the standard square root function which you might remember from high school, and the absolutely not standard Cardano's algorithm for solving the cubic root function.
             </summary>
             <param name="line">The line</param>
@@ -280,7 +280,7 @@
              <summary>
              Finds the intersections between this curve and another.
              Intersections are yielded as a List of <see cref="T:System.Geometry.Pair`1" />, where the Left float corresponds to the t value on this curve, and the Right float corresponds to the t value on the other curve.
-            
+
              Curve/curve intersection uses an interative process, where curves are subdivided at the midpoint, and bounding box overlap checks are performed between the resulting smaller curves. Any overlap is marked as a pair to resolve, and the "divide and check overlap" step is repeated. Doing this enough times "homes in" on the actual intersections, such that with infinite divisions, we can get an arbitrarily close approximation of the t values involved. Thankfully, repeating the process a low number of steps is generally good enough to get reliable values (typically 10 steps yields more than acceptable precision).
              </summary>
              <param name="curve">Other curve.</param>
@@ -323,33 +323,33 @@
         </member>
         <member name="M:System.Geometry.Circle.#ctor(System.Single)">
              Class for circle path, created from radius. Origin will be [0, 0].
-             
+
              Example:
              ```
              var c = new Circle(7);
              ```
-            
+
              @param radius The radius of the circle.
         </member>
         <member name="M:System.Geometry.Circle.#ctor(System.Numerics.Vector2,System.Single)">
              Class for circle path, created from origin point and radius.
-            
+
              Example:
              ```
              var c = new Circle([10, 10], 7);
              ```
-            
+
              @param origin The center point of the circle.
              @param radius The radius of the circle.
         </member>
         <member name="M:System.Geometry.Circle.#ctor(System.Numerics.Vector2,System.Numerics.Vector2)">
              Class for circle path, created from 2 points.
-            
+
              Example:
              ```
              var c = new makerjs.paths.Circle([5, 15], [25, 15]);
              ```
-            
+
              @param pointA First point on the circle.
              @param pointB Second point on the circle.
         </member>
@@ -363,7 +363,7 @@
         </member>
         <member name="M:System.Geometry.Helper.IsLineOverlapping(System.Geometry.Line,System.Geometry.Line,System.Boolean)">
             Check for line overlapping another line.
-            
+
             @param lineA The line to test.
             @param lineB The line to check for overlap.
             @param excludeTangents Boolean to exclude exact endpoints and only look for deep overlaps.
@@ -399,7 +399,7 @@
         </member>
         <member name="M:System.Geometry.Helper.IsAngleEqual(System.Single,System.Single,System.Int32)">
             Find out if two angles are equal.
-            
+
             @param angleA First angle.
             @param angleB Second angle.
             @returns true if angles are the same, false if they are not
@@ -474,20 +474,20 @@
         </member>
         <member name="M:System.Geometry.Point.FromPolar(System.Single,System.Single)">
             Get a point from its polar coordinates.
-            
+
             @param angleInRadians The angle of the polar coordinate, in radians.
             @param radius The radius of the polar coordinate.
             @returns A new point object.
         </member>
         <member name="M:System.Geometry.Point.FromArc(System.Geometry.Arc)">
             Get the two end points of an arc path.
-            
+
             @param arc The arc path object.
             @returns Array with 2 elements: [0] is the point object corresponding to the start angle, [1] is the point object corresponding to the end angle.
         </member>
         <member name="M:System.Geometry.Point.IsPointEqual(System.Numerics.Vector2,System.Numerics.Vector2,System.Double)">
             Find out if two points are equal.
-            
+
             @param a First point.
             @param b Second point.
             @param withinDistance Optional distance to consider points equal.
@@ -495,7 +495,7 @@
         </member>
         <member name="M:System.Geometry.Point.FromSlopeIntersection(System.Geometry.Line,System.Geometry.Line,System.Boolean@,System.Boolean)">
             Calculates the intersection of slopes of two lines.
-            
+
             @param lineA First line to use for slope.
             @param lineB Second line to use for slope.
             @param options Optional IPathIntersectionOptions.
@@ -509,13 +509,13 @@
         </member>
         <member name="M:System.Geometry.Point.FromPathEnds(System.Geometry.IPathShape,System.Numerics.Vector2)">
             Get the two end points of a path.
-            
+
             @param pathContext The path object.
             @returns Array with 2 elements: [0] is the point object corresponding to the origin, [1] is the point object corresponding to the end.
         </member>
         <member name="M:System.Geometry.Point.Rotate(System.Numerics.Vector2,System.Single,System.Numerics.Vector2)">
             Rotate a point.
-            
+
             @param pointToRotate The point to rotate.
             @param angleInDegrees The amount of rotation, in degrees.
             @param rotationOrigin The center point of rotation.

@@ -13,7 +13,7 @@
         </member>
         <member name="M:OsuParsers.Beatmaps.Beatmap.Write(System.String)">
             <summary>
-            Writes this <see cref="T:OsuParsers.Beatmaps.Beatmap"/> to the specified path.
+            Writes this <see cref="T:OsuParsers.Beatmaps.Beatmap" /> to the specified path.
             </summary>
         </member>
         <member name="M:OsuParsers.Beatmaps.Objects.Mania.ManiaNote.SetColumn(System.Int32,System.Int32)">
@@ -31,22 +31,22 @@
         </member>
         <member name="M:OsuParsers.Database.CollectionDatabase.Write(System.String)">
             <summary>
-            Writes this <see cref="T:OsuParsers.Database.CollectionDatabase"/> to the specified path.
+            Writes this <see cref="T:OsuParsers.Database.CollectionDatabase" /> to the specified path.
             </summary>
         </member>
         <member name="M:OsuParsers.Database.OsuDatabase.Write(System.String)">
             <summary>
-            Writes this <see cref="T:OsuParsers.Database.OsuDatabase"/> to the specified path.
+            Writes this <see cref="T:OsuParsers.Database.OsuDatabase" /> to the specified path.
             </summary>
         </member>
         <member name="M:OsuParsers.Database.PresenceDatabase.Write(System.String)">
             <summary>
-            Writes this <see cref="T:OsuParsers.Database.PresenceDatabase"/> to the specified path.
+            Writes this <see cref="T:OsuParsers.Database.PresenceDatabase" /> to the specified path.
             </summary>
         </member>
         <member name="M:OsuParsers.Database.ScoresDatabase.Write(System.String)">
             <summary>
-            Writes this <see cref="T:OsuParsers.Database.ScoresDatabase"/> to the specified path.
+            Writes this <see cref="T:OsuParsers.Database.ScoresDatabase" /> to the specified path.
             </summary>
         </member>
         <member name="M:OsuParsers.Decoders.BeatmapDecoder.Decode(System.String)">
@@ -75,70 +75,70 @@
             Parses osu!.db file.
             </summary>
             <param name="path">Path to the osu!.db file.</param>
-            <returns>A usable <see cref="T:OsuParsers.Database.OsuDatabase"/>.</returns>
+            <returns>A usable <see cref="T:OsuParsers.Database.OsuDatabase" />.</returns>
         </member>
         <member name="M:OsuParsers.Decoders.DatabaseDecoder.DecodeOsu(System.IO.Stream)">
             <summary>
             Parses osu!.db file.
             </summary>
             <param name="stream">Stream containing osu!.db data.</param>
-            <returns>A usable <see cref="T:OsuParsers.Database.OsuDatabase"/>.</returns>
+            <returns>A usable <see cref="T:OsuParsers.Database.OsuDatabase" />.</returns>
         </member>
         <member name="M:OsuParsers.Decoders.DatabaseDecoder.DecodeCollection(System.String)">
             <summary>
             Parses collection.db file.
             </summary>
             <param name="path">Path to the collection.db file.</param>
-            <returns>A usable <see cref="T:OsuParsers.Database.CollectionDatabase"/>.</returns>
+            <returns>A usable <see cref="T:OsuParsers.Database.CollectionDatabase" />.</returns>
         </member>
         <member name="M:OsuParsers.Decoders.DatabaseDecoder.DecodeCollection(System.IO.Stream)">
             <summary>
             Parses collection.db file.
             </summary>
             <param name="stream">Stream containing collection.db data.</param>
-            <returns>A usable <see cref="T:OsuParsers.Database.CollectionDatabase"/>.</returns>
+            <returns>A usable <see cref="T:OsuParsers.Database.CollectionDatabase" />.</returns>
         </member>
         <member name="M:OsuParsers.Decoders.DatabaseDecoder.DecodeScores(System.String)">
             <summary>
             Parses scores.db file.
             </summary>
             <param name="path">Path to the scores.db file.</param>
-            <returns>A usable <see cref="T:OsuParsers.Database.ScoresDatabase"/>.</returns>
+            <returns>A usable <see cref="T:OsuParsers.Database.ScoresDatabase" />.</returns>
         </member>
         <member name="M:OsuParsers.Decoders.DatabaseDecoder.DecodeScores(System.IO.Stream)">
             <summary>
             Parses scores.db file.
             </summary>
             <param name="stream">Stream containing scores.db data.</param>
-            <returns>A usable <see cref="T:OsuParsers.Database.ScoresDatabase"/>.</returns>
+            <returns>A usable <see cref="T:OsuParsers.Database.ScoresDatabase" />.</returns>
         </member>
         <member name="M:OsuParsers.Decoders.DatabaseDecoder.DecodePresence(System.String)">
             <summary>
             Parses presence.db file.
             </summary>
             <param name="path">Path to the presence.db file.</param>
-            <returns>A usable <see cref="T:OsuParsers.Database.PresenceDatabase"/>.</returns>
+            <returns>A usable <see cref="T:OsuParsers.Database.PresenceDatabase" />.</returns>
         </member>
         <member name="M:OsuParsers.Decoders.DatabaseDecoder.DecodePresence(System.IO.Stream)">
             <summary>
             Parses presence.db file.
             </summary>
             <param name="stream">Stream containing presence.db data.</param>
-            <returns>A usable <see cref="T:OsuParsers.Database.PresenceDatabase"/>.</returns>
+            <returns>A usable <see cref="T:OsuParsers.Database.PresenceDatabase" />.</returns>
         </member>
         <member name="M:OsuParsers.Decoders.ReplayDecoder.Decode(System.String)">
             <summary>
             Parses .osr file.
             </summary>
             <param name="path">Path to the .osr file.</param>
-            <returns>A usable <see cref="T:OsuParsers.Replays.Replay"/>.</returns>
+            <returns>A usable <see cref="T:OsuParsers.Replays.Replay" />.</returns>
         </member>
         <member name="M:OsuParsers.Decoders.ReplayDecoder.Decode(System.IO.Stream)">
             <summary>
             Parses .osr file.
             </summary>
             <param name="stream">Stream containing replay data.</param>
-            <returns>A usable <see cref="T:OsuParsers.Replays.Replay"/>.</returns>
+            <returns>A usable <see cref="T:OsuParsers.Replays.Replay" />.</returns>
         </member>
         <member name="M:OsuParsers.Decoders.SkinDecoder.Decode(System.String)">
             <summary>
@@ -184,12 +184,12 @@
         </member>
         <member name="M:OsuParsers.Replays.Replay.Write(System.String)">
             <summary>
-            Writes this <see cref="T:OsuParsers.Replays.Replay"/> to the specified path.
+            Writes this <see cref="T:OsuParsers.Replays.Replay" /> to the specified path.
             </summary>
         </member>
         <member name="M:OsuParsers.Skins.Skin.Write(System.String)">
             <summary>
-            Writes this <see cref="T:OsuParsers.Skins.Skin"/> to the specified path.
+            Writes this <see cref="T:OsuParsers.Skins.Skin" /> to the specified path.
             </summary>
         </member>
         <member name="M:OsuParsers.Storyboards.Storyboard.GetLayer(OsuParsers.Enums.Storyboards.StoryboardLayer)">
@@ -199,7 +199,7 @@
         </member>
         <member name="M:OsuParsers.Storyboards.Storyboard.Write(System.String)">
             <summary>
-            Writes this <see cref="T:OsuParsers.Storyboards.Storyboard"/> to the specified path.
+            Writes this <see cref="T:OsuParsers.Storyboards.Storyboard" /> to the specified path.
             </summary>
         </member>
         <member name="T:SevenZip.DataErrorException">

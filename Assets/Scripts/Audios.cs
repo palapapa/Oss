@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Audios : MonoBehaviour
 {
@@ -9,12 +7,15 @@ public class Audios : MonoBehaviour
     public AudioClip KeyDown0;
     public AudioClip KeyDown1;
     public AudioClip KeyDown2;
+
     [HideInInspector]
     public AudioClip[] KeyDownSounds;
+
     public AudioClip Backspace;
     public static GameObject Music;
     public static GameObject SoundEffects;
     private static bool hasLoaded = false;
+
     private void Start()
     {
         if (!hasLoaded)
@@ -33,6 +34,7 @@ public class Audios : MonoBehaviour
     {
         Instance = this;
     }
+
     public static GameObject PlayAudio(AudioClip ac)
     {
         GameObject gameObject = new GameObject(ac.name);
@@ -40,6 +42,7 @@ public class Audios : MonoBehaviour
         audioSource.PlayOneShot(ac);
         return gameObject;
     }
+
     public static GameObject PlayAudio(AudioClip ac, float volume)
     {
         GameObject gameObject = new GameObject(ac.name);
@@ -47,6 +50,7 @@ public class Audios : MonoBehaviour
         audioSource.PlayOneShot(ac, volume);
         return gameObject;
     }
+
     public static GameObject PlayAudio(AudioClip ac, float volume, string name)
     {
         GameObject gameObject = new GameObject(name);
@@ -54,6 +58,7 @@ public class Audios : MonoBehaviour
         audioSource.PlayOneShot(ac, volume);
         return gameObject;
     }
+
     public static GameObject PlayAudio(AudioClip ac, float volume, GameObject channel)
     {
         AudioSource audioSource = channel.GetComponent<AudioSource>();

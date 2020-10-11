@@ -6,7 +6,7 @@ using UnityEngine;
 public static class Utilities
 {
     //Get all interfaces T of all Components attacted to GameObject objectToSearch
-    public static List<T> GetInterfaces<T>(GameObject objectToSearch) where T : class
+    public static List<T> GetInterfaces<T>(this GameObject objectToSearch) where T : class
     {
         Component[] components = objectToSearch.GetComponents<Component>();
         List<T> resultList = new List<T>();
@@ -21,7 +21,7 @@ public static class Utilities
     }
 
     //Get the interface T of a MonoBehavior attached to GameObject objectToSearch
-    public static T GetInterface<T>(GameObject objectToSearch) where T : class
+    public static T GetInterface<T>(this GameObject objectToSearch) where T : class
     {
         MonoBehaviour mb = objectToSearch.GetComponent<MonoBehaviour>();
         if (mb is T)
@@ -33,6 +33,7 @@ public static class Utilities
             return null;
         }
     }
+
     /*
     public static void DisableRaycastTarget(GameObject gameObject)
     {
@@ -51,8 +52,10 @@ public static class Utilities
         }
     }
     */
+
     //Switch to panel and make all other panels invisible
-    public static void SwitchPanelSingle(this GameObject panel)
+    /*
+    public static void SwitchPanel(this GameObject panel)
     {
         if (!panel.CompareTag("Panel"))
         {
@@ -66,5 +69,50 @@ public static class Utilities
         panel.GetComponent<CanvasGroup>().alpha = 1;
         PlayerData.Instance.ActivePanel = panel;
         panel.transform.SetAsLastSibling();//bring to front
+    }
+    */
+    private static float from;
+    private static CanvasGroup canvasGroup;
+    //fade canvas group in speed seconds with steps steps
+    public static IEnumerator FadeCanvasGroup(GameObject gameObject, float speed, int steps, float from, float to)
+    {
+        if (from > 1.0f || from < 0.0f || to > 1.0f || to < 0.0f)
+        {
+            throw new ArgumentException("\"from\" and \"to\" can only range from 1.0 to 0.0");
+        }
+        if (speed < 0.0f)
+        {
+            throw new ArgumentException("\"speed\" cannot be less than 0.0");
+        }
+        Debug.Log(Time.time);
+        canvasGroup = gameObject.GetComponent<CanvasGroup>();
+        canvasGroup.alpha = from;
+        for (int i = 0; i < steps; i++)
+        {
+            canvasGroup.alpha -= (from - to) / steps;
+            yield return new WaitForSeconds(speed / steps);
+        }
+        Debug.Log(Time.time);
+    }
+    //fade canvas group in speed seconds with steps steps
+    public static IEnumerator FadeCanvasGroupTo(GameObject gameObject, float speed, int steps, float to)
+    {
+        if (to > 1.0f || to < 0.0f)
+        {
+            throw new ArgumentException("\"to\" can only range from 1.0 to 0.0");
+        }
+        if (speed < 0.0f)
+        {
+            throw new ArgumentException("\"speed\" cannot be less than 0.0");
+        }
+        Debug.Log(Time.time);
+        canvasGroup = gameObject.GetComponent<CanvasGroup>();
+        from = canvasGroup.alpha;
+        for (int i = 0; i < steps; i++)
+        {
+            canvasGroup.alpha -= (from - to) / steps;
+            yield return new WaitForSeconds(speed / steps);
+        }
+        Debug.Log(Time.time);//it somehow waits too long
     }
 }

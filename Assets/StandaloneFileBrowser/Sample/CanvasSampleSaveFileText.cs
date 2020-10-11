@@ -1,13 +1,12 @@
-using System.IO;
-using System.Text;
-using System.Runtime.InteropServices;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using SFB;
+using System.IO;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
-public class CanvasSampleSaveFileText : MonoBehaviour, IPointerDownHandler {
+public class CanvasSampleSaveFileText : MonoBehaviour, IPointerDownHandler
+{
     public Text output;
 
     // Sample text data
@@ -31,22 +30,27 @@ public class CanvasSampleSaveFileText : MonoBehaviour, IPointerDownHandler {
         output.text = "File Successfully Downloaded";
     }
 #else
+
     //
     // Standalone platforms & editor
     //
     public void OnPointerDown(PointerEventData eventData) { }
 
     // Listen OnClick event in standlone builds
-    void Start() {
+    private void Start()
+    {
         var button = GetComponent<Button>();
         button.onClick.AddListener(OnClick);
     }
 
-    public void OnClick() {
+    public void OnClick()
+    {
         var path = StandaloneFileBrowser.SaveFilePanel("Title", "", "sample", "txt");
-        if (!string.IsNullOrEmpty(path)) {
+        if (!string.IsNullOrEmpty(path))
+        {
             File.WriteAllText(path, _data);
         }
     }
+
 #endif
 }

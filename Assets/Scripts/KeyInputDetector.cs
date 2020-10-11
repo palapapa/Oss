@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class KeyInputDetector : MonoBehaviour
 {
     private static bool hasLoaded = false;
+
     private void Start()
     {
         if (!hasLoaded)
@@ -13,7 +12,8 @@ public class KeyInputDetector : MonoBehaviour
             hasLoaded = true;
         }
     }
-    void Update()
+
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && PlayerData.Instance.IsOptionOpen)
         {

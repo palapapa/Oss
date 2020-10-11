@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
@@ -10,8 +8,9 @@ public class IntroPlayer : MonoBehaviour
     public Image Fade;
     public Image BeforeImageReadyBlack;
     public Button OsuLogo;
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         VideoPlayer.Prepare();
         VideoPlayer.prepareCompleted += (VideoPlayer source) =>
@@ -29,8 +28,7 @@ public class IntroPlayer : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
     }
 }

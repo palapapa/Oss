@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using SFB;
 using UnityEngine;
-using SFB;
 
 public class SelectBeatmapLocation : MonoBehaviour, ILeftClickable
 {
@@ -14,6 +12,7 @@ public class SelectBeatmapLocation : MonoBehaviour, ILeftClickable
         }
         PlayerData.SavePersistentPlayerData();
     }
+
     private void Update()
     {
         //Debug.Log(PlayerData.Instance.BeatmapLocation);

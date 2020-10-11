@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Options : MonoBehaviour, ILeftClickable
 {
@@ -8,10 +6,11 @@ public class Options : MonoBehaviour, ILeftClickable
     public static Options Instance;
     private Animator optionsMenuAnimator;
 
-    void Start()
+    private void Start()
     {
         optionsMenuAnimator = OptionsMenu.GetComponent<Animator>();
     }
+
     public void OnLeftClick()
     {
         if (!PlayerData.Instance.IsOptionOpen)
@@ -20,6 +19,7 @@ public class Options : MonoBehaviour, ILeftClickable
             PlayerData.Instance.IsOptionOpen = true;
         }
     }
+
     public void CloseOptions()
     {
         if (PlayerData.Instance.IsOptionOpen)
@@ -28,7 +28,8 @@ public class Options : MonoBehaviour, ILeftClickable
             PlayerData.Instance.IsOptionOpen = false;
         }
     }
-    Options()
+
+    private Options()
     {
         Instance = this;
     }

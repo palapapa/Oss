@@ -325,10 +325,10 @@
       <param name="nearPlaneDistance">The distance to the near view plane.</param>
       <param name="farPlaneDistance">The distance to the far view plane.</param>
       <returns>The perspective projection matrix.</returns>
-      <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="nearPlaneDistance">nearPlaneDistance</paramref> is less than or equal to zero.  
- -or-  
- <paramref name="farPlaneDistance">farPlaneDistance</paramref> is less than or equal to zero.  
- -or-  
+      <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="nearPlaneDistance">nearPlaneDistance</paramref> is less than or equal to zero.
+ -or-
+ <paramref name="farPlaneDistance">farPlaneDistance</paramref> is less than or equal to zero.
+ -or-
  <paramref name="nearPlaneDistance">nearPlaneDistance</paramref> is greater than or equal to <paramref name="farPlaneDistance">farPlaneDistance</paramref>.</exception>
     </member>
     <member name="M:System.Numerics.Matrix4x4.CreatePerspectiveFieldOfView(System.Single,System.Single,System.Single,System.Single)">
@@ -338,13 +338,13 @@
       <param name="nearPlaneDistance">The distance to the near view plane.</param>
       <param name="farPlaneDistance">The distance to the far view plane.</param>
       <returns>The perspective projection matrix.</returns>
-      <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="fieldOfView">fieldOfView</paramref> is less than or equal to zero.  
- -or-  
- <paramref name="fieldOfView">fieldOfView</paramref> is greater than or equal to <see cref="System.Math.PI"></see>.  
- <paramref name="nearPlaneDistance">nearPlaneDistance</paramref> is less than or equal to zero.  
- -or-  
- <paramref name="farPlaneDistance">farPlaneDistance</paramref> is less than or equal to zero.  
- -or-  
+      <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="fieldOfView">fieldOfView</paramref> is less than or equal to zero.
+ -or-
+ <paramref name="fieldOfView">fieldOfView</paramref> is greater than or equal to <see cref="System.Math.PI"></see>.
+ <paramref name="nearPlaneDistance">nearPlaneDistance</paramref> is less than or equal to zero.
+ -or-
+ <paramref name="farPlaneDistance">farPlaneDistance</paramref> is less than or equal to zero.
+ -or-
  <paramref name="nearPlaneDistance">nearPlaneDistance</paramref> is greater than or equal to <paramref name="farPlaneDistance">farPlaneDistance</paramref>.</exception>
     </member>
     <member name="M:System.Numerics.Matrix4x4.CreatePerspectiveOffCenter(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
@@ -356,10 +356,10 @@
       <param name="nearPlaneDistance">The distance to the near view plane.</param>
       <param name="farPlaneDistance">The distance to the far view plane.</param>
       <returns>The perspective projection matrix.</returns>
-      <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="nearPlaneDistance">nearPlaneDistance</paramref> is less than or equal to zero.  
- -or-  
- <paramref name="farPlaneDistance">farPlaneDistance</paramref> is less than or equal to zero.  
- -or-  
+      <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="nearPlaneDistance">nearPlaneDistance</paramref> is less than or equal to zero.
+ -or-
+ <paramref name="farPlaneDistance">farPlaneDistance</paramref> is less than or equal to zero.
+ -or-
  <paramref name="nearPlaneDistance">nearPlaneDistance</paramref> is greater than or equal to <paramref name="farPlaneDistance">farPlaneDistance</paramref>.</exception>
     </member>
     <member name="M:System.Numerics.Matrix4x4.CreateReflection(System.Numerics.Plane)">
@@ -979,8 +979,8 @@
       <param name="values">A numeric array.</param>
       <param name="index">The starting index position from which to create the vector.</param>
       <exception cref="T:System.ArgumentNullException"><paramref name="values">values</paramref> is null.</exception>
-      <exception cref="T:System.IndexOutOfRangeException"><paramref name="index">index</paramref> is less than zero.  
- -or-  
+      <exception cref="T:System.IndexOutOfRangeException"><paramref name="index">index</paramref> is less than zero.
+ -or-
  The length of <paramref name="values">values</paramref> minus <paramref name="index">index</paramref> is less than <see cref="System.Numerics.Vector`1.Count"></see>.</exception>
     </member>
     <member name="M:System.Numerics.Vector`1.CopyTo(`0[])">
@@ -1020,8 +1020,8 @@
       <summary>Gets the element at a specified index.</summary>
       <param name="index">The index of the element to return.</param>
       <returns>The element at index <paramref name="index">index</paramref>.</returns>
-      <exception cref="T:System.IndexOutOfRangeException"><paramref name="index">index</paramref> is less than zero.  
- -or-  
+      <exception cref="T:System.IndexOutOfRangeException"><paramref name="index">index</paramref> is less than zero.
+ -or-
  <paramref name="index">index</paramref> is greater than or equal to <see cref="System.Numerics.Vector`1.Count"></see>.</exception>
     </member>
     <member name="P:System.Numerics.Vector`1.One">
@@ -1747,8 +1747,8 @@
       <param name="index">The index at which to copy the first element of the vector.</param>
       <exception cref="T:System.ArgumentNullException"><paramref name="array">array</paramref> is null.</exception>
       <exception cref="T:System.ArgumentException">The number of elements in the current instance is greater than in the array.</exception>
-      <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index">index</paramref> is less than zero.  
- -or-  
+      <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index">index</paramref> is less than zero.
+ -or-
  <paramref name="index">index</paramref> is greater than or equal to the array length.</exception>
       <exception cref="T:System.RankException"><paramref name="array">array</paramref> is multidimensional.</exception>
     </member>
@@ -2045,8 +2045,8 @@
       <param name="index">The index at which to copy the first element of the vector.</param>
       <exception cref="T:System.ArgumentNullException"><paramref name="array">array</paramref> is null.</exception>
       <exception cref="T:System.ArgumentException">The number of elements in the current instance is greater than in the array.</exception>
-      <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index">index</paramref> is less than zero.  
- -or-  
+      <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index">index</paramref> is less than zero.
+ -or-
  <paramref name="index">index</paramref> is greater than or equal to the array length.</exception>
       <exception cref="T:System.RankException"><paramref name="array">array</paramref> is multidimensional.</exception>
     </member>
@@ -2352,8 +2352,8 @@
       <param name="index">The index at which to copy the first element of the vector.</param>
       <exception cref="T:System.ArgumentNullException"><paramref name="array">array</paramref> is null.</exception>
       <exception cref="T:System.ArgumentException">The number of elements in the current instance is greater than in the array.</exception>
-      <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index">index</paramref> is less than zero.  
- -or-  
+      <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index">index</paramref> is less than zero.
+ -or-
  <paramref name="index">index</paramref> is greater than or equal to the array length.</exception>
       <exception cref="T:System.RankException"><paramref name="array">array</paramref> is multidimensional.</exception>
     </member>
