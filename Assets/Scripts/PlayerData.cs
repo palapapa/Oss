@@ -14,6 +14,13 @@ public class PlayerData : MonoBehaviour
     private static string saveFilePath;
     private static PersistentPlayerData persistentPlayerData;
 
+    private PlayerData()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
     private void Start()
     {
         if (!hasLoaded)
@@ -21,7 +28,6 @@ public class PlayerData : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             hasLoaded = true;
         }
-        Instance = this;
         saveFilePath = Application.persistentDataPath + @"\PersistentPlayerData.dat";
         if (File.Exists(saveFilePath))
         {

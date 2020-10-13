@@ -3,20 +3,17 @@ using UnityEngine.UI;
 
 public class OsuLogo : MonoBehaviour, ILeftClickable
 {
+    public static OsuLogo Instance;
     public GameObject PopUpButtonsLogo;
-    public Button Play;
-    public Button Options;
-    public Button Exit;
     public Animator Animator;
-
-    [HideInInspector]
-    public OsuLogo Instance;
-
     private Animator popUpButtonsAnimator;
 
     private OsuLogo()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
     }
 
     private void Start()
@@ -32,11 +29,11 @@ public class OsuLogo : MonoBehaviour, ILeftClickable
 
     private void Awake()
     {
-        SetLogoBpm(this, 160);//placeholder
+        SetLogoBpm(160);//placeholder
     }
 
-    public static void SetLogoBpm(OsuLogo ol, int bpm)
+    public static void SetLogoBpm(int bpm)
     {
-        ol.Instance.Animator.SetFloat("PulsatingSpeed", bpm / 180.0f);//dependent on animation clip OsuLogoPulsating
+        Instance.Animator.SetFloat("PulsatingSpeed", bpm / 180.0f);//dependent on animation clip OsuLogoPulsating
     }
 }

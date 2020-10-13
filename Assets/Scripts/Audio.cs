@@ -1,19 +1,19 @@
 ﻿using UnityEngine;
 
-public class Audios : MonoBehaviour
+public class Audio : MonoBehaviour
 {
-    public static Audios Instance;//workaround to show audio clips in inspector
+    public static Audio Instance { get; set; }
     public AudioClip Triangles;
     public AudioClip KeyDown0;
     public AudioClip KeyDown1;
     public AudioClip KeyDown2;
 
     [HideInInspector]
-    public AudioClip[] KeyDownSounds;
+    public AudioClip[] KeyDownSounds { get; set; }
 
     public AudioClip Backspace;
-    public static GameObject Music;
-    public static GameObject SoundEffects;
+    public static GameObject Music { get; set; }
+    public static GameObject SoundEffects { get; set; }
     private static bool hasLoaded = false;
 
     private void Start()
@@ -30,9 +30,12 @@ public class Audios : MonoBehaviour
         SoundEffects.transform.SetParent(transform);
     }
 
-    private Audios()
+    private Audio()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
     }
 
     public static GameObject PlayAudio(AudioClip ac)

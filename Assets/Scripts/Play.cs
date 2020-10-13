@@ -11,8 +11,9 @@ public class Play : MonoBehaviour, ILeftClickable
     }
     private IEnumerator SwitchToSongSelection()
     {
-        yield return StartCoroutine(Utilities.FadeCanvasGroupTo(MainMenu, 0.15f, 20, 0.0f));
+        SongSelection.GetComponent<CanvasGroup>().alpha = 0;
+        yield return StartCoroutine(MainMenu.FadeCanvasGroupTo(0.2f, 20, 0.0f));
         SongSelection.transform.SetAsLastSibling();
-        yield return StartCoroutine(Utilities.FadeCanvasGroup(SongSelection, 0.15f, 20, 0.0f, 1.0f));
+        yield return StartCoroutine(SongSelection.FadeCanvasGroupTo(0.2f, 20, 1.0f));
     }
 }

@@ -9,8 +9,9 @@ public class SelectBeatmapLocation : MonoBehaviour, ILeftClickable
         if (path.Length != 0)
         {
             PlayerData.Instance.BeatmapLocation = path[0];
+            PlayerData.SavePersistentPlayerData();
+            Debug.Log(path[0]);
         }
-        PlayerData.SavePersistentPlayerData();
     }
 
     private void Update()

@@ -71,10 +71,8 @@ public static class Utilities
         panel.transform.SetAsLastSibling();//bring to front
     }
     */
-    private static float from;
-    private static CanvasGroup canvasGroup;
     //fade canvas group in speed seconds with steps steps
-    public static IEnumerator FadeCanvasGroup(GameObject gameObject, float speed, int steps, float from, float to)
+    public static IEnumerator FadeCanvasGroup(this GameObject gameObject, float speed, uint steps, float from, float to)
     {
         if (from > 1.0f || from < 0.0f || to > 1.0f || to < 0.0f)
         {
@@ -85,7 +83,7 @@ public static class Utilities
             throw new ArgumentException("\"speed\" cannot be less than 0.0");
         }
         Debug.Log(Time.time);
-        canvasGroup = gameObject.GetComponent<CanvasGroup>();
+        CanvasGroup canvasGroup = gameObject.GetComponent<CanvasGroup>();
         canvasGroup.alpha = from;
         for (int i = 0; i < steps; i++)
         {
@@ -95,7 +93,7 @@ public static class Utilities
         Debug.Log(Time.time);
     }
     //fade canvas group in speed seconds with steps steps
-    public static IEnumerator FadeCanvasGroupTo(GameObject gameObject, float speed, int steps, float to)
+    public static IEnumerator FadeCanvasGroupTo(this GameObject gameObject, float speed, uint steps, float to)
     {
         if (to > 1.0f || to < 0.0f)
         {
@@ -106,8 +104,8 @@ public static class Utilities
             throw new ArgumentException("\"speed\" cannot be less than 0.0");
         }
         Debug.Log(Time.time);
-        canvasGroup = gameObject.GetComponent<CanvasGroup>();
-        from = canvasGroup.alpha;
+        CanvasGroup canvasGroup = gameObject.GetComponent<CanvasGroup>();
+        float from = canvasGroup.alpha;
         for (int i = 0; i < steps; i++)
         {
             canvasGroup.alpha -= (from - to) / steps;
