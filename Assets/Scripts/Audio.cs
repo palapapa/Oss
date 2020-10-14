@@ -1,5 +1,9 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using OsuParsers;
+using OsuParsers.Beatmaps;
 
+//Contains some in-game sound effects and provides audio-related utilities, use the methods in this class if you simply want to play a sound and nothing more
 public class Audio : MonoBehaviour
 {
     public static Audio Instance { get; set; }
@@ -7,14 +11,10 @@ public class Audio : MonoBehaviour
     public AudioClip KeyDown0;
     public AudioClip KeyDown1;
     public AudioClip KeyDown2;
-
-    [HideInInspector]
-    public AudioClip[] KeyDownSounds { get; set; }
-
     public AudioClip Backspace;
-    public static GameObject Music { get; set; }
-    public static GameObject SoundEffects { get; set; }
-    private static bool hasLoaded = false;
+    public AudioClip[] KeyDownSounds { get; set; }
+    public List<Beatmap> Musics { get; set; }
+    private bool hasLoaded = false;
 
     private void Start()
     {
@@ -24,10 +24,7 @@ public class Audio : MonoBehaviour
             hasLoaded = true;
         }
         KeyDownSounds = new AudioClip[] { KeyDown0, KeyDown1, KeyDown2 };
-        Music = new GameObject("Music");
-        Music.transform.SetParent(transform);
-        SoundEffects = new GameObject("SoundEffects");
-        SoundEffects.transform.SetParent(transform);
+        Musics = new List<Beatmap>();
     }
 
     private Audio()

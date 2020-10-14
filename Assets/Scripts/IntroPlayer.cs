@@ -15,7 +15,7 @@ public class IntroPlayer : MonoBehaviour
         VideoPlayer.Prepare();
         VideoPlayer.prepareCompleted += (VideoPlayer source) =>
         {
-            Audio.PlayAudio(Audio.Instance.Triangles, 0.25f, Audio.Music);
+            PlayList.PlaySelected(Audio.Instance.Triangles, 1.0f);
             VideoPlayer.Play();
         };
         VideoPlayer.loopPointReached += (VideoPlayer source) =>

@@ -47,7 +47,7 @@ public class GameCamera : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
         
     }

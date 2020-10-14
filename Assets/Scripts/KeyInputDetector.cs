@@ -2,7 +2,9 @@
 
 public class KeyInputDetector : MonoBehaviour
 {
-    private static bool hasLoaded = false;
+    public GameObject MainMenu;
+    public GameObject SongSelection;
+    private bool hasLoaded = false;
 
     private void Start()
     {
@@ -11,13 +13,21 @@ public class KeyInputDetector : MonoBehaviour
             DontDestroyOnLoad(this);
             hasLoaded = true;
         }
+        PlayerData.Instance.ActivePanel = MainMenu;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && PlayerData.Instance.IsOptionOpen)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Options.Instance.CloseOptions();
+            if (PlayerData.Instance.IsOptionOpen && PlayerData.Instance.ActivePanel == MainMenu)
+            {
+                Options.Instance.CloseOptions();
+            }
+            if (PlayerData.Instance.ActivePanel == SongSelection)
+            {
+                StartCoroutine(Back.Instance.SwitchToMainMenu());
+            }
         }
         if
         (
@@ -33,11 +43,11 @@ public class KeyInputDetector : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Backspace))
             {
-                Audio.PlayAudio(Audio.Instance.Backspace, 1.0f, Audio.SoundEffects);
+                Audio.PlayAudio(Audio.Instance.Backspace, 1.0f, AudioChannels.SoundEffects);
             }
             else
             {
-                Audio.PlayAudio(Audio.Instance.KeyDownSounds[new System.Random().Next(0, Audio.Instance.KeyDownSounds.Length)], 1.0f, Audio.SoundEffects);//plays a random keydown sound
+                Audio.PlayAudio(Audio.Instance.KeyDownSounds[new System.Random().Next(0, Audio.Instance.KeyDownSounds.Length)], 1.0f, AudioChannels.SoundEffects);//plays a random keydown sound
             }
         }
     }

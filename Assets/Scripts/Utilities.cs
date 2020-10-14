@@ -54,23 +54,12 @@ public static class Utilities
     */
 
     //Switch to panel and make all other panels invisible
-    /*
     public static void SwitchPanel(this GameObject panel)
     {
-        if (!panel.CompareTag("Panel"))
-        {
-            throw new ArgumentException($"Specified panel(\"{panel.name}\") is not tagged with \"Panel\"");
-        }
-        GameObject[] panels = GameObject.FindGameObjectsWithTag("Panel");
-        foreach (GameObject p in panels)
-        {
-            p.GetComponent<CanvasGroup>().alpha = 0;
-        }
-        panel.GetComponent<CanvasGroup>().alpha = 1;
         PlayerData.Instance.ActivePanel = panel;
         panel.transform.SetAsLastSibling();//bring to front
+        Debug.Log(PlayerData.Instance.ActivePanel);
     }
-    */
     //fade canvas group in speed seconds with steps steps
     public static IEnumerator FadeCanvasGroup(this GameObject gameObject, float speed, uint steps, float from, float to)
     {
