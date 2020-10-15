@@ -380,6 +380,49 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &523329797
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 523329798}
+  - component: {fileID: 523329799}
+  m_Layer: 0
+  m_Name: SongManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &523329798
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523329797}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.459348, y: 1.1739775, z: 82.045006}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &523329799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523329797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0e3aa04d41491249b69100e109540a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &564493920
 GameObject:
   m_ObjectHideFlags: 0
@@ -467,14 +510,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfb105421710ad148aba3a0401a3d66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Triangles: {fileID: 8300000, guid: 645e0042c5552454ab05380346eeb013, type: 3}
+  TrianglesAudioClip: {fileID: 8300000, guid: 645e0042c5552454ab05380346eeb013, type: 3}
   KeyDown0: {fileID: 8300000, guid: 6965deda4d93f46469abb01b1a8c14c3, type: 3}
   KeyDown1: {fileID: 8300000, guid: da44134af098e634c9b89a4299f069ba, type: 3}
   KeyDown2: {fileID: 8300000, guid: abbc7e259e4bc354cb89fd87ff059a37, type: 3}
   Backspace: {fileID: 8300000, guid: 407a7e2a1cba38e4681ee9feea1662db, type: 3}
-  <KeyDownSounds>k__BackingField: []
-  <Musics>k__BackingField: []
-  hasLoaded: 0
 --- !u!4 &714223357
 Transform:
   m_ObjectHideFlags: 0
@@ -585,7 +625,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 060125fae8946bc4f83cbf2bb0a29a72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 0}
 --- !u!1 &731798693
 GameObject:
   m_ObjectHideFlags: 0
@@ -1525,7 +1564,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c64dc4f1ea8f174ea733451e22f5960, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasLoaded: 0
 --- !u!4 &1391310276
 Transform:
   m_ObjectHideFlags: 0
@@ -1705,7 +1743,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OptionsMenu: {fileID: 2090397673}
-  optionsMenuAnimator: {fileID: 0}
 --- !u!1 &1536952756
 GameObject:
   m_ObjectHideFlags: 0
@@ -1813,7 +1850,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainMenu: {fileID: 1181577922}
   SongSelection: {fileID: 103840390}
-  hasLoaded: 0
 --- !u!222 &1672407907
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2130,10 +2166,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca56eb4acd1416c449770ef93eb654bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <IsOptionOpen>k__BackingField: 0
-  <BeatmapLocation>k__BackingField: 
-  <ActivePanel>k__BackingField: {fileID: 0}
-  hasLoaded: 0
 --- !u!4 &1731020852
 Transform:
   m_ObjectHideFlags: 0
@@ -2405,7 +2437,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PopUpButtonsLogo: {fileID: 564493920}
   Animator: {fileID: 1957793004}
-  popUpButtonsAnimator: {fileID: 0}
 --- !u!1 &2018480695
 GameObject:
   m_ObjectHideFlags: 0

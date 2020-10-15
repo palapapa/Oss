@@ -2,34 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using OsuParsers.Beatmaps;
 
 //Contains utilities related to the music player in the main menu, use the methods in this class if you want to play a music and have it registered to the main menu music player
 public class PlayList : MonoBehaviour
 {
-    public static AudioClip CurrentPlaying { get; set; }
+    public static Beatmap CurrentPlaying { get; set; }
     public Text MusicName;
     
     void Start()
     {
-        MusicName.text = "Triangles";//better way?
+        MusicName.text = "cYsmix - Triangles";//better way?
     }
 
     void Update()
     {
-        
+        CurrentPlaying = Audio.Instance.Triangles;
+        MusicName.text = CurrentPlaying.MetadataSection.TitleUnicode;
     }
 
-    /*
     public static GameObject PlayRandom(float volume)
     {
-        AudioClip ac = Audio.Instance.Musics[new System.Random().Next()];
-        CurrentPlaying = ac;
+        Song song = SongManager.Songs[new System.Random().Next(0, SongManager.Songs.Count)];
+        AudioClip ac = song.AudioClip;
+        CurrentPlaying = song;
         return Audio.PlayAudio(ac, volume, AudioChannels.Music);
     }
-    */
-    public static GameObject PlaySelected(AudioClip ac, float volume)
+
+    public static GameObject PlaySelected(Song song, float volume)
     {
-        CurrentPlaying = ac;
-        return Audio.PlayAudio(ac, volume, AudioChannels.Music);
+        CurrentPlaying = song;
+        return Audio.PlayAudio(song.AudioClip, volume, AudioChannels.Music);
     }
 }
