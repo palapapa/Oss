@@ -8,6 +8,7 @@ public class Play : MonoBehaviour, ILeftClickable
     public static Play Instance;
     public void OnLeftClick()
     {
+        StartCoroutine(SongManager.ScanSongDirectory());
         StartCoroutine(SwitchToSongSelection());
     }
     public IEnumerator SwitchToSongSelection()

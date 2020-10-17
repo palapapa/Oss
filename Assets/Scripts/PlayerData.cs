@@ -32,7 +32,6 @@ public class PlayerData : MonoBehaviour
         if (File.Exists(saveFilePath))
         {
             persistentPlayerData = LoadPersistentPlayerData();
-            BeatmapLocation = persistentPlayerData.BeatmapLocation;
         }
         //InvokeRepeating("SavePersistentPlayerData", 0.0f, 60.0f);
     }
@@ -67,6 +66,8 @@ public class PlayerData : MonoBehaviour
                 persistentPlayerData = new PersistentPlayerData(Instance);
             }
         }
+        Instance.BeatmapLocation = persistentPlayerData.BeatmapLocation;
+        Debug.Log($"Song location = {Instance.BeatmapLocation}");
         return persistentPlayerData;
     }
 }
