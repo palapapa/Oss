@@ -1,21 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using OsuParsers.Beatmaps;
 using UnityEngine;
 using UnityEngine.UI;
-using OsuParsers.Beatmaps;
 
 //Contains utilities related to the music player in the main menu, use the methods in this class if you want to play a music and have it registered to the main menu music player
 public class PlayList : MonoBehaviour
 {
     public static Beatmap CurrentPlaying { get; set; }
     public Text MusicName;
-    
-    void Start()
+
+    private void Start()
     {
         MusicName.text = "cYsmix - Triangles";//better way?
     }
 
-    void Update()
+    private void Update()
     {
         CurrentPlaying = Audio.Instance.Triangles;
         MusicName.text = CurrentPlaying.MetadataSection.TitleUnicode;

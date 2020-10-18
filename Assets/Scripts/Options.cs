@@ -13,13 +13,16 @@ public class Options : MonoBehaviour, ILeftClickable
 
     public void OnLeftClick()
     {
+        OpenOptions();
+    }
+    public void OpenOptions()
+    {
         if (!PlayerData.Instance.IsOptionOpen)
         {
             optionsMenuAnimator.SetTrigger("OptionsClicked");
             PlayerData.Instance.IsOptionOpen = true;
         }
     }
-
     public void CloseOptions()
     {
         if (PlayerData.Instance.IsOptionOpen)

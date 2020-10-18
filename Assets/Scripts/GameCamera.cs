@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameCamera : MonoBehaviour
 {
@@ -49,6 +47,5 @@ public class GameCamera : MonoBehaviour
 
     private void Update()
     {
-        
     }
 }

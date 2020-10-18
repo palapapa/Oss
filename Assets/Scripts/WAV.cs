@@ -1,12 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class WAV
+﻿public class WAV
 {
-
     // convert two bytes to one float in the range -1 to 1
-    static float bytesToFloat(byte firstByte, byte secondByte)
+    private static float bytesToFloat(byte firstByte, byte secondByte)
     {
         // convert two bytes to one short (little endian)
         short s = (short)((secondByte << 8) | firstByte);
@@ -14,7 +9,7 @@ public class WAV
         return s / 32768.0F;
     }
 
-    static int BytesToInt(byte[] bytes, int offset = 0)
+    private static int BytesToInt(byte[] bytes, int offset = 0)
     {
         int value = 0;
         for (int i = 0; i < 4; i++)
@@ -23,8 +18,10 @@ public class WAV
         }
         return value;
     }
+
     // properties
     public float[] LeftChannel { get; internal set; }
+
     public float[] RightChannel { get; internal set; }
     public int ChannelCount { get; internal set; }
     public int SampleCount { get; internal set; }
@@ -32,7 +29,6 @@ public class WAV
 
     public WAV(byte[] wav)
     {
-
         // Determine if mono or stereo
         ChannelCount = wav[22];     // Forget byte 23 as 99.999% of WAVs are 1 or 2 channels
 

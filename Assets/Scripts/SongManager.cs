@@ -1,18 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using OsuParsers.Beatmaps;
+﻿using OsuParsers.Beatmaps;
 using OsuParsers.Decoders;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System;
+using UnityEngine;
 
 public class SongManager : MonoBehaviour
 {
     public static List<Song> Songs { get; set; }
-    private static IEnumerable<string> audioPaths;
+    private static IEnumerable<string> osuPaths;
     private static bool isScanningSongDirectory = false;
-    void Start()
+
+    private void Start()
     {
         Songs = new List<Song>();
         if (!isScanningSongDirectory)
@@ -26,10 +27,11 @@ public class SongManager : MonoBehaviour
             StartCoroutine(ScanSongDirectory());
         }
     }
-    void Update()
+
+    private void Update()
     {
-        
     }
+
     public static IEnumerator ScanSongDirectory()
     {
         if (!isScanningSongDirectory)
@@ -39,13 +41,13 @@ public class SongManager : MonoBehaviour
         Songs.Clear();
         try
         {
-            audioPaths = Directory.EnumerateFiles(PlayerData.Instance.BeatmapLocation, "*.osu", SearchOption.AllDirectories);
+            osuPaths = Directory.EnumerateFiles(PlayerData.Instance.BeatmapLocation, "*.osu", SearchOption.AllDirectories);
         }
         catch (ArgumentException e)
         {
             Debug.Log(e.Message);
         }
-        foreach (string path in audioPaths ?? Enumerable.Empty<string>())
+        foreach (string path in osuPaths ?? Enumerable.Empty<string>())
         {
             Beatmap beatmap = BeatmapDecoder.Decode(path);
             string audioPath = path.Substring(0, path.LastIndexOf('\\') + 1) + beatmap.GeneralSection.AudioFilename;

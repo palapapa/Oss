@@ -20,11 +20,15 @@ public class KeyInputDetector : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (PlayerData.Instance.IsOptionOpen && PlayerData.Instance.ActivePanel == MainMenu)
+            if (PlayerData.Instance.IsCreditsOpen)
+            {
+                StartCoroutine(Credits.Instance.CloseCredits());
+            }
+            else if (PlayerData.Instance.IsOptionOpen && PlayerData.Instance.ActivePanel == MainMenu)
             {
                 Options.Instance.CloseOptions();
             }
-            if (PlayerData.Instance.ActivePanel == SongSelection)
+            else if (PlayerData.Instance.ActivePanel == SongSelection)
             {
                 StartCoroutine(Back.Instance.SwitchToMainMenu());
             }

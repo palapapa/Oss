@@ -1,12 +1,8 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using OsuParsers;
-using OsuParsers.Beatmaps;
+﻿using NAudio.Wave;
 using OsuParsers.Beatmaps.Sections;
-using System.IO;
 using System;
-using NAudio;
-using NAudio.Wave;
+using System.IO;
+using UnityEngine;
 
 //Contains some in-game sound effects and provides audio-related utilities, use the methods in this class if you simply want to play a sound and nothing more
 public class Audio : MonoBehaviour

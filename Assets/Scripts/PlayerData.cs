@@ -1,5 +1,4 @@
-﻿using System.Data;
-using System.IO;
+﻿using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
@@ -10,6 +9,7 @@ public class PlayerData : MonoBehaviour
     public string BeatmapLocation { get; set; }
     public GameObject ActivePanel { get; set; }
     public static PlayerData Instance { get; set; }
+    public bool IsCreditsOpen { get; set; } = false;
     private bool hasLoaded = false;
     private static string saveFilePath;
     private static PersistentPlayerData persistentPlayerData;
@@ -21,6 +21,7 @@ public class PlayerData : MonoBehaviour
             Instance = this;
         }
     }
+
     private void Start()
     {
         if (!hasLoaded)
