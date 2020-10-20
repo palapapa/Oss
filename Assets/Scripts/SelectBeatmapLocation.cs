@@ -10,7 +10,6 @@ public class SelectBeatmapLocation : MonoBehaviour, ILeftClickable
         {
             PlayerData.Instance.BeatmapLocation = path[0];
             PlayerData.SavePersistentPlayerData();
-            StartCoroutine(SongManager.ScanSongDirectory());
         }
     }
 

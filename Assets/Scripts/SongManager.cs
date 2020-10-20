@@ -3,8 +3,8 @@ using OsuParsers.Decoders;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
+using System.IO;
 using UnityEngine;
 
 public class SongManager : MonoBehaviour
@@ -12,20 +12,12 @@ public class SongManager : MonoBehaviour
     public static List<Song> Songs { get; set; }
     private static IEnumerable<string> osuPaths;
     private static bool isScanningSongDirectory = false;
+    private static SongManager instance;
 
     private void Start()
     {
         Songs = new List<Song>();
-        if (!isScanningSongDirectory)
-        {
-            StartCoroutine(ScanSongDirectory());
-        }
-        else // force reset the coroutine
-        {
-            StopCoroutine(nameof(ScanSongDirectory));
-            isScanningSongDirectory = false;
-            StartCoroutine(ScanSongDirectory());
-        }
+        StartCoroutine(ScanSongDirectory());
     }
 
     private void Update()
@@ -37,6 +29,10 @@ public class SongManager : MonoBehaviour
         if (!isScanningSongDirectory)
         {
             isScanningSongDirectory = true;
+        }
+        else
+        {
+            yield break;
         }
         Songs.Clear();
         try
@@ -63,5 +59,12 @@ public class SongManager : MonoBehaviour
             yield return null;
         }
         isScanningSongDirectory = false;
+    }
+    private SongManager()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
     }
 }

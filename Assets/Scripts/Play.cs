@@ -9,14 +9,13 @@ public class Play : MonoBehaviour, ILeftClickable
 
     public void OnLeftClick()
     {
-        StartCoroutine(SongManager.ScanSongDirectory());
         StartCoroutine(SwitchToSongSelection());
     }
 
     public IEnumerator SwitchToSongSelection()
     {
         SongSelection.GetComponent<CanvasGroup>().alpha = 0;
-        yield return StartCoroutine(MainMenu.FadeCanvasGroupTo(0.2f, 20, 0.0f));
+        yield return StartCoroutine(MainMenu.FadeCanvasGroupTo(0.2f, 20, 0.0f)); // todo: use animator instead of this inconsistent shit
         SongSelection.SwitchPanel();
         yield return StartCoroutine(SongSelection.FadeCanvasGroupTo(0.2f, 20, 1.0f));
     }

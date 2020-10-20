@@ -17,7 +17,7 @@ public class Credits : MonoBehaviour, ILeftClickable
         {
             CreditsPanel.SetActive(true);
             PlayerData.Instance.IsCreditsOpen = true;
-            yield return StartCoroutine(CreditsPanel.FadeCanvasGroup(0.1f, 20, 0.0f, 1.0f));
+            yield return StartCoroutine(CreditsPanel.FadeCanvasGroup(0.1f, 20, 0.0f, 1.0f)); // todo: use animator instead of this inconsistent shit
         }
         else
         {

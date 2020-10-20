@@ -3,7 +3,7 @@
 public class Options : MonoBehaviour, ILeftClickable
 {
     public GameObject OptionsMenu;
-    public static Options Instance;
+    public static Options Instance { get; set; }
     private Animator optionsMenuAnimator;
 
     private void Start()

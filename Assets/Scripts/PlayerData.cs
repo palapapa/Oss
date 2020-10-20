@@ -3,44 +3,36 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
-public class PlayerData : MonoBehaviour
+public class PlayerData : PersistentPlayerData 
 {
     public bool IsOptionOpen { get; set; } = false;
-    public string BeatmapLocation { get; set; }
     public GameObject ActivePanel { get; set; }
-    public static PlayerData Instance { get; set; }
+    private static PlayerData instance;
+    public static PlayerData Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = new PlayerData();
+            }
+            return instance;
+        }
+    }
     public bool IsCreditsOpen { get; set; } = false;
-    private bool hasLoaded = false;
-    private static string saveFilePath;
-    private static PersistentPlayerData persistentPlayerData;
+    private readonly string saveFilePath;
+    private PersistentPlayerData persistentPlayerData; // warper for all player data to be saved onto disk
 
     private PlayerData()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-    }
-
-    private void Start()
-    {
-        if (!hasLoaded)
-        {
-            DontDestroyOnLoad(gameObject);
-            hasLoaded = true;
-        }
         saveFilePath = Application.persistentDataPath + @"\PersistentPlayerData.dat";
-        if (File.Exists(saveFilePath))
-        {
-            persistentPlayerData = LoadPersistentPlayerData();
-        }
-        //InvokeRepeating("SavePersistentPlayerData", 0.0f, 60.0f);
+        BeatmapLocation = string.Empty;
     }
 
     public static PersistentPlayerData SavePersistentPlayerData()
     {
         PersistentPlayerData persistentPlayerData = new PersistentPlayerData(Instance);
-        using (FileStream fileStream = File.Create(saveFilePath))
+        using (FileStream fileStream = File.Create(Instance.saveFilePath))
         {
             try
             {
@@ -56,19 +48,24 @@ public class PlayerData : MonoBehaviour
 
     public static PersistentPlayerData LoadPersistentPlayerData()
     {
-        using (FileStream fileStream = File.OpenRead(saveFilePath))
+        using (FileStream fileStream = File.OpenRead(Instance.saveFilePath))
         {
             try
             {
-                persistentPlayerData = (PersistentPlayerData)new BinaryFormatter().Deserialize(fileStream);
+                Instance.persistentPlayerData = (PersistentPlayerData)new BinaryFormatter().Deserialize(fileStream);
             }
             catch (SerializationException)
             {
-                persistentPlayerData = new PersistentPlayerData(Instance);
+                Instance.persistentPlayerData = new PersistentPlayerData(Instance);
             }
         }
-        Instance.BeatmapLocation = persistentPlayerData.BeatmapLocation;
+        ApplyPersistentPlayerData();
         Debug.Log($"Song location = {Instance.BeatmapLocation}");
-        return persistentPlayerData;
+        return Instance.persistentPlayerData;
+    }
+
+    public static void ApplyPersistentPlayerData()
+    {
+        Instance.BeatmapLocation = Instance.persistentPlayerData.BeatmapLocation;
     }
 }
