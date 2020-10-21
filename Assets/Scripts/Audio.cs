@@ -17,7 +17,7 @@ public class Audio : MonoBehaviour
     public AudioClip[] KeyDownSounds { get; set; }
     private bool hasLoaded = false;
 
-    private void Start()
+    private void Awake()
     {
         if (!hasLoaded)
         {
@@ -32,6 +32,11 @@ public class Audio : MonoBehaviour
                 TitleUnicode = "cYsmix - Triangles"
             }
         };
+    }
+
+    private void Start()
+    {
+        
     }
 
     private Audio()

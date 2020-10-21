@@ -6,7 +6,7 @@ public class AudioChannels : MonoBehaviour
     public static GameObject SoundEffects { get; set; }
     private bool hasLoaded = false;
 
-    private void Start()
+    private void Awake()
     {
         if (!hasLoaded)
         {
@@ -21,7 +21,14 @@ public class AudioChannels : MonoBehaviour
         {
             name = "SoundEffects"
         };
+        Music.AddComponent<AudioSource>();
+        SoundEffects.AddComponent<AudioSource>();
         Music.transform.SetParent(transform);
         SoundEffects.transform.SetParent(transform);
+    }
+
+    private void Start()
+    {
+        
     }
 }

@@ -23,10 +23,9 @@ public class PlayerData : PersistentPlayerData
     private readonly string saveFilePath;
     private PersistentPlayerData persistentPlayerData; // warper for all player data to be saved onto disk
 
-    private PlayerData()
+    private PlayerData() : base()
     {
         saveFilePath = Application.persistentDataPath + @"\PersistentPlayerData.dat";
-        BeatmapLocation = string.Empty;
     }
 
     public static PersistentPlayerData SavePersistentPlayerData()
@@ -67,5 +66,7 @@ public class PlayerData : PersistentPlayerData
     public static void ApplyPersistentPlayerData()
     {
         Instance.BeatmapLocation = Instance.persistentPlayerData.BeatmapLocation;
+        Instance.MusicVolume = Instance.persistentPlayerData.MusicVolume;
+        Instance.SoundEffectsVolume = Instance.persistentPlayerData.SoundEffectsVolume;
     }
 }
