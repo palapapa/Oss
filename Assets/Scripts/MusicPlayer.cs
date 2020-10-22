@@ -5,11 +5,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //Contains utilities related to the music player in the main menu, use the methods in this class if you want to play a music and have it registered to the main menu music player
-public class PlayList : MonoBehaviour
+public class MusicPlayer : MonoBehaviour
 {
     public static Song CurrentPlaying { get; set; }
     public Text MusicName;
-    private AudioSource musicAudioSource;
+    public GameObject MainMenu;
+    private static AudioSource musicAudioSource;
 
     private void Start()
     {
@@ -21,7 +22,7 @@ public class PlayList : MonoBehaviour
     private void Update()
     {
         MusicName.text = CurrentPlaying.MetadataSection.TitleUnicode;
-        if (!musicAudioSource.isPlaying)
+        if (!musicAudioSource.isPlaying && PlayerData.Instance.HasIntroFinished && PlayerData.Instance.ActivePanel == MainMenu)
         {
             try
             {
@@ -39,6 +40,7 @@ public class PlayList : MonoBehaviour
         Song song = SongManager.Songs[new System.Random().Next(0, SongManager.Songs.Count)];
         AudioClip ac = song.AudioClip;
         CurrentPlaying = song;
+        musicAudioSource.Stop();
         return Audio.PlayAudio(ac, volume, AudioChannels.Music);
     }
     public static GameObject PlayNext(float volume)
@@ -51,6 +53,7 @@ public class PlayList : MonoBehaviour
         Song song = SongManager.Songs[index];
         AudioClip ac = song.AudioClip;
         CurrentPlaying = song;
+        musicAudioSource.Stop();
         return Audio.PlayAudio(ac, volume, AudioChannels.Music);
     }
     public static GameObject PlayLast(float volume)
@@ -63,11 +66,20 @@ public class PlayList : MonoBehaviour
         Song song = SongManager.Songs[index];
         AudioClip ac = song.AudioClip;
         CurrentPlaying = song;
+        musicAudioSource.Stop();
         return Audio.PlayAudio(ac, volume, AudioChannels.Music);
     }
     public static GameObject PlaySelected(Song song, float volume)
     {
-        CurrentPlaying = song;
-        return Audio.PlayAudio(song.AudioClip, volume, AudioChannels.Music);
+        if (!SongManager.Songs.Exists(s => s == song))
+        {
+            CurrentPlaying = song;
+            musicAudioSource.Stop();
+            return Audio.PlayAudio(song.AudioClip, volume, AudioChannels.Music);
+        }
+        else
+        {
+            throw new ArgumentException($"{song.MetadataSection.TitleUnicode} is not registered in SongManager.Songs");
+        }
     }
 }

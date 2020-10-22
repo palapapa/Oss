@@ -20,6 +20,7 @@ public class PlayerData : PersistentPlayerData
         }
     }
     public bool IsCreditsOpen { get; set; } = false;
+    public bool HasIntroFinished { get; set; } = false;
     private readonly string saveFilePath;
     private PersistentPlayerData persistentPlayerData; // warper for all player data to be saved onto disk
 

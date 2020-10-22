@@ -14,10 +14,12 @@ public class SongManager : MonoBehaviour
     private static bool isScanningSongDirectory = false;
     private static SongManager instance;
 
-    private void Start()
+    private void Awake()
     {
-        Songs = new List<Song>();
-        StartCoroutine(ScanSongDirectory());
+        Songs = new List<Song>
+        {
+            Audio.Instance.Triangles
+        };
     }
 
     private void Update()
@@ -26,6 +28,7 @@ public class SongManager : MonoBehaviour
 
     public static IEnumerator ScanSongDirectory()
     {
+        Debug.Log("Scanning song directory");
         if (!isScanningSongDirectory)
         {
             isScanningSongDirectory = true;
@@ -49,7 +52,11 @@ public class SongManager : MonoBehaviour
             string audioPath = path.Substring(0, path.LastIndexOf('\\') + 1) + beatmap.GeneralSection.AudioFilename;
             try
             {
-                Songs.Add(new Song(beatmap, Audio.Mp3ToAudioClip(File.ReadAllBytes(audioPath))));
+                Song song = new Song(beatmap, Audio.Mp3ToAudioClip(File.ReadAllBytes(audioPath)));
+                if (!Songs.Contains(song))
+                {
+                    Songs.Add(song);
+                }
             }
             catch (FileNotFoundException e)
             {
