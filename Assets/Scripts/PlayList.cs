@@ -1,5 +1,6 @@
 ﻿using OsuParsers.Beatmaps;
 using OsuParsers.Beatmaps.Sections;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,7 +23,14 @@ public class PlayList : MonoBehaviour
         MusicName.text = CurrentPlaying.MetadataSection.TitleUnicode;
         if (!musicAudioSource.isPlaying)
         {
-            PlayNext(PlayerData.Instance.MusicVolume);
+            try
+            {
+                PlayNext(PlayerData.Instance.MusicVolume);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                Debug.Log("Can't find next song");
+            }
         }
     }
 
