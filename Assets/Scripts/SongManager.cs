@@ -14,7 +14,7 @@ public class SongManager : MonoBehaviour
     private static bool isScanningSongDirectory = false;
     private static SongManager instance;
 
-    private void Awake()
+    private void Start()
     {
         Songs = new List<Song>
         {
@@ -53,7 +53,8 @@ public class SongManager : MonoBehaviour
             try
             {
                 Song song = new Song(beatmap, Audio.Mp3ToAudioClip(File.ReadAllBytes(audioPath)));
-                if (!Songs.Contains(song))
+                //somehow checking for the whole Song object doesn't work so I had to make do with checking for the title
+                if (!Songs.Exists(s => s.MetadataSection.TitleUnicode == song.MetadataSection.TitleUnicode))
                 {
                     Songs.Add(song);
                 }

@@ -71,7 +71,7 @@ public class MusicPlayer : MonoBehaviour
     }
     public static GameObject PlaySelected(Song song, float volume)
     {
-        if (!SongManager.Songs.Exists(s => s == song))
+        if (SongManager.Songs.Exists(s => s == song))
         {
             CurrentPlaying = song;
             musicAudioSource.Stop();
