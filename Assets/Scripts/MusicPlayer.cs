@@ -42,7 +42,7 @@ public class MusicPlayer : MonoBehaviour
         AudioClip ac = song.AudioClip;
         CurrentPlaying = song;
         musicAudioSource.Stop();
-        HasManuallyPaused = true;
+        HasManuallyPaused = false;
         return Audio.PlayAudio(ac, volume, AudioChannels.Music);
     }
     public static GameObject PlayNext(float volume)
@@ -56,7 +56,7 @@ public class MusicPlayer : MonoBehaviour
         AudioClip ac = song.AudioClip;
         CurrentPlaying = song;
         musicAudioSource.Stop();
-        HasManuallyPaused = true;
+        HasManuallyPaused = false;
         return Audio.PlayAudio(ac, volume, AudioChannels.Music);
     }
     public static GameObject PlayLast(float volume)
@@ -70,7 +70,7 @@ public class MusicPlayer : MonoBehaviour
         AudioClip ac = song.AudioClip;
         CurrentPlaying = song;
         musicAudioSource.Stop();
-        HasManuallyPaused = true;
+        HasManuallyPaused = false;
         return Audio.PlayAudio(ac, volume, AudioChannels.Music);
     }
     public static GameObject PlaySelected(Song song, float volume)
@@ -79,7 +79,7 @@ public class MusicPlayer : MonoBehaviour
         {
             CurrentPlaying = song;
             musicAudioSource.Stop();
-            HasManuallyPaused = true;
+            HasManuallyPaused = false;
             return Audio.PlayAudio(song.AudioClip, volume, AudioChannels.Music);
         }
         else
