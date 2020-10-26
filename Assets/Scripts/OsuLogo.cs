@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class OsuLogo : MonoBehaviour, ILeftClickable
 {
@@ -18,6 +19,18 @@ public class OsuLogo : MonoBehaviour, ILeftClickable
     private void Start()
     {
         popUpButtonsAnimator = PopUpButtonsLogo.GetComponent<Animator>();
+    }
+
+    private void Update()
+    {
+        try
+        {
+            SetLogoBpm((int)(1 / MusicPlayer.CurrentPlaying.TimingPoints[0].BeatLength * 60000));
+        }
+        catch (ArgumentOutOfRangeException)
+        {
+            SetLogoBpm(160);
+        }
     }
 
     public void OnLeftClick()
