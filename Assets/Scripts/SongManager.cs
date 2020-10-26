@@ -38,6 +38,7 @@ public class SongManager : MonoBehaviour
             yield break;
         }
         Songs.Clear();
+        Songs.Add(Audio.Instance.Triangles);
         try
         {
             osuPaths = Directory.EnumerateFiles(PlayerData.Instance.BeatmapLocation, "*.osu", SearchOption.AllDirectories);

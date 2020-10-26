@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class MusicPlayer : MonoBehaviour
 {
     public static Song CurrentPlaying { get; set; }
+    public static bool HasManuallyPaused { get; set; } = false;
     public Text MusicName;
     public GameObject MainMenu;
     private static AudioSource musicAudioSource;
@@ -22,7 +23,7 @@ public class MusicPlayer : MonoBehaviour
     private void Update()
     {
         MusicName.text = CurrentPlaying.MetadataSection.TitleUnicode;
-        if (!musicAudioSource.isPlaying && PlayerData.Instance.HasIntroFinished && PlayerData.Instance.ActivePanel == MainMenu)
+        if (!musicAudioSource.isPlaying && !HasManuallyPaused && PlayerData.Instance.HasIntroFinished && PlayerData.Instance.ActivePanel == MainMenu)
         {
             try
             {
@@ -41,6 +42,7 @@ public class MusicPlayer : MonoBehaviour
         AudioClip ac = song.AudioClip;
         CurrentPlaying = song;
         musicAudioSource.Stop();
+        HasManuallyPaused = true;
         return Audio.PlayAudio(ac, volume, AudioChannels.Music);
     }
     public static GameObject PlayNext(float volume)
@@ -54,6 +56,7 @@ public class MusicPlayer : MonoBehaviour
         AudioClip ac = song.AudioClip;
         CurrentPlaying = song;
         musicAudioSource.Stop();
+        HasManuallyPaused = true;
         return Audio.PlayAudio(ac, volume, AudioChannels.Music);
     }
     public static GameObject PlayLast(float volume)
@@ -67,6 +70,7 @@ public class MusicPlayer : MonoBehaviour
         AudioClip ac = song.AudioClip;
         CurrentPlaying = song;
         musicAudioSource.Stop();
+        HasManuallyPaused = true;
         return Audio.PlayAudio(ac, volume, AudioChannels.Music);
     }
     public static GameObject PlaySelected(Song song, float volume)
@@ -75,11 +79,36 @@ public class MusicPlayer : MonoBehaviour
         {
             CurrentPlaying = song;
             musicAudioSource.Stop();
+            HasManuallyPaused = true;
             return Audio.PlayAudio(song.AudioClip, volume, AudioChannels.Music);
         }
         else
         {
             throw new ArgumentException($"{song.MetadataSection.TitleUnicode} is not registered in SongManager.Songs");
+        }
+    }
+    public static void Stop()
+    {
+        musicAudioSource.Stop();
+        HasManuallyPaused = true;
+    }
+    public static void Pause()
+    {
+        musicAudioSource.Pause();
+        HasManuallyPaused = true;
+    }
+    public static void Play()
+    {
+        if (!HasManuallyPaused)
+        {
+            musicAudioSource.Stop();
+            PlaySelected(CurrentPlaying, PlayerData.Instance.MusicVolume);
+            HasManuallyPaused = false;
+        }
+        else
+        {
+            musicAudioSource.UnPause();
+            HasManuallyPaused = false;
         }
     }
 }
