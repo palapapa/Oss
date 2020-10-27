@@ -8,7 +8,8 @@ using UnityEngine.UI;
 public class MusicPlayer : MonoBehaviour
 {
     public static Song CurrentPlaying { get; set; }
-    public static bool HasManuallyPaused { get; set; } = false;
+    private static bool HasManuallyPaused { get; set; } = false;
+    private static bool HasStopped { get; set; } = false;
     public Text MusicName;
     public GameObject MainMenu;
     private static AudioSource musicAudioSource;
@@ -22,7 +23,7 @@ public class MusicPlayer : MonoBehaviour
 
     private void Update()
     {
-        MusicName.text = CurrentPlaying.MetadataSection.TitleUnicode;
+        MusicName.text = CurrentPlaying.MetadataSection.ArtistUnicode + " - " + CurrentPlaying.MetadataSection.TitleUnicode;
         if (!musicAudioSource.isPlaying && !HasManuallyPaused && PlayerData.Instance.HasIntroFinished && PlayerData.Instance.ActivePanel == MainMenu)
         {
             try
@@ -52,6 +53,27 @@ public class MusicPlayer : MonoBehaviour
         {
             index = 0;
         }
+        int originalIndex = index; // the original index before searching for the next unindentical song
+        if (SongManager.Songs.Count > 1)
+        {
+            int lastIndex = index - 1; // the index of the previous song before switching
+            if (lastIndex < 0)
+            {
+                lastIndex = SongManager.Songs.Count - 1;
+            }
+            while (SongManager.Songs[lastIndex].MetadataSection.TitleUnicode == SongManager.Songs[index].MetadataSection.TitleUnicode) // if the last song is the same song
+            {
+                index++;
+                if (index >= SongManager.Songs.Count)
+                {
+                    index = 0;
+                }
+                if (index == originalIndex) // if a whole loop has been made
+                {
+                    break;
+                }
+            }
+        }
         Song song = SongManager.Songs[index];
         AudioClip ac = song.AudioClip;
         CurrentPlaying = song;
@@ -65,6 +87,27 @@ public class MusicPlayer : MonoBehaviour
         if (index < 0)
         {
             index = SongManager.Songs.Count - 1;
+        }
+        int originalIndex = index;
+        if (SongManager.Songs.Count > 1)
+        {
+            int lastIndex = index + 1; // the index of the previous song before switching
+            if (lastIndex >= SongManager.Songs.Count)
+            {
+                lastIndex = 0;
+            }
+            while (SongManager.Songs[lastIndex].MetadataSection.TitleUnicode == SongManager.Songs[index].MetadataSection.TitleUnicode)
+            {
+                index--;
+                if (index < 0)
+                {
+                    index = SongManager.Songs.Count - 1;
+                }
+                if (index == originalIndex)// if a whole loop has been made
+                {
+                    break;
+                }
+            }
         }
         Song song = SongManager.Songs[index];
         AudioClip ac = song.AudioClip;
@@ -87,10 +130,28 @@ public class MusicPlayer : MonoBehaviour
             throw new ArgumentException($"{song.MetadataSection.TitleUnicode} is not registered in SongManager.Songs");
         }
     }
+
+    public static GameObject PlaySelected(string titleUnicode, float volume)
+    {
+        Song song = SongManager.Songs.Find(s => s.MetadataSection.TitleUnicode == titleUnicode);
+        if (song != null)
+        {
+            CurrentPlaying = song;
+            musicAudioSource.Stop();
+            HasManuallyPaused = false;
+            return Audio.PlayAudio(song.AudioClip, volume, AudioChannels.Music);
+        }
+        else
+        {
+            throw new ArgumentException($"{song.MetadataSection.TitleUnicode} is not registered in SongManager.Songs");
+        }
+    }
+
     public static void Stop()
     {
         musicAudioSource.Stop();
         HasManuallyPaused = true;
+        HasStopped = true;
     }
     public static void Pause()
     {
@@ -104,6 +165,13 @@ public class MusicPlayer : MonoBehaviour
             musicAudioSource.Stop();
             PlaySelected(CurrentPlaying, PlayerData.Instance.MusicVolume);
             HasManuallyPaused = false;
+        }
+        else if (HasStopped)
+        {
+            musicAudioSource.Stop();
+            PlaySelected(CurrentPlaying, PlayerData.Instance.MusicVolume);
+            HasManuallyPaused = false;
+            HasStopped = false;
         }
         else
         {

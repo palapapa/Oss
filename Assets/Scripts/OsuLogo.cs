@@ -25,7 +25,7 @@ public class OsuLogo : MonoBehaviour, ILeftClickable
     {
         try
         {
-            SetLogoBpm((int)(1 / MusicPlayer.CurrentPlaying.TimingPoints[0].BeatLength * 60000));
+            SetLogoBpm((float)(1 / MusicPlayer.CurrentPlaying.TimingPoints[0].BeatLength * 60000));
         }
         catch (ArgumentOutOfRangeException)
         {
@@ -44,7 +44,7 @@ public class OsuLogo : MonoBehaviour, ILeftClickable
         SetLogoBpm(160);//placeholder
     }
 
-    public static void SetLogoBpm(int bpm)
+    public static void SetLogoBpm(float bpm)
     {
         Instance.Animator.SetFloat("PulsatingSpeed", bpm / 180.0f);//dependent on animation clip OsuLogoPulsating
     }
