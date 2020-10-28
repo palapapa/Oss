@@ -1,4 +1,5 @@
 ﻿using OsuParsers.Beatmaps;
+using System.Linq;
 using UnityEngine;
 
 public class Song : Beatmap
@@ -12,12 +13,15 @@ public class Song : Beatmap
 
     public Song(Beatmap beatmap)
     {
+        Version = beatmap.Version;
         GeneralSection = beatmap.GeneralSection;
         EditorSection = beatmap.EditorSection;
         MetadataSection = beatmap.MetadataSection;
         DifficultySection = beatmap.DifficultySection;
         EventsSection = beatmap.EventsSection;
         ColoursSection = beatmap.ColoursSection;
+        TimingPoints = beatmap.TimingPoints;
+        HitObjects = beatmap.HitObjects;
     }
 
     public Song(Beatmap beatmap, AudioClip audioClip) : this(beatmap)

@@ -27,8 +27,9 @@ public class OsuLogo : MonoBehaviour, ILeftClickable
         {
             SetLogoBpm((float)(1 / MusicPlayer.CurrentPlaying.TimingPoints[0].BeatLength * 60000));
         }
-        catch (ArgumentOutOfRangeException)
+        catch (ArgumentOutOfRangeException e)
         {
+            Debug.Log(e.Message);
             SetLogoBpm(160);
         }
     }
