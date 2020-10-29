@@ -29,7 +29,7 @@ public class OsuLogo : MonoBehaviour, ILeftClickable
         }
         catch (ArgumentOutOfRangeException e)
         {
-            Debug.Log(e.Message);
+            //Debug.Log(e.Message);
             SetLogoBpm(160);
         }
     }

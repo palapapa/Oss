@@ -54,6 +54,7 @@ public class SongManager : MonoBehaviour
             try
             {
                 Song song = new Song(beatmap, Audio.Mp3ToAudioClip(File.ReadAllBytes(audioPath)));
+                //Debug.Log(song.TimingPoints[0].BeatLength);
                 Songs.Add(song);
             }
             catch (FileNotFoundException e)

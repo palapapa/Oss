@@ -1,6 +1,8 @@
 ﻿using OsuParsers.Beatmaps;
 using System.Linq;
 using UnityEngine;
+using System.Collections.Generic;
+using OsuParsers.Beatmaps.Objects;
 
 public class Song : Beatmap
 {
@@ -20,8 +22,8 @@ public class Song : Beatmap
         DifficultySection = beatmap.DifficultySection;
         EventsSection = beatmap.EventsSection;
         ColoursSection = beatmap.ColoursSection;
-        TimingPoints = beatmap.TimingPoints;
-        HitObjects = beatmap.HitObjects;
+        TimingPoints = new List<TimingPoint>(beatmap.TimingPoints);
+        HitObjects = new List<HitObject>(beatmap.HitObjects);
     }
 
     public Song(Beatmap beatmap, AudioClip audioClip) : this(beatmap)
