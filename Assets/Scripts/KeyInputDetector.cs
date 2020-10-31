@@ -47,11 +47,11 @@ public class KeyInputDetector : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Backspace))
             {
-                Audio.PlayAudio(Audio.Instance.Backspace, PlayerData.Instance.SoundEffectsVolume, AudioChannels.SoundEffects);
+                Audio.PlayAudio(Audio.Instance.Backspace, 1.0f, AudioChannels.SoundEffects);
             }
             else
             {
-                Audio.PlayAudio(Audio.Instance.KeyDownSounds[new System.Random().Next(0, Audio.Instance.KeyDownSounds.Length)], PlayerData.Instance.SoundEffectsVolume, AudioChannels.SoundEffects);//plays a random keydown sound
+                Audio.PlayAudio(Audio.Instance.KeyDownSounds[new System.Random().Next(0, Audio.Instance.KeyDownSounds.Length)], 1.0f, AudioChannels.SoundEffects);//plays a random keydown sound
             }
         }
     }

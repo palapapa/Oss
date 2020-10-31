@@ -3,8 +3,8 @@ using OsuParsers.Decoders;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 public class SongManager : MonoBehaviour
@@ -66,6 +66,7 @@ public class SongManager : MonoBehaviour
         }
         isScanningSongDirectory = false;
     }
+
     private SongManager()
     {
         if (instance == null)

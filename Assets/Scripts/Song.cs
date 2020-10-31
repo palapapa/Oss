@@ -1,8 +1,7 @@
 ﻿using OsuParsers.Beatmaps;
-using System.Linq;
-using UnityEngine;
-using System.Collections.Generic;
 using OsuParsers.Beatmaps.Objects;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class Song : Beatmap
 {

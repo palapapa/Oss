@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Credits : MonoBehaviour, ILeftClickable
@@ -11,6 +10,7 @@ public class Credits : MonoBehaviour, ILeftClickable
     {
         StartCoroutine(OpenCredits());
     }
+
     public IEnumerator OpenCredits()
     {
         if (!PlayerData.Instance.IsCreditsOpen)
@@ -24,6 +24,7 @@ public class Credits : MonoBehaviour, ILeftClickable
             yield break;
         }
     }
+
     public IEnumerator CloseCredits()
     {
         if (PlayerData.Instance.IsCreditsOpen)
@@ -37,6 +38,7 @@ public class Credits : MonoBehaviour, ILeftClickable
             yield break;
         }
     }
+
     private Credits()
     {
         if (Instance == null)

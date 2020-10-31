@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MusicPlayerLast : MonoBehaviour, ILeftClickable
 {
     public void OnLeftClick()
     {
-        MusicPlayer.PlayLast(PlayerData.Instance.MusicVolume);
+        MusicPlayer.PlayLast(1.0f);
     }
 }

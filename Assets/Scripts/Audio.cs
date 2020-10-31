@@ -4,7 +4,9 @@ using System;
 using System.IO;
 using UnityEngine;
 
-//Contains some in-game sound effects and provides audio-related utilities, use the methods in this class if you simply want to play a sound and nothing more
+/// <summary>
+/// Contains some in-game sound effects and provides audio-related utilities, use the methods in this class if you simply want to play a sound and nothing more
+/// </summary>
 public class Audio : MonoBehaviour
 {
     public static Audio Instance { get; set; }
@@ -37,7 +39,6 @@ public class Audio : MonoBehaviour
 
     private void Start()
     {
-        
     }
 
     private Audio()

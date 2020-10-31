@@ -15,6 +15,7 @@ public class Options : MonoBehaviour, ILeftClickable
     {
         OpenOptions();
     }
+
     public void OpenOptions()
     {
         if (!PlayerData.Instance.IsOptionOpen)
@@ -23,6 +24,7 @@ public class Options : MonoBehaviour, ILeftClickable
             PlayerData.Instance.IsOptionOpen = true;
         }
     }
+
     public void CloseOptions()
     {
         if (PlayerData.Instance.IsOptionOpen)

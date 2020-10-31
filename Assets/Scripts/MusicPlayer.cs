@@ -1,10 +1,10 @@
-﻿using OsuParsers.Beatmaps;
-using OsuParsers.Beatmaps.Sections;
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-//Contains utilities related to the music player in the main menu, use the methods in this class if you want to play a music and have it registered to the main menu music player
+/// <summary>
+/// Contains utilities related to the music player in the main menu, use the methods in this class if you want to play a music and have it registered to the main menu music player
+/// </summary>
 public class MusicPlayer : MonoBehaviour
 {
     public static Song CurrentPlaying { get; set; }
@@ -28,7 +28,7 @@ public class MusicPlayer : MonoBehaviour
         {
             try
             {
-                PlayNext(PlayerData.Instance.MusicVolume);
+                PlayNext(1.0f);
             }
             catch (ArgumentOutOfRangeException)
             {
@@ -47,6 +47,7 @@ public class MusicPlayer : MonoBehaviour
         HasStopped = false;
         return Audio.PlayAudio(ac, volume, AudioChannels.Music);
     }
+
     public static GameObject PlayNext(float volume)
     {
         int index = SongManager.Songs.FindIndex(s => s == CurrentPlaying) + 1;
@@ -83,6 +84,7 @@ public class MusicPlayer : MonoBehaviour
         HasStopped = false;
         return Audio.PlayAudio(ac, volume, AudioChannels.Music);
     }
+
     public static GameObject PlayLast(float volume)
     {
         int index = SongManager.Songs.FindIndex(s => s == CurrentPlaying) - 1;
@@ -119,6 +121,7 @@ public class MusicPlayer : MonoBehaviour
         HasStopped = false;
         return Audio.PlayAudio(ac, volume, AudioChannels.Music);
     }
+
     public static GameObject PlaySelected(Song song, float volume)
     {
         if (SongManager.Songs.Exists(s => s == song))
@@ -158,23 +161,25 @@ public class MusicPlayer : MonoBehaviour
         HasManuallyPaused = true;
         HasStopped = true;
     }
+
     public static void Pause()
     {
         musicAudioSource.Pause();
         HasManuallyPaused = true;
     }
+
     public static void Play()
     {
         if (!HasManuallyPaused)
         {
             musicAudioSource.Stop();
-            PlaySelected(CurrentPlaying, PlayerData.Instance.MusicVolume);
+            PlaySelected(CurrentPlaying, 1.0f);
             HasManuallyPaused = false;
         }
         else if (HasStopped)
         {
             musicAudioSource.Stop();
-            PlaySelected(CurrentPlaying, PlayerData.Instance.MusicVolume);
+            PlaySelected(CurrentPlaying, 1.0f);
             HasManuallyPaused = false;
             HasStopped = false;
         }

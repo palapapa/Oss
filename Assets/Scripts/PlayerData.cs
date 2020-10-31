@@ -3,11 +3,12 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
-public class PlayerData : PersistentPlayerData 
+public class PlayerData : PersistentPlayerData
 {
     public bool IsOptionOpen { get; set; } = false;
     public GameObject ActivePanel { get; set; }
     private static PlayerData instance;
+
     public static PlayerData Instance
     {
         get
@@ -19,6 +20,7 @@ public class PlayerData : PersistentPlayerData
             return instance;
         }
     }
+
     public bool IsCreditsOpen { get; set; } = false;
     public bool HasIntroFinished { get; set; } = false;
     private readonly string saveFilePath;
@@ -43,6 +45,7 @@ public class PlayerData : PersistentPlayerData
                 //todo: add pop up notification system
             }
         }
+        Debug.Log("Player data saved");
         return persistentPlayerData;
     }
 
@@ -59,8 +62,8 @@ public class PlayerData : PersistentPlayerData
                 Instance.persistentPlayerData = new PersistentPlayerData(Instance);
             }
         }
+        Debug.Log("Player data loaded");
         ApplyPersistentPlayerData();
-        Debug.Log($"Song location = {Instance.BeatmapLocation}");
         return Instance.persistentPlayerData;
     }
 
@@ -69,5 +72,6 @@ public class PlayerData : PersistentPlayerData
         Instance.BeatmapLocation = Instance.persistentPlayerData.BeatmapLocation;
         Instance.MusicVolume = Instance.persistentPlayerData.MusicVolume;
         Instance.SoundEffectsVolume = Instance.persistentPlayerData.SoundEffectsVolume;
+        Debug.Log("Player data applied");
     }
 }
