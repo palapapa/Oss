@@ -15,13 +15,13 @@ public class MusicVolumeSlider : MonoBehaviour, IOnValueChanged
 
     private void Update()
     {
-        slider.value = musicAudioSource.volume;
+        slider.value = PlayerData.Instance.MusicVolume;
+        musicAudioSource.volume = PlayerData.Instance.MusicVolume * PlayerData.Instance.MasterVolume;
     }
 
     public void OnValueChanged()
     {
         PlayerData.Instance.MusicVolume = slider.value;
-        musicAudioSource.volume = PlayerData.Instance.MusicVolume;
         PlayerData.SavePersistentPlayerData();
     }
 }

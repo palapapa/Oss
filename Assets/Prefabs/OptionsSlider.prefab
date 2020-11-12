@@ -232,9 +232,8 @@ GameObject:
   m_Component:
   - component: {fileID: 977351418392129503}
   - component: {fileID: 977351418392129488}
-  - component: {fileID: 977351418392129489}
   m_Layer: 5
-  m_Name: Volume
+  m_Name: OptionsSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -308,11 +307,11 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.743
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 977351418392129489}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: VolumeSlider, Assembly-CSharp
         m_MethodName: OnValueChanged
         m_Mode: 1
@@ -324,18 +323,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &977351418392129489
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 977351418392129502}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba89cddd391fd0c44ad9e4f4b39a5f4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &977351418984474530
 GameObject:
   m_ObjectHideFlags: 0
