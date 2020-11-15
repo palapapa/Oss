@@ -72,6 +72,7 @@ public class PlayerData : PersistentPlayerData
         Instance.BeatmapLocation = Instance.persistentPlayerData.BeatmapLocation;
         Instance.MusicVolume = Instance.persistentPlayerData.MusicVolume;
         Instance.SoundEffectsVolume = Instance.persistentPlayerData.SoundEffectsVolume;
+        Instance.MasterVolume = Instance.persistentPlayerData.MasterVolume;
         Debug.Log("Player data applied");
     }
 }
