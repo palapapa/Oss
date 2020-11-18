@@ -8,15 +8,15 @@ public class Credits : MonoBehaviour, ILeftClickable
 
     public void OnLeftClick()
     {
-        StartCoroutine(OpenCredits());
+        StartCoroutine(Activate());
     }
 
-    public IEnumerator OpenCredits()
+    public IEnumerator Activate()
     {
-        if (!PlayerData.Instance.IsCreditsOpen)
+        if (!PlayerData.Instance.IsCreditsActive)
         {
             CreditsPanel.SetActive(true);
-            PlayerData.Instance.IsCreditsOpen = true;
+            PlayerData.Instance.IsCreditsActive = true;
             yield return StartCoroutine(CreditsPanel.FadeCanvasGroup(0.1f, 20, 0.0f, 1.0f)); // todo: use animator instead of this inconsistent shit
         }
         else
@@ -25,11 +25,11 @@ public class Credits : MonoBehaviour, ILeftClickable
         }
     }
 
-    public IEnumerator CloseCredits()
+    public IEnumerator Deactivate()
     {
-        if (PlayerData.Instance.IsCreditsOpen)
+        if (PlayerData.Instance.IsCreditsActive)
         {
-            PlayerData.Instance.IsCreditsOpen = false;
+            PlayerData.Instance.IsCreditsActive = false;
             yield return StartCoroutine(CreditsPanel.FadeCanvasGroup(0.1f, 20, 1.0f, 0.0f));
             CreditsPanel.SetActive(false);
         }

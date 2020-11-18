@@ -62,42 +62,44 @@ public static class Utilities
     }
 
     //fade canvas group in speed seconds with steps steps
-    public static IEnumerator FadeCanvasGroup(this GameObject gameObject, float speed, uint steps, float from, float to)
+    public static IEnumerator FadeCanvasGroup(this GameObject gameObject, float time, uint step, float from, float to)
     {
         if (from > 1.0f || from < 0.0f || to > 1.0f || to < 0.0f)
         {
             throw new ArgumentException("\"from\" and \"to\" can only range from 1.0 to 0.0");
         }
-        if (speed < 0.0f)
+        if (time < 0.0f)
         {
             throw new ArgumentException("\"speed\" cannot be less than 0.0");
         }
         CanvasGroup canvasGroup = gameObject.GetComponent<CanvasGroup>();
         canvasGroup.alpha = from;
-        for (int i = 0; i < steps; i++)
+        float alphaStep = (from - to) / step;
+        for (int i = 0; i < step; i++)
         {
-            canvasGroup.alpha -= (from - to) / steps;
-            yield return new WaitForSeconds(speed / steps);
+            canvasGroup.alpha -= alphaStep;
+            yield return new WaitForSeconds(time / step);
         }
     }
 
     //fade canvas group in speed seconds with steps steps
-    public static IEnumerator FadeCanvasGroupTo(this GameObject gameObject, float speed, uint steps, float to)
+    public static IEnumerator FadeCanvasGroupTo(this GameObject gameObject, float time, uint step, float to)
     {
         if (to > 1.0f || to < 0.0f)
         {
             throw new ArgumentException("\"to\" can only range from 1.0 to 0.0");
         }
-        if (speed < 0.0f)
+        if (time < 0.0f)
         {
             throw new ArgumentException("\"speed\" cannot be less than 0.0");
         }
         CanvasGroup canvasGroup = gameObject.GetComponent<CanvasGroup>();
         float from = canvasGroup.alpha;
-        for (int i = 0; i < steps; i++)
+        float alphaStep = (from - to) / step;
+        for (int i = 0; i < step; i++)
         {
-            canvasGroup.alpha -= (from - to) / steps;
-            yield return new WaitForSeconds(speed / steps);
+            canvasGroup.alpha -= alphaStep;
+            yield return new WaitForSeconds(time / step);
         }
     }
 }

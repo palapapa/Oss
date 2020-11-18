@@ -65,6 +65,20 @@ public class SongManager : MonoBehaviour
             yield return null;
         }
         isScanningSongDirectory = false;
+        SongList.Instance.UpdateSongList();
+    }
+
+    public static List<Song> GetUniqueSongList()
+    {
+        List<Song> result = new List<Song>();
+        for (int i = 0; i < Songs.Count; i++)
+        {
+            if (!result.Exists((s) => s.MetadataSection.TitleUnicode == Songs[i].MetadataSection.TitleUnicode))
+            {
+                result.Add(Songs[i]);
+            }
+        }
+        return result;
     }
 
     private SongManager()

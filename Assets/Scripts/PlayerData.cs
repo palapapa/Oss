@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerData : PersistentPlayerData
 {
-    public bool IsOptionOpen { get; set; } = false;
+    public bool IsOptionActive { get; set; } = false;
     public GameObject ActivePanel { get; set; }
     private static PlayerData instance;
 
@@ -21,8 +21,9 @@ public class PlayerData : PersistentPlayerData
         }
     }
 
-    public bool IsCreditsOpen { get; set; } = false;
+    public bool IsCreditsActive { get; set; } = false;
     public bool HasIntroFinished { get; set; } = false;
+    public bool IsSongListActive { get; set; } = false;
     private readonly string saveFilePath;
     private PersistentPlayerData persistentPlayerData; // warper for all player data to be saved onto disk
 
