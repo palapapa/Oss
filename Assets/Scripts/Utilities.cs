@@ -64,6 +64,7 @@ public static class Utilities
     //fade canvas group in speed seconds with steps steps
     public static IEnumerator FadeCanvasGroup(this GameObject gameObject, float time, uint step, float from, float to)
     {
+        Debug.Log(Time.time);
         if (from > 1.0f || from < 0.0f || to > 1.0f || to < 0.0f)
         {
             throw new ArgumentException("\"from\" and \"to\" can only range from 1.0 to 0.0");
@@ -74,12 +75,22 @@ public static class Utilities
         }
         CanvasGroup canvasGroup = gameObject.GetComponent<CanvasGroup>();
         canvasGroup.alpha = from;
-        float alphaStep = (from - to) / step;
+        float alphaStep = (from - to) / step, timeStep = time / step;
+        float idealTime = 0, actualTime = 0;
         for (int i = 0; i < step; i++)
         {
             canvasGroup.alpha -= alphaStep;
-            yield return new WaitForSeconds(time / step);
+            idealTime += timeStep;
+            actualTime += Time.deltaTime;
+            while (actualTime > idealTime)
+            {
+                canvasGroup.alpha -= alphaStep;
+                idealTime += timeStep;
+                i++;
+            }
+            yield return new WaitForSeconds(timeStep);
         }
+        Debug.Log(Time.time);
     }
 
     //fade canvas group in speed seconds with steps steps
@@ -95,10 +106,19 @@ public static class Utilities
         }
         CanvasGroup canvasGroup = gameObject.GetComponent<CanvasGroup>();
         float from = canvasGroup.alpha;
-        float alphaStep = (from - to) / step;
+        float alphaStep = (from - to) / step, timeStep = time / step;
+        float idealTime = 0, actualTime = 0;
         for (int i = 0; i < step; i++)
         {
             canvasGroup.alpha -= alphaStep;
+            idealTime += timeStep;
+            actualTime += Time.deltaTime;
+            while (actualTime > idealTime)
+            {
+                canvasGroup.alpha -= alphaStep;
+                idealTime += timeStep;
+                i++;
+            }
             yield return new WaitForSeconds(time / step);
         }
     }

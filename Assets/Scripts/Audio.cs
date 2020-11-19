@@ -32,7 +32,9 @@ public class Audio : MonoBehaviour
             MetadataSection = new BeatmapMetadataSection()
             {
                 TitleUnicode = "Triangles",
-                ArtistUnicode = "cYsmix"
+                ArtistUnicode = "cYsmix",
+                Title = "Triangles",
+                Artist = "cYsmix"
             }
         };
     }

@@ -17,13 +17,13 @@ public class MusicPlayer : MonoBehaviour
     private void Start()
     {
         CurrentPlaying = Audio.Instance.Triangles;
-        MusicName.text = CurrentPlaying.MetadataSection.TitleUnicode;
+        MusicName.text = CurrentPlaying.MetadataSection.Title;
         musicAudioSource = AudioChannels.Music.GetComponent<AudioSource>();
     }
 
     private void Update()
     {
-        MusicName.text = CurrentPlaying.MetadataSection.ArtistUnicode + " - " + CurrentPlaying.MetadataSection.TitleUnicode;
+        MusicName.text = CurrentPlaying.MetadataSection.Artist + " - " + CurrentPlaying.MetadataSection.Title;
         if (!musicAudioSource.isPlaying && !HasManuallyPaused && PlayerData.Instance.HasIntroFinished && PlayerData.Instance.ActivePanel == MainMenu)
         {
             try
@@ -138,9 +138,9 @@ public class MusicPlayer : MonoBehaviour
         }
     }
 
-    public static GameObject PlaySelected(string titleUnicode, float volume)
+    public static GameObject PlaySelected(string title, float volume)
     {
-        Song song = SongManager.Songs.Find(s => s.MetadataSection.TitleUnicode == titleUnicode);
+        Song song = SongManager.Songs.Find(s => s.MetadataSection.Title == title);
         if (song != null)
         {
             CurrentPlaying = song;

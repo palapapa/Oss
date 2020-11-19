@@ -14,7 +14,7 @@ public class SongList : MonoBehaviour
         {
             PlayerData.Instance.IsSongListActive = true;
             gameObject.SetActive(true);
-            yield return StartCoroutine(gameObject.FadeCanvasGroup(0.2f, 20, 0.0f, 1.0f));
+            yield return StartCoroutine(gameObject.FadeCanvasGroup(0.2f, 10000, 0.0f, 1.0f));
         }
     }
     public IEnumerator Deactivate()
@@ -22,7 +22,7 @@ public class SongList : MonoBehaviour
         if (PlayerData.Instance.IsSongListActive)
         {
             PlayerData.Instance.IsSongListActive = false;
-            yield return StartCoroutine(gameObject.FadeCanvasGroup(0.2f, 20, 1.0f, 0.0f));
+            yield return StartCoroutine(gameObject.FadeCanvasGroup(0.2f, 10000, 1.0f, 0.0f));
             gameObject.SetActive(false);
         }
     }

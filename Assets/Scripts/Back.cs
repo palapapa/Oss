@@ -15,9 +15,9 @@ public class Back : MonoBehaviour, ILeftClickable
     public IEnumerator SwitchToMainMenu()
     {
         MainMenu.GetComponent<CanvasGroup>().alpha = 0;
-        yield return StartCoroutine(SongSelection.FadeCanvasGroupTo(0.2f, 20, 0.0f));
+        yield return StartCoroutine(SongSelection.FadeCanvasGroupTo(0.2f, 1000, 0.0f));
         MainMenu.SwitchPanel();
-        yield return StartCoroutine(MainMenu.FadeCanvasGroupTo(0.2f, 20, 1.0f));
+        yield return StartCoroutine(MainMenu.FadeCanvasGroupTo(0.2f, 1000, 1.0f));
     }
 
     private Back()

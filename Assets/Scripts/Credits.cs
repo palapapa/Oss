@@ -17,7 +17,7 @@ public class Credits : MonoBehaviour, ILeftClickable
         {
             CreditsPanel.SetActive(true);
             PlayerData.Instance.IsCreditsActive = true;
-            yield return StartCoroutine(CreditsPanel.FadeCanvasGroup(0.1f, 20, 0.0f, 1.0f)); // todo: use animator instead of this inconsistent shit
+            yield return StartCoroutine(CreditsPanel.FadeCanvasGroup(0.1f, 10000, 0.0f, 1.0f)); // todo: use animator instead of this inconsistent shit
         }
         else
         {
@@ -30,7 +30,7 @@ public class Credits : MonoBehaviour, ILeftClickable
         if (PlayerData.Instance.IsCreditsActive)
         {
             PlayerData.Instance.IsCreditsActive = false;
-            yield return StartCoroutine(CreditsPanel.FadeCanvasGroup(0.1f, 20, 1.0f, 0.0f));
+            yield return StartCoroutine(CreditsPanel.FadeCanvasGroup(0.1f, 10000, 1.0f, 0.0f));
             CreditsPanel.SetActive(false);
         }
         else
