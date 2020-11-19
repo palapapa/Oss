@@ -64,7 +64,6 @@ public static class Utilities
     //fade canvas group in speed seconds with steps steps
     public static IEnumerator FadeCanvasGroup(this GameObject gameObject, float time, uint step, float from, float to)
     {
-        Debug.Log(Time.time);
         if (from > 1.0f || from < 0.0f || to > 1.0f || to < 0.0f)
         {
             throw new ArgumentException("\"from\" and \"to\" can only range from 1.0 to 0.0");
@@ -90,7 +89,6 @@ public static class Utilities
             }
             yield return new WaitForSeconds(timeStep);
         }
-        Debug.Log(Time.time);
     }
 
     //fade canvas group in speed seconds with steps steps

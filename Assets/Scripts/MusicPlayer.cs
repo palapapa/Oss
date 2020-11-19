@@ -151,7 +151,7 @@ public class MusicPlayer : MonoBehaviour
         }
         else
         {
-            throw new ArgumentException($"{song.MetadataSection.TitleUnicode} is not registered in SongManager.Songs");
+            throw new ArgumentException($"{song.MetadataSection.Title} is not registered in SongManager.Songs");
         }
     }
 

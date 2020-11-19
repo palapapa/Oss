@@ -66,6 +66,7 @@ public class SongManager : MonoBehaviour
         }
         isScanningSongDirectory = false;
         SongList.Instance.UpdateSongList();
+        SongSelection.Instance.UpdateSongList();
     }
 
     public static List<Song> GetUniqueSongList()

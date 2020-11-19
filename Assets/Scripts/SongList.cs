@@ -38,7 +38,7 @@ public class SongList : MonoBehaviour
             GameObject songListButton = Instantiate(SongListButton);
             songListButton.transform.SetParent(Content.transform, false);
             LayoutRebuilder.MarkLayoutForRebuild((RectTransform)Content.transform);
-            songListButton.transform.Find("Title").GetComponent<Text>().text = songs[i].MetadataSection.TitleUnicode;
+            songListButton.transform.Find("Title").GetComponent<Text>().text = songs[i].MetadataSection.Title;
         }
     }
     // Start is called before the first frame update
