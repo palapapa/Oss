@@ -13,26 +13,26 @@ public class KeyInputDetector : MonoBehaviour
             DontDestroyOnLoad(this);
             hasLoaded = true;
         }
-        PlayerData.Instance.ActivePanel = MainMenu;
+        PlayerData.ActivePanel = MainMenu;
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (PlayerData.Instance.IsSongListActive)
+            if (PlayerData.IsSongListActive)
             {
                 StartCoroutine(SongList.Instance.Deactivate());
             }
-            else if (PlayerData.Instance.IsCreditsActive)
+            else if (PlayerData.IsCreditsActive)
             {
                 StartCoroutine(Credits.Instance.Deactivate());
             }
-            else if (PlayerData.Instance.IsOptionActive && PlayerData.Instance.ActivePanel == MainMenu)
+            else if (PlayerData.IsOptionActive && PlayerData.ActivePanel == MainMenu)
             {
                 Options.Instance.Deactivate();
             }
-            else if (PlayerData.Instance.ActivePanel == SongSelection)
+            else if (PlayerData.ActivePanel == SongSelection)
             {
                 StartCoroutine(Back.Instance.SwitchToMainMenu());
             }

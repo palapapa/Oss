@@ -24,7 +24,7 @@ public class IntroPlayer : MonoBehaviour
             Fade.GetComponent<Animator>().SetTrigger("Fading");
             BeforeImageReadyBlack.color = new Color(0, 0, 0, 0);
             Destroy(MouseBlocker.gameObject);
-            PlayerData.Instance.HasIntroFinished = true;
+            PlayerData.HasIntroFinished = true;
         };
     }
 

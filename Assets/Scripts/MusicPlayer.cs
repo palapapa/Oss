@@ -24,7 +24,7 @@ public class MusicPlayer : MonoBehaviour
     private void Update()
     {
         MusicName.text = CurrentPlaying.MetadataSection.Artist + " - " + CurrentPlaying.MetadataSection.Title;
-        if (!musicAudioSource.isPlaying && !HasManuallyPaused && PlayerData.Instance.HasIntroFinished && PlayerData.Instance.ActivePanel == MainMenu)
+        if (!musicAudioSource.isPlaying && !HasManuallyPaused && PlayerData.HasIntroFinished && PlayerData.ActivePanel == MainMenu)
         {
             try
             {

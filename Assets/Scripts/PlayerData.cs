@@ -3,43 +3,22 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
-public class PlayerData : PersistentPlayerData
+public class PlayerData
 {
-    public bool IsOptionActive { get; set; } = false;
-    public GameObject ActivePanel { get; set; }
-    private static PlayerData instance;
+    public static bool IsOptionActive { get; set; } = false;
+    public static GameObject ActivePanel { get; set; }
+    public static bool IsCreditsActive { get; set; } = false;
+    public static bool HasIntroFinished { get; set; } = false;
+    public static bool IsSongListActive { get; set; } = false;
+    public static PersistentPlayerData PersistentPlayerData { get; set; } = new PersistentPlayerData(); // warper for all player data to be saved onto disk
 
-    public static PlayerData Instance
+    public static void SavePersistentPlayerData()
     {
-        get
-        {
-            if (instance == null)
-            {
-                instance = new PlayerData();
-            }
-            return instance;
-        }
-    }
-
-    public bool IsCreditsActive { get; set; } = false;
-    public bool HasIntroFinished { get; set; } = false;
-    public bool IsSongListActive { get; set; } = false;
-    private readonly string saveFilePath;
-    private PersistentPlayerData persistentPlayerData; // warper for all player data to be saved onto disk
-
-    private PlayerData() : base()
-    {
-        saveFilePath = Application.persistentDataPath + @"\PersistentPlayerData.dat";
-    }
-
-    public static PersistentPlayerData SavePersistentPlayerData()
-    {
-        PersistentPlayerData persistentPlayerData = new PersistentPlayerData(Instance);
-        using (FileStream fileStream = File.Create(Instance.saveFilePath))
+        using (FileStream fileStream = File.Create(Application.persistentDataPath + "Oss.dat"))
         {
             try
             {
-                new BinaryFormatter().Serialize(fileStream, persistentPlayerData);
+                new BinaryFormatter().Serialize(fileStream, PersistentPlayerData);
             }
             catch (SerializationException)
             {
@@ -47,33 +26,21 @@ public class PlayerData : PersistentPlayerData
             }
         }
         Debug.Log("Player data saved");
-        return persistentPlayerData;
     }
 
-    public static PersistentPlayerData LoadPersistentPlayerData()
+    public static void LoadPersistentPlayerData()
     {
-        using (FileStream fileStream = File.OpenRead(Instance.saveFilePath))
+        using (FileStream fileStream = File.OpenRead(Application.persistentDataPath + "Oss.dat"))
         {
             try
             {
-                Instance.persistentPlayerData = (PersistentPlayerData)new BinaryFormatter().Deserialize(fileStream);
+                PersistentPlayerData = (PersistentPlayerData)new BinaryFormatter().Deserialize(fileStream);
             }
             catch (SerializationException)
             {
-                Instance.persistentPlayerData = new PersistentPlayerData(Instance);
+                PersistentPlayerData = new PersistentPlayerData();
             }
         }
         Debug.Log("Player data loaded");
-        ApplyPersistentPlayerData();
-        return Instance.persistentPlayerData;
-    }
-
-    public static void ApplyPersistentPlayerData()
-    {
-        Instance.BeatmapLocation = Instance.persistentPlayerData.BeatmapLocation;
-        Instance.MusicVolume = Instance.persistentPlayerData.MusicVolume;
-        Instance.SoundEffectsVolume = Instance.persistentPlayerData.SoundEffectsVolume;
-        Instance.MasterVolume = Instance.persistentPlayerData.MasterVolume;
-        Debug.Log("Player data applied");
     }
 }

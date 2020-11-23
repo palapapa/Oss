@@ -41,7 +41,7 @@ public class SongManager : MonoBehaviour
         Songs.Add(Audio.Instance.Triangles);
         try
         {
-            osuPaths = Directory.EnumerateFiles(PlayerData.Instance.BeatmapLocation, "*.osu", SearchOption.AllDirectories);
+            osuPaths = Directory.EnumerateFiles(PlayerData.PersistentPlayerData.BeatmapLocation, "*.osu", SearchOption.AllDirectories);
         }
         catch (ArgumentException e)
         {
@@ -74,7 +74,7 @@ public class SongManager : MonoBehaviour
         List<Song> result = new List<Song>();
         for (int i = 0; i < Songs.Count; i++)
         {
-            if (!result.Exists((s) => s.MetadataSection.TitleUnicode == Songs[i].MetadataSection.TitleUnicode))
+            if (!result.Exists((s) => s.MetadataSection.Title == Songs[i].MetadataSection.Title))
             {
                 result.Add(Songs[i]);
             }

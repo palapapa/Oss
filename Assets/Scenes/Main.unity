@@ -2123,8 +2123,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.25106812, y: 0}
-  m_SizeDelta: {x: 0.5020752, y: -0.00012207031}
+  m_AnchoredPosition: {x: 0.000030517578, y: 0}
+  m_SizeDelta: {x: 0, y: -0.00012207031}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &942992633
 MonoBehaviour:
@@ -2207,7 +2207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Content: {fileID: 708091998}
-  SongButton: {fileID: 7939454202441103145, guid: 12f944ab7b525ca4d87918d21cc1d16c, type: 3}
+  SongButton: {fileID: 7939454202441103145, guid: c1eaedca8afedfd4cbd3cc308478f60e, type: 3}
 --- !u!1 &970954294
 GameObject:
   m_ObjectHideFlags: 0
@@ -4685,7 +4685,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AspectMode: 0
-  m_AspectRatio: 1.7790055
+  m_AspectRatio: 1.7777779
 --- !u!1 &1733572817
 GameObject:
   m_ObjectHideFlags: 0

@@ -56,9 +56,9 @@ public static class Utilities
     //Switch to panel and make all other panels invisible
     public static void SwitchPanel(this GameObject panel)
     {
-        PlayerData.Instance.ActivePanel = panel;
+        PlayerData.ActivePanel = panel;
         panel.transform.SetAsLastSibling();//bring to front
-        Debug.Log(PlayerData.Instance.ActivePanel);
+        Debug.Log(PlayerData.ActivePanel);
     }
 
     //fade canvas group in speed seconds with steps steps

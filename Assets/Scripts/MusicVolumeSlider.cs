@@ -10,18 +10,18 @@ public class MusicVolumeSlider : MonoBehaviour, IOnValueChanged
     {
         slider = gameObject.GetComponent<Slider>();
         musicAudioSource = AudioChannels.Music.GetComponent<AudioSource>();
-        musicAudioSource.volume = PlayerData.Instance.MusicVolume;
+        musicAudioSource.volume = PlayerData.PersistentPlayerData.MusicVolume;
     }
 
     private void Update()
     {
-        slider.value = PlayerData.Instance.MusicVolume;
-        musicAudioSource.volume = PlayerData.Instance.MusicVolume * PlayerData.Instance.MasterVolume;
+        slider.value = PlayerData.PersistentPlayerData.MusicVolume;
+        musicAudioSource.volume = PlayerData.PersistentPlayerData.MusicVolume * PlayerData.PersistentPlayerData.MasterVolume;
     }
 
     public void OnValueChanged()
     {
-        PlayerData.Instance.MusicVolume = slider.value;
+        PlayerData.PersistentPlayerData.MusicVolume = slider.value;
         PlayerData.SavePersistentPlayerData();
     }
 }

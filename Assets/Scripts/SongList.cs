@@ -10,18 +10,18 @@ public class SongList : MonoBehaviour
     public GameObject SongListButton;
     public IEnumerator Activate()
     {
-        if (!PlayerData.Instance.IsSongListActive)
+        if (!PlayerData.IsSongListActive)
         {
-            PlayerData.Instance.IsSongListActive = true;
+            PlayerData.IsSongListActive = true;
             gameObject.SetActive(true);
             yield return StartCoroutine(gameObject.FadeCanvasGroup(0.2f, 10000, 0.0f, 1.0f));
         }
     }
     public IEnumerator Deactivate()
     {
-        if (PlayerData.Instance.IsSongListActive)
+        if (PlayerData.IsSongListActive)
         {
-            PlayerData.Instance.IsSongListActive = false;
+            PlayerData.IsSongListActive = false;
             yield return StartCoroutine(gameObject.FadeCanvasGroup(0.2f, 10000, 1.0f, 0.0f));
             gameObject.SetActive(false);
         }

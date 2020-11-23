@@ -9,7 +9,7 @@ public class MasterVolumeSlider : MonoBehaviour, IOnValueChanged
     
     public void OnValueChanged()
     {
-        PlayerData.Instance.MasterVolume = slider.value;
+        PlayerData.PersistentPlayerData.MasterVolume = slider.value;
         PlayerData.SavePersistentPlayerData();
     }
 
@@ -22,6 +22,6 @@ public class MasterVolumeSlider : MonoBehaviour, IOnValueChanged
     // Update is called once per frame
     void Update()
     {
-        slider.value = PlayerData.Instance.MasterVolume;
+        slider.value = PlayerData.PersistentPlayerData.MasterVolume;
     }
 }

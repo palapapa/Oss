@@ -10,7 +10,7 @@ public class SoundEffectsVolumeSlider : MonoBehaviour, IOnValueChanged
 
     public void OnValueChanged()
     {
-        PlayerData.Instance.SoundEffectsVolume = slider.value;
+        PlayerData.PersistentPlayerData.SoundEffectsVolume = slider.value;
         PlayerData.SavePersistentPlayerData();
     }
 
@@ -19,13 +19,13 @@ public class SoundEffectsVolumeSlider : MonoBehaviour, IOnValueChanged
     {
         slider = gameObject.GetComponent<Slider>();
         soundEffectsAudioSource = AudioChannels.SoundEffects.GetComponent<AudioSource>();
-        soundEffectsAudioSource.volume = PlayerData.Instance.SoundEffectsVolume;
+        soundEffectsAudioSource.volume = PlayerData.PersistentPlayerData.SoundEffectsVolume;
     }
 
     // Update is called once per frame
     void Update()
     {
-        slider.value = PlayerData.Instance.SoundEffectsVolume;
-        soundEffectsAudioSource.volume = PlayerData.Instance.SoundEffectsVolume * PlayerData.Instance.MasterVolume;
+        slider.value = PlayerData.PersistentPlayerData.SoundEffectsVolume;
+        soundEffectsAudioSource.volume = PlayerData.PersistentPlayerData.SoundEffectsVolume * PlayerData.PersistentPlayerData.MasterVolume;
     }
 }

@@ -13,10 +13,10 @@ public class Credits : MonoBehaviour, ILeftClickable
 
     public IEnumerator Activate()
     {
-        if (!PlayerData.Instance.IsCreditsActive)
+        if (!PlayerData.IsCreditsActive)
         {
             CreditsPanel.SetActive(true);
-            PlayerData.Instance.IsCreditsActive = true;
+            PlayerData.IsCreditsActive = true;
             yield return StartCoroutine(CreditsPanel.FadeCanvasGroup(0.1f, 10000, 0.0f, 1.0f)); // todo: use animator instead of this inconsistent shit
         }
         else
@@ -27,9 +27,9 @@ public class Credits : MonoBehaviour, ILeftClickable
 
     public IEnumerator Deactivate()
     {
-        if (PlayerData.Instance.IsCreditsActive)
+        if (PlayerData.IsCreditsActive)
         {
-            PlayerData.Instance.IsCreditsActive = false;
+            PlayerData.IsCreditsActive = false;
             yield return StartCoroutine(CreditsPanel.FadeCanvasGroup(0.1f, 10000, 1.0f, 0.0f));
             CreditsPanel.SetActive(false);
         }
