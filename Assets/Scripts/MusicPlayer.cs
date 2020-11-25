@@ -63,7 +63,7 @@ public class MusicPlayer : MonoBehaviour
             {
                 lastIndex = SongManager.Songs.Count - 1;
             }
-            while (SongManager.Songs[lastIndex].MetadataSection.TitleUnicode == SongManager.Songs[index].MetadataSection.TitleUnicode) // if the last song is the same song
+            while (SongManager.Songs[lastIndex].MetadataSection.Title == SongManager.Songs[index].MetadataSection.Title) // if the last song is the same song
             {
                 index++;
                 if (index >= SongManager.Songs.Count)
@@ -100,7 +100,7 @@ public class MusicPlayer : MonoBehaviour
             {
                 lastIndex = 0;
             }
-            while (SongManager.Songs[lastIndex].MetadataSection.TitleUnicode == SongManager.Songs[index].MetadataSection.TitleUnicode)
+            while (SongManager.Songs[lastIndex].MetadataSection.Title == SongManager.Songs[index].MetadataSection.Title)
             {
                 index--;
                 if (index < 0)
@@ -134,7 +134,7 @@ public class MusicPlayer : MonoBehaviour
         }
         else
         {
-            throw new ArgumentException($"{song.MetadataSection.TitleUnicode} is not registered in SongManager.Songs");
+            throw new ArgumentException($"{song.MetadataSection.Title} is not registered in SongManager.Songs");
         }
     }
 

@@ -30,7 +30,7 @@ public class KeyInputDetector : MonoBehaviour
             }
             else if (PlayerData.IsOptionActive && PlayerData.ActivePanel == MainMenu)
             {
-                Options.Instance.Deactivate();
+                Options.Deactivate();
             }
             else if (PlayerData.ActivePanel == SongSelection)
             {

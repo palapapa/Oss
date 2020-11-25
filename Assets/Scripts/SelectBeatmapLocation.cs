@@ -12,9 +12,4 @@ public class SelectBeatmapLocation : MonoBehaviour, ILeftClickable
             PlayerData.SavePersistentPlayerData();
         }
     }
-
-    private void Update()
-    {
-        //Debug.Log(PlayerData.Instance.BeatmapLocation);
-    }
 }

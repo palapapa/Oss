@@ -6,6 +6,11 @@ public class Credits : MonoBehaviour, ILeftClickable
     public static Credits Instance { get; set; }
     public GameObject CreditsPanel;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     public void OnLeftClick()
     {
         StartCoroutine(Activate());
@@ -36,14 +41,6 @@ public class Credits : MonoBehaviour, ILeftClickable
         else
         {
             yield break;
-        }
-    }
-
-    private Credits()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
         }
     }
 }

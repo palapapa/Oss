@@ -67,7 +67,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 7179f6dde1b6bbc44b703c80436453bf, type: 3}
-    m_FontSize: 80
+    m_FontSize: 45
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -91,9 +91,9 @@ GameObject:
   - component: {fileID: 2443933108857299357}
   - component: {fileID: 2775960901832542704}
   - component: {fileID: 9026370258931990609}
-  - component: {fileID: 1906713094278190577}
+  - component: {fileID: -2689948813570370452}
   m_Layer: 5
-  m_Name: SongListButton
+  m_Name: SongSelectionButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -200,8 +200,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1906713094278190577}
-        m_TargetAssemblyTypeName: SongListButton, Assembly-CSharp
+      - m_Target: {fileID: -2689948813570370452}
+        m_TargetAssemblyTypeName: SongSelectionButton, Assembly-CSharp
         m_MethodName: OnLeftClick
         m_Mode: 1
         m_Arguments:
@@ -212,7 +212,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1906713094278190577
+--- !u!114 &-2689948813570370452
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -221,7 +221,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 7939454202441103145}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2d6dc995ff03cf4f90e25ad7ed1117d, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ce91c9c3008d5c45a94cfb409636762, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: {fileID: 3946475123282562022}
+  Title: {fileID: 3946475123282562022}
+  Songname: {fileID: 0}
+  Mapper: {fileID: 0}
+  Length: {fileID: 0}
+  Bpm: {fileID: 0}
+  Objects: {fileID: 0}
+  Circles: {fileID: 0}
+  Sliders: {fileID: 0}
+  Spinners: {fileID: 0}
+  Cs: {fileID: 0}
+  Ar: {fileID: 0}
+  Od: {fileID: 0}
+  Hp: {fileID: 0}
+  Stars: {fileID: 0}

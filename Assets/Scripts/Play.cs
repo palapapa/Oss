@@ -7,6 +7,11 @@ public class Play : MonoBehaviour, ILeftClickable
     public GameObject MainMenu;
     public static Play Instance;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     public void OnLeftClick()
     {
         StartCoroutine(SwitchToSongSelection());
@@ -15,16 +20,8 @@ public class Play : MonoBehaviour, ILeftClickable
     public IEnumerator SwitchToSongSelection()
     {
         SongSelection.GetComponent<CanvasGroup>().alpha = 0;
-        yield return StartCoroutine(MainMenu.FadeCanvasGroupTo(0.2f, 1000, 0.0f)); // todo: use animator instead of this inconsistent shit
+        yield return StartCoroutine(MainMenu.FadeCanvasGroupTo(0.2f, 1000, 0.0f));
         SongSelection.SwitchPanel();
         yield return StartCoroutine(SongSelection.FadeCanvasGroupTo(0.2f, 1000, 1.0f));
-    }
-
-    private Play()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
     }
 }

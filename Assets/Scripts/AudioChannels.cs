@@ -26,8 +26,4 @@ public class AudioChannels : MonoBehaviour
         Music.transform.SetParent(transform);
         SoundEffects.transform.SetParent(transform);
     }
-
-    private void Start()
-    {
-    }
 }

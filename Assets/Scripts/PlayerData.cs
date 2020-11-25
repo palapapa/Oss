@@ -40,6 +40,10 @@ public class PlayerData
             {
                 PersistentPlayerData = new PersistentPlayerData();
             }
+            catch (FileNotFoundException)
+            {
+                Debug.Log("Save file not found, falling back to default");
+            }
         }
         Debug.Log("Player data loaded");
     }

@@ -22,10 +22,6 @@ public class SongManager : MonoBehaviour
         };
     }
 
-    private void Update()
-    {
-    }
-
     public static IEnumerator ScanSongDirectory()
     {
         Debug.Log("Scanning song directory");

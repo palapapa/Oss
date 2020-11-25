@@ -39,10 +39,6 @@ public class Audio : MonoBehaviour
         };
     }
 
-    private void Start()
-    {
-    }
-
     private Audio()
     {
         if (Instance == null)

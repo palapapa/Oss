@@ -27,9 +27,4 @@ public class IntroPlayer : MonoBehaviour
             PlayerData.HasIntroFinished = true;
         };
     }
-
-    // Update is called once per frame
-    private void Update()
-    {
-    }
 }

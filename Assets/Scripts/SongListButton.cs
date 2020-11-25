@@ -5,21 +5,9 @@ using UnityEngine.UI;
 
 public class SongListButton : MonoBehaviour, ILeftClickable
 {
-    public Text title;
+    public Text Title;
     public void OnLeftClick()
     {
-        MusicPlayer.PlaySelected(title.text, 1.0f);
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        MusicPlayer.PlaySelected(Title.text, 1.0f);
     }
 }

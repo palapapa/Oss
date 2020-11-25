@@ -7,6 +7,19 @@ public class SongSelection : MonoBehaviour
 {
     public GameObject Content;
     public GameObject SongButton;
+    public Text SongName;
+    public Text Mapper;
+    public Text Length;
+    public Text Bpm;
+    public Text Objects;
+    public Text Circles;
+    public Text Sliders;
+    public Text Spinners;
+    public Text Cs;
+    public Text Ar;
+    public Text Od;
+    public Text Hp;
+    public Text Stars;
     public static SongSelection Instance;
     public void UpdateSongList()
     {
@@ -21,20 +34,17 @@ public class SongSelection : MonoBehaviour
                 continue;
             }
             GameObject songListButton = Instantiate(SongButton);
+            SongSelectionButton script = songListButton.GetComponent<SongSelectionButton>();
             songListButton.transform.SetParent(Content.transform, false);
             LayoutRebuilder.MarkLayoutForRebuild((RectTransform)Content.transform);
-            songListButton.transform.Find("Title").GetComponent<Text>().text = SongManager.Songs[i].MetadataSection.Title + "[" +
+            script.Title.text = SongManager.Songs[i].MetadataSection.Title + "[" +
                 SongManager.Songs[i].MetadataSection.Version + "]";
+            script.Song = SongManager.Songs[i];
         }
     }
 
     void Start()
     {
         Instance = this;
-    }
-
-    void Update()
-    {
-        
     }
 }

@@ -4,8 +4,12 @@ public class Options : MonoBehaviour, ILeftClickable
 {
     public GameObject OptionsMenu;
     public static Options Instance { get; set; }
-    private Animator optionsMenuAnimator;
+    private static Animator optionsMenuAnimator;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
     private void Start()
     {
         optionsMenuAnimator = OptionsMenu.GetComponent<Animator>();
@@ -16,7 +20,7 @@ public class Options : MonoBehaviour, ILeftClickable
         Activate();
     }
 
-    public void Activate()
+    public static void Activate()
     {
         if (!PlayerData.IsOptionActive)
         {
@@ -25,17 +29,12 @@ public class Options : MonoBehaviour, ILeftClickable
         }
     }
 
-    public void Deactivate()
+    public static void Deactivate()
     {
         if (PlayerData.IsOptionActive)
         {
             optionsMenuAnimator.SetTrigger("OptionsNotClicked");
             PlayerData.IsOptionActive = false;
         }
-    }
-
-    private Options()
-    {
-        Instance = this;
     }
 }
