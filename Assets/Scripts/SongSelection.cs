@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class SongSelection : MonoBehaviour
 {
     public GameObject Content;
+    public GameObject Background;
     public GameObject SongButton;
     public Text SongName;
     public Text Mapper;

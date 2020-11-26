@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class SongManager : MonoBehaviour
 {
@@ -46,11 +47,13 @@ public class SongManager : MonoBehaviour
         foreach (string path in osuPaths ?? Enumerable.Empty<string>())
         {
             Beatmap beatmap = BeatmapDecoder.Decode(path);
-            string audioPath = path.Substring(0, path.LastIndexOf('\\') + 1) + beatmap.GeneralSection.AudioFilename;
+            string songFolderPath = path.Substring(0, path.LastIndexOf('\\') + 1);
+            string audioPath = songFolderPath + beatmap.GeneralSection.AudioFilename;
+            string backgroundPath = songFolderPath + beatmap.EventsSection.BackgroundImage;
             try
             {
                 Song song = new Song(beatmap, Audio.Mp3ToAudioClip(File.ReadAllBytes(audioPath)));
-                //Debug.Log(song.TimingPoints[0].BeatLength);
+                song.Background.LoadImage(File.ReadAllBytes(backgroundPath));
                 Songs.Add(song);
             }
             catch (FileNotFoundException e)

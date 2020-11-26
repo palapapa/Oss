@@ -3147,6 +3147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Content: {fileID: 708091998}
+  Background: {fileID: 121255917}
   SongButton: {fileID: 7939454202441103145, guid: c1eaedca8afedfd4cbd3cc308478f60e, type: 3}
   SongName: {fileID: 1048660710}
   Mapper: {fileID: 886301073}
@@ -5876,7 +5877,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AspectMode: 0
-  m_AspectRatio: 1.7777779
+  m_AspectRatio: 1.7790055
 --- !u!1 &1733572817
 GameObject:
   m_ObjectHideFlags: 0
@@ -7207,7 +7208,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -374.66003, y: 0}
+  m_AnchoredPosition: {x: -374.75, y: 0}
   m_SizeDelta: {x: 187.32776, y: -810.0141}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &2090397675

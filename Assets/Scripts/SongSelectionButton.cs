@@ -14,6 +14,7 @@ public class SongSelectionButton : MonoBehaviour, ILeftClickable
         if (!isSelected)
         {
             UpdateMetadataDisplay();
+            MusicPlayer.PlaySelected(Song.MetadataSection.Title, 1.0f);
             isSelected = true;
         }
         else
@@ -26,7 +27,7 @@ public class SongSelectionButton : MonoBehaviour, ILeftClickable
     {
         SongSelection.Instance.SongName.text = Title.text;
         SongSelection.Instance.Mapper.text = "Mapped by " + Song.MetadataSection.Creator;
-        SongSelection.Instance.Length.text = "Length: " + (Song.GeneralSection.Length / 1000.0f).ToString(); // todo: make this number look like clock display
+        SongSelection.Instance.Length.text = "Length: " + (Song.GeneralSection.Length / 1000).ToString(); // todo: make this number look like clock display
         SongSelection.Instance.Bpm.text = "BPM: " + (1 / Song.TimingPoints[0].BeatLength * 60000).ToString();
         SongSelection.Instance.Objects.text = "Objects: " + Song.HitObjects.Count.ToString();
         SongSelection.Instance.Circles.text = "Circles: " + Song.GeneralSection.CirclesCount.ToString();
@@ -37,5 +38,12 @@ public class SongSelectionButton : MonoBehaviour, ILeftClickable
         SongSelection.Instance.Od.text = "OD: " + Song.DifficultySection.OverallDifficulty.ToString();
         SongSelection.Instance.Hp.text = "HP: " + Song.DifficultySection.HPDrainRate.ToString();
         SongSelection.Instance.Stars.text = "Stars: IDK";
+        SongSelection.Instance.Background.GetComponent<Image>().sprite =
+            Sprite.Create
+            (
+                Song.Background,
+                new Rect(0.0f, 0.0f, Song.Background.width, Song.Background.height),
+                new Vector2(0.5f, 0.5f)
+            );
     }
 }
