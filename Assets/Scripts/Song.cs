@@ -9,7 +9,20 @@ public class Song : Beatmap
     public AudioClip AudioClip { get; set; }
     public Texture2D Background { get; set; }
 
-    public Song(AudioClip audioClip) : base()
+    public Song() : base()
+    {
+        AudioClip = null;
+        Background = Texture2D.whiteTexture;
+        for (int x = 0; x < Background.width; x++)
+        {
+            for (int y = 0; y < Background.height; y++)
+            {
+                Background.SetPixel(x, y, new Color(0, 0, 0, 0));
+            }
+        }
+    }
+
+    public Song(AudioClip audioClip) : this()
     {
         AudioClip = audioClip;
     }
@@ -32,22 +45,8 @@ public class Song : Beatmap
         AudioClip = audioClip;
     }
 
-    public Song(Beatmap beatmap, AudioClip audioClip, Texture2D background) : this(beatmap)
+    public Song(Beatmap beatmap, AudioClip audioClip, Texture2D background) : this(beatmap, audioClip)
     {
-        AudioClip = audioClip;
         Background = background;
-    }
-
-    public Song() : base()
-    {
-        AudioClip = null;
-        Background = Texture2D.whiteTexture;
-        for (int x = 0; x < Background.width; x++)
-        {
-            for (int y = 0; y < Background.height; y++)
-            {
-                Background.SetPixel(x, y, new Color(0, 0, 0, 0));
-            }
-        }
     }
 }

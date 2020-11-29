@@ -53,7 +53,7 @@ public class SongManager : MonoBehaviour
             try
             {
                 Song song = new Song(beatmap, Audio.Mp3ToAudioClip(File.ReadAllBytes(audioPath)));
-                song.Background.LoadImage(File.ReadAllBytes(backgroundPath));
+                //song.Background.LoadImage(File.ReadAllBytes(backgroundPath));
                 Songs.Add(song);
             }
             catch (FileNotFoundException e)

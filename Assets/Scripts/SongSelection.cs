@@ -34,9 +34,9 @@ public class SongSelection : MonoBehaviour
             {
                 continue;
             }
-            GameObject songListButton = Instantiate(SongButton);
-            SongSelectionButton script = songListButton.GetComponent<SongSelectionButton>();
-            songListButton.transform.SetParent(Content.transform, false);
+            GameObject songSelectionButton = Instantiate(SongButton);
+            SongSelectionButton script = songSelectionButton.GetComponent<SongSelectionButton>();
+            songSelectionButton.transform.SetParent(Content.transform, false);
             LayoutRebuilder.MarkLayoutForRebuild((RectTransform)Content.transform);
             script.Title.text = SongManager.Songs[i].MetadataSection.Title + "[" +
                 SongManager.Songs[i].MetadataSection.Version + "]";
