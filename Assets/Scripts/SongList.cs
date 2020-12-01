@@ -14,7 +14,7 @@ public class SongList : MonoBehaviour
         {
             PlayerData.IsSongListActive = true;
             gameObject.SetActive(true);
-            yield return StartCoroutine(gameObject.FadeCanvasGroup(0.2f, 10000, 0.0f, 1.0f));
+            yield return StartCoroutine(gameObject.FadeCanvasGroup(0.2f, 100, 0.0f, 1.0f));
         }
     }
     public IEnumerator Deactivate()
@@ -22,7 +22,7 @@ public class SongList : MonoBehaviour
         if (PlayerData.IsSongListActive)
         {
             PlayerData.IsSongListActive = false;
-            yield return StartCoroutine(gameObject.FadeCanvasGroup(0.2f, 10000, 1.0f, 0.0f));
+            yield return StartCoroutine(gameObject.FadeCanvasGroup(0.2f, 100, 1.0f, 0.0f));
             gameObject.SetActive(false);
         }
     }
@@ -38,7 +38,9 @@ public class SongList : MonoBehaviour
             GameObject songListButton = Instantiate(SongListButton);
             songListButton.transform.SetParent(Content.transform, false);
             LayoutRebuilder.MarkLayoutForRebuild((RectTransform)Content.transform);
-            songListButton.GetComponent<SongListButton>().Title.text = songs[i].MetadataSection.Title;
+            SongListButton script = songListButton.GetComponent<SongListButton>();
+            script.Title.text = songs[i].MetadataSection.Title;
+            script.Song = songs[i];
         }
     }
     // Start is called before the first frame update

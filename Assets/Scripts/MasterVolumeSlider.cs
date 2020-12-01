@@ -16,7 +16,7 @@ public class MasterVolumeSlider : MonoBehaviour, IOnValueChanged
     // Start is called before the first frame update
     void Start()
     {
-        slider = gameObject.GetComponent<Slider>();
+        slider = GetComponent<Slider>();
     }
 
     // Update is called once per frame

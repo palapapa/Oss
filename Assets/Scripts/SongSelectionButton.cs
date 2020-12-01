@@ -3,12 +3,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class SongSelectionButton : MonoBehaviour, ILeftClickable
+public class SongSelectionButton : MonoBehaviour, ILeftClickable, IDeselectHandler
 {
     private bool isSelected = false;
+    private Outline outline;
     public Text Title;
     public Song Song { get; set; }
+
+    
+    private void Awake()
+    {
+        outline = GetComponent<Outline>();
+        outline.enabled = false;
+    }
+    
+    private void Update()
+    {
+        outline.enabled = isSelected;
+    }
 
     public void OnLeftClick()
     {
@@ -17,7 +31,7 @@ public class SongSelectionButton : MonoBehaviour, ILeftClickable
             UpdateMetadataDisplay();
             if (MusicPlayer.CurrentPlaying.MetadataSection.Title != Song.MetadataSection.Title)
             {
-                MusicPlayer.PlaySelected(Song.MetadataSection.Title, 1.0f);
+                MusicPlayer.PlaySelected(Song, 1.0f);
             }
             isSelected = true;
         }
@@ -49,5 +63,10 @@ public class SongSelectionButton : MonoBehaviour, ILeftClickable
                 new Rect(0.0f, 0.0f, Song.Background.width, Song.Background.height),
                 new Vector2(0.5f, 0.5f)
             );
+    }
+
+    public void OnDeselect(BaseEventData eventData)
+    {
+        isSelected = false;
     }
 }

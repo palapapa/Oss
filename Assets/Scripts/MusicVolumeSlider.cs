@@ -8,7 +8,7 @@ public class MusicVolumeSlider : MonoBehaviour, IOnValueChanged
 
     private void Start()
     {
-        slider = gameObject.GetComponent<Slider>();
+        slider = GetComponent<Slider>();
         musicAudioSource = AudioChannels.Music.GetComponent<AudioSource>();
         musicAudioSource.volume = PlayerData.PersistentPlayerData.MusicVolume;
     }

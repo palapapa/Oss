@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 2775960901832542704}
   - component: {fileID: 9026370258931990609}
   - component: {fileID: 1906713094278190577}
+  - component: {fileID: 3981156689454344607}
   m_Layer: 5
   m_Name: SongListButton
   m_TagString: Untagged
@@ -225,3 +226,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Title: {fileID: 3946475123282562022}
+--- !u!114 &3981156689454344607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7939454202441103145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.0627451}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 0
