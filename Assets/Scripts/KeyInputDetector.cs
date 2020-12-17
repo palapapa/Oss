@@ -4,6 +4,7 @@ public class KeyInputDetector : MonoBehaviour
 {
     public GameObject MainMenu;
     public GameObject SongSelection;
+    public GameObject PlayField;
     private bool hasLoaded = false;
 
     private void Start()
@@ -20,11 +21,11 @@ public class KeyInputDetector : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (PlayerData.IsSongListActive)
+            if (PlayerData.IsSongListActive && PlayerData.ActivePanel == MainMenu)
             {
                 StartCoroutine(SongList.Instance.Deactivate());
             }
-            else if (PlayerData.IsCreditsActive)
+            else if (PlayerData.IsCreditsActive && PlayerData.ActivePanel == MainMenu)
             {
                 StartCoroutine(Credits.Instance.Deactivate());
             }
@@ -35,6 +36,11 @@ public class KeyInputDetector : MonoBehaviour
             else if (PlayerData.ActivePanel == SongSelection)
             {
                 StartCoroutine(Back.Instance.SwitchToMainMenu());
+            }
+            else if (PlayerData.ActivePanel == PlayField)
+            {
+                StartCoroutine(global::PlayField.Instance.SwitchToSongSelection());
+                global::PlayField.Instance.StopGame();
             }
         }
         if

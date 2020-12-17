@@ -49,7 +49,7 @@ public class SongManager : MonoBehaviour
             Beatmap beatmap = BeatmapDecoder.Decode(path);
             string songFolderPath = path.Substring(0, path.LastIndexOf('\\') + 1);
             string audioPath = songFolderPath + beatmap.GeneralSection.AudioFilename;
-            string backgroundPath = songFolderPath + beatmap.EventsSection.BackgroundImage;
+            //string backgroundPath = songFolderPath + beatmap.EventsSection.BackgroundImage;
             try
             {
                 Song song = new Song(beatmap, Audio.Mp3ToAudioClip(File.ReadAllBytes(audioPath)));
