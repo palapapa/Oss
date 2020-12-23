@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class MasterVolumeSlider : MonoBehaviour, IOnValueChanged
 {
-    private Slider slider;
+    private UnityEngine.UI.Slider slider;
     
     public void OnValueChanged()
     {
@@ -16,7 +16,7 @@ public class MasterVolumeSlider : MonoBehaviour, IOnValueChanged
     // Start is called before the first frame update
     void Start()
     {
-        slider = GetComponent<Slider>();
+        slider = GetComponent<UnityEngine.UI.Slider>();
     }
 
     // Update is called once per frame

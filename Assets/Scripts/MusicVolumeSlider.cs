@@ -3,12 +3,12 @@ using UnityEngine.UI;
 
 public class MusicVolumeSlider : MonoBehaviour, IOnValueChanged
 {
-    private Slider slider;
+    private UnityEngine.UI.Slider slider;
     private AudioSource musicAudioSource;
 
     private void Start()
     {
-        slider = GetComponent<Slider>();
+        slider = GetComponent<UnityEngine.UI.Slider>();
         musicAudioSource = AudioChannels.Music.GetComponent<AudioSource>();
         musicAudioSource.volume = PlayerData.PersistentPlayerData.MusicVolume;
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Diagnostics;
 using OsuParsers.Beatmaps.Objects;
+using OsuHitObjects = OsuParsers.Beatmaps.Objects;
 
 public class PlayField : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class PlayField : MonoBehaviour
     public static int CurrentHitObject { get; private set; }
     public GameObject SongSelection;
     public GameObject Circle;
+    public GameObject Slider;
     public GameObject HitObjects;
     private CanvasGroup canvasGroup;
     private Song song;
@@ -57,6 +59,11 @@ public class PlayField : MonoBehaviour
             {
                 GameObject circle = Instantiate(Circle);
                 circle.transform.SetParent(HitObjects.transform);
+            }
+            else if (hitObject is OsuHitObjects.Slider)
+            {
+                GameObject slider = Instantiate(Slider);
+                slider.transform.SetParent(HitObjects.transform);
             }
             CurrentHitObject++;
         }

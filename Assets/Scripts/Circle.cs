@@ -48,24 +48,20 @@ public class Circle : MonoBehaviour
         hp = MusicPlayer.CurrentPlaying.DifficultySection.HPDrainRate;
         od = MusicPlayer.CurrentPlaying.DifficultySection.OverallDifficulty;
         spawnDelay = (int)PlayField.GameTimer.ElapsedMilliseconds - HitCircle.StartTime;
+        Vector2 screenPoint = Utilities.OsuPixelToScreenPoint(HitCircle.Position.X, HitCircle.Position.Y);
         transform.position = Camera.main.ScreenToWorldPoint
         (
             new Vector3
             (
-                x: HitCircle.Position.X * Screen.width / 512,
-                y: HitCircle.Position.Y * Screen.height / 384
+                screenPoint.x,
+                screenPoint.y
             )
         );
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-        if (ar < 5)
+        if (ar <= 5)
         {
             fadeIn = (int)(800 + 400 * (5 - ar) / 5);
             preempt = (int)(1200 + 600 * (5 - ar) / 5);
-        }
-        else if (ar == 5)
-        {
-            fadeIn = 800;
-            preempt = 1200;
         }
         else
         {

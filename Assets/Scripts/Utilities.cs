@@ -129,4 +129,13 @@ public static class Utilities
         rect.y -= ((1.0f - rectTransform.pivot.y) * size.y);
         return rect;
     }
+
+    public static Vector2 OsuPixelToScreenPoint(Vector2 osuPixel)
+    {
+        return new Vector2(osuPixel.x * Screen.width / 512, osuPixel.y * Screen.height / 384);
+    }
+    public static Vector2 OsuPixelToScreenPoint(float x, float y)
+    {
+        return new Vector2(x * Screen.width / 512, y * Screen.height / 384);
+    }
 }

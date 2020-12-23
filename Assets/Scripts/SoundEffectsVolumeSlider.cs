@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class SoundEffectsVolumeSlider : MonoBehaviour, IOnValueChanged
 {
-    private Slider slider;
+    private UnityEngine.UI.Slider slider;
     private AudioSource soundEffectsAudioSource;
 
     public void OnValueChanged()
@@ -17,7 +17,7 @@ public class SoundEffectsVolumeSlider : MonoBehaviour, IOnValueChanged
     // Start is called before the first frame update
     void Start()
     {
-        slider = GetComponent<Slider>();
+        slider = GetComponent<UnityEngine.UI.Slider>();
         soundEffectsAudioSource = AudioChannels.SoundEffects.GetComponent<AudioSource>();
         soundEffectsAudioSource.volume = PlayerData.PersistentPlayerData.SoundEffectsVolume;
     }
