@@ -130,12 +130,63 @@ public static class Utilities
         return rect;
     }
 
-    public static Vector2 OsuPixelToScreenPoint(Vector2 osuPixel)
+    public static System.Numerics.Vector2 OsuPixelToScreenPoint(System.Numerics.Vector2 osuPixel)
     {
-        return new Vector2(osuPixel.x * Screen.width / 512, osuPixel.y * Screen.height / 384);
+        return new System.Numerics.Vector2(osuPixel.X * Screen.width / 512, osuPixel.Y * Screen.height / 384);
     }
-    public static Vector2 OsuPixelToScreenPoint(float x, float y)
+
+    public static System.Numerics.Vector2 OsuPixelToScreenPoint(float x, float y)
     {
-        return new Vector2(x * Screen.width / 512, y * Screen.height / 384);
+        return new System.Numerics.Vector2(x * Screen.width / 512, y * Screen.height / 384);
+    }
+
+    public static Vector2 OsuPixelToScreenPointUnity(System.Numerics.Vector2 osuPixel)
+    {
+        return new Vector2(osuPixel.X * Screen.width / 512, osuPixel.Y * Screen.height / 384);
+    }
+
+    public static List<System.Numerics.Vector2> OsuPixelsToScreenPoints(List<System.Numerics.Vector2> osuPixels)
+    {
+        List<System.Numerics.Vector2> result = new List<System.Numerics.Vector2>();
+        foreach (System.Numerics.Vector2 coordinate in osuPixels)
+        {
+            result.Add(new System.Numerics.Vector2(coordinate.X * Screen.width / 512, coordinate.Y * Screen.height / 384));
+        }
+        return result;
+    }
+
+    public static List<float> SolveThreeVariableLinearEquation(ThreeVariableLinearEquation A, ThreeVariableLinearEquation B, ThreeVariableLinearEquation C)
+    {
+        float delta = new Matrix3x3
+        (
+            A.XCoefficient, A.YCoefficient, A.ZCoefficient,
+            B.XCoefficient, B.YCoefficient, B.ZCoefficient,
+            C.XCoefficient, C.YCoefficient, C.ZCoefficient
+        ).CalculateMatrix();
+        float deltaX = new Matrix3x3
+        (
+            A.Answer, A.YCoefficient, A.ZCoefficient,
+            B.Answer, B.YCoefficient, B.ZCoefficient,
+            C.Answer, C.YCoefficient, C.ZCoefficient
+        ).CalculateMatrix();
+        float deltaY = new Matrix3x3
+        (
+            A.XCoefficient, A.Answer, A.ZCoefficient,
+            B.XCoefficient, B.Answer, B.ZCoefficient,
+            C.XCoefficient, C.Answer, C.ZCoefficient
+        ).CalculateMatrix();
+        float deltaZ = new Matrix3x3
+        (
+            A.XCoefficient, A.YCoefficient, A.Answer,
+            B.XCoefficient, B.YCoefficient, B.Answer,
+            C.XCoefficient, C.YCoefficient, C.Answer
+        ).CalculateMatrix();
+        List<float> result = new List<float>
+        {
+            deltaX / delta,
+            deltaY / delta,
+            deltaZ / delta
+        };
+        return result;
     }
 }

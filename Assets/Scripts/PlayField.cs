@@ -33,6 +33,7 @@ public class PlayField : MonoBehaviour
     {
         MusicPlayer.Stop();
         canvasGroup.alpha = 0;
+        PlayerData.ActivePanel = gameObject;
         yield return StartCoroutine(SongSelection.FadeCanvasGroup(0.5f, 100, 1.0f, 0.0f));
         gameObject.SwitchPanel();
         yield return StartCoroutine(gameObject.FadeCanvasGroup(0.5f, 100, 0.0f, 1.0f));
@@ -77,7 +78,13 @@ public class PlayField : MonoBehaviour
     
     public void StopGame()
     {
-        StopAllCoroutines();
+        StopCoroutine(nameof(StartGame));
+        StopCoroutine(nameof(SwitchToPlayField));
+        foreach (Transform t in HitObjects.transform)
+        {
+            Destroy(t.gameObject);
+        }
         GameTimer.Reset();
+        UnityEngine.Debug.Log("Game stopped");
     }
 }

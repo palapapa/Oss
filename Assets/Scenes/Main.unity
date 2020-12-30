@@ -740,8 +740,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1712165769}
-  - {fileID: 1795193240}
   - {fileID: 1066299224}
+  - {fileID: 1795193240}
   - {fileID: 4719385159831536142}
   - {fileID: 1171168871}
   - {fileID: 1398144916878529575}
@@ -1461,7 +1461,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SongSelection: {fileID: 103840390}
   Circle: {fileID: 57556950124259240, guid: 0689f9df20d914148bed1735b3dceef7, type: 3}
-  Slider: {fileID: 0}
+  Slider: {fileID: 1048003521124695406, guid: 345e91ca8eadcb54698bb7aa73946e13, type: 3}
   HitObjects: {fileID: 240964082}
 --- !u!1 &523329797
 GameObject:
@@ -3828,7 +3828,7 @@ RectTransform:
   m_Children:
   - {fileID: 1306390345}
   m_Father: {fileID: 185650665}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -6106,7 +6106,7 @@ RectTransform:
   m_Children:
   - {fileID: 63803868}
   m_Father: {fileID: 185650665}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

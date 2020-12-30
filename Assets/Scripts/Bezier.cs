@@ -1,30 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System;
 using System.Linq;
+using System.Numerics;
+using UnityEngine;
 
 public class Bezier
 {
-    public List<Vector2> ControlPoints { get; private set; }
-    public List<Vector2> Points { get; private set; }
+    public List<System.Numerics.Vector2> ControlPoints { get; private set; } = new List<System.Numerics.Vector2>();
+    public List<System.Numerics.Vector2> Points { get; private set; } = new List<System.Numerics.Vector2>();
     /// <summary>
     /// This property has no elements until <see cref="CalculateEvenlySpacedPoints(int)"/> is called
     /// </summary>
-    public List<Vector2> EvenlySpacedPoints { get; private set; }
+    public List<System.Numerics.Vector2> EvenlySpacedPoints { get; private set; } = new List<System.Numerics.Vector2>();
     public float Length { get; private set; }
     private int segments;
     /// <summary>
     /// Correspond each interpolation value to a ratio(0 ~ 1) of the total length of the curve
     /// </summary>
     private Dictionary<float, float> interpolationToSegment = new Dictionary<float, float>();
-    public Bezier(List<Vector2> controlPoints, int resolution)
+    public Bezier(List<System.Numerics.Vector2> controlPoints, int accuracy)
     {
         ControlPoints = controlPoints;
-        RecalculateCurve(controlPoints, resolution);
+        RecalculateCurve(controlPoints, accuracy);
     }
     
-    private Vector2 GetPointByInterpolationIndependent(List<Vector2> controlPoints, float interpolation)
+    private System.Numerics.Vector2 GetPointByInterpolationIndependent(List<System.Numerics.Vector2> controlPoints, float interpolation)
     {
         if (interpolation < 0 || interpolation > 1)
         {
@@ -38,11 +39,15 @@ public class Bezier
         {
             return controlPoints[0];
         }
+        if (controlPoints.Count == 2)
+        {
+            return System.Numerics.Vector2.Lerp(controlPoints[0], controlPoints[1], interpolation);
+        }
         else
         {
-            Vector2 p1 = GetPointByInterpolationIndependent(controlPoints.GetRange(0, controlPoints.Count - 2), interpolation);
-            Vector2 p2 = GetPointByInterpolationIndependent(controlPoints.GetRange(1, controlPoints.Count - 1), interpolation);
-            return Vector2.Lerp(p1, p2, interpolation);
+            System.Numerics.Vector2 p1 = GetPointByInterpolationIndependent(controlPoints.GetRange(0, controlPoints.Count - 1), interpolation);
+            System.Numerics.Vector2 p2 = GetPointByInterpolationIndependent(controlPoints.GetRange(1, controlPoints.Count - 1), interpolation);
+            return System.Numerics.Vector2.Lerp(p1, p2, interpolation);
         }
     }
 
@@ -66,25 +71,26 @@ public class Bezier
         }
         interpolationToSegment.Clear();
         interpolationToSegment.Add(0, 0);
-        Vector2 currentPoint, nextPoint;
+        System.Numerics.Vector2 currentPoint, nextPoint;
         float result = 0;
         for (int i = 0; i <= accuracy; i++)
         {
             currentPoint = GetPointByInterpolation(1 / accuracy * i);
-            if (1 / accuracy * (i + 1) > 1)
+            nextPoint = GetPointByInterpolation(1 / accuracy * (i + 1));
+            result += System.Numerics.Vector2.Distance(currentPoint, nextPoint);
+            try
             {
-                Length = result;
-                interpolationToSegment.Remove(interpolationToSegment.Keys.ElementAt(interpolationToSegment.Count - 1));
-                interpolationToSegment.Add(1, result);
-                return;
+                interpolationToSegment.Add(1 / accuracy * (i + 1), result);
             }
-            else
+            catch (ArgumentException)
             {
-                nextPoint = GetPointByInterpolation(1 / accuracy * (i + 1));
+
             }
-            result += Vector2.Distance(currentPoint, nextPoint);
-            interpolationToSegment.Add(1 / accuracy * (i + 1), result);
         }
+        Length = result;
+        interpolationToSegment.Remove(interpolationToSegment.Keys.ElementAt(interpolationToSegment.Count - 1)); // remove last pair
+        interpolationToSegment.Add(1, result);
+        return;
     }
 
     /// <summary>
@@ -92,7 +98,7 @@ public class Bezier
     /// </summary>
     /// <param name="interpolation">A value from 0 to 1</param>
     /// <returns></returns>
-    public Vector2 GetPointByInterpolation(float interpolation)
+    public System.Numerics.Vector2 GetPointByInterpolation(float interpolation)
     {
         if (interpolation < 0 || interpolation > 1)
         {
@@ -106,11 +112,15 @@ public class Bezier
         {
             return ControlPoints[0];
         }
+        if (ControlPoints.Count == 2)
+        {
+            return System.Numerics.Vector2.Lerp(ControlPoints[0], ControlPoints[1], interpolation);
+        }
         else
         {
-            Vector2 p1 = GetPointByInterpolationIndependent(ControlPoints.GetRange(0, ControlPoints.Count - 2), interpolation);
-            Vector2 p2 = GetPointByInterpolationIndependent(ControlPoints.GetRange(1, ControlPoints.Count - 1), interpolation);
-            return Vector2.Lerp(p1, p2, interpolation);
+            System.Numerics.Vector2 p1 = GetPointByInterpolationIndependent(ControlPoints.GetRange(0, ControlPoints.Count - 1), interpolation);
+            System.Numerics.Vector2 p2 = GetPointByInterpolationIndependent(ControlPoints.GetRange(1, ControlPoints.Count - 1), interpolation);
+            return System.Numerics.Vector2.Lerp(p1, p2, interpolation);
         }
     }
 
@@ -119,7 +129,7 @@ public class Bezier
     /// </summary>
     /// <param name="segments">The number of evenly spaced points(including start and end) to be calculated</param>
     /// <param name="pointIndex">The index of the calculated point to return</param>
-    public Vector2 GetPointBySegment(int segments, int pointIndex)
+    public System.Numerics.Vector2 GetPointBySegment(int segments, int pointIndex)
     {
         if (segments < 2)
         {
@@ -129,21 +139,22 @@ public class Bezier
         {
             throw new ArgumentOutOfRangeException("\'pointIndex\' out of range");
         }
+        float unitLength = Length / segments;
         for (int i = 0; i < segments; i++)
         {
             float targetInterpolation = 0;
             for (int j = 0; j < interpolationToSegment.Count; j++)
             {
-                if (interpolationToSegment.ElementAt(j).Value == Length / segments * i)
+                if (interpolationToSegment.ElementAt(j).Value == unitLength * i)
                 {
                     targetInterpolation = interpolationToSegment.ElementAt(j).Key;
                     break;
                 }
-                else if (interpolationToSegment.ElementAt(j).Value > Length / segments * i)
+                else if (interpolationToSegment.ElementAt(j).Value > unitLength * i)
                 {
                     targetInterpolation = Mathf.Lerp(interpolationToSegment.ElementAt(j - 1).Key,
                         interpolationToSegment.ElementAt(j).Key,
-                        Length / segments * i / (interpolationToSegment.ElementAt(j).Value - interpolationToSegment.ElementAt(j - 1).Key));
+                        (unitLength * i - interpolationToSegment.ElementAt(j - 1).Value) / (interpolationToSegment.ElementAt(j).Value - interpolationToSegment.ElementAt(j - 1).Value));
                     break;
                 }
             }
@@ -158,7 +169,7 @@ public class Bezier
     /// <summary>
     /// Calculate <paramref name="segments"/> number of evenly spaced points on the curve and updates <see cref="EvenlySpacedPoints"/>
     /// <br/>
-    /// <paramref name="segments"/> will be cached and will be used to recalculate <see cref="EvenlySpacedPoints"/> when <see cref="UpdateAccuracy(int)"/> or <see cref="RecalculateCurve(List{Vector2}, int)"/> is called
+    /// <paramref name="segments"/> will be cached and will be used to recalculate <see cref="EvenlySpacedPoints"/> when <see cref="UpdateAccuracy(int)"/> or <see cref="RecalculateCurve(List{System.Numerics.Vector2}, int)"/> is called
     /// </summary>
     /// <param name="segments">The number of evenly spaced points(including start and end) to be calculated</param>
     public void CalculateEvenlySpacedPoints(int segments)
@@ -170,21 +181,22 @@ public class Bezier
         }
         EvenlySpacedPoints.Clear();
         this.segments = segments;
+        float unitLength = Length / segments;
         for (int i = 0; i < segments; i++)
         {
             float targetInterpolation = 0;
             for (int j = 0; j < interpolationToSegment.Count; j++)
             {
-                if (interpolationToSegment.ElementAt(j).Value == Length / segments * i)
+                if (interpolationToSegment.ElementAt(j).Value == unitLength * i)
                 {
                     targetInterpolation = interpolationToSegment.ElementAt(j).Key;
                     break;
                 }
-                else if (interpolationToSegment.ElementAt(j).Value > Length / segments * i)
+                else if (interpolationToSegment.ElementAt(j).Value > unitLength * i)
                 {
                     targetInterpolation = Mathf.Lerp(interpolationToSegment.ElementAt(j - 1).Key,
                         interpolationToSegment.ElementAt(j).Key,
-                        Length / segments * i / (interpolationToSegment.ElementAt(j).Value - interpolationToSegment.ElementAt(j - 1).Key));
+                        (unitLength * i - interpolationToSegment.ElementAt(j - 1).Value) / (interpolationToSegment.ElementAt(j).Value - interpolationToSegment.ElementAt(j - 1).Value));
                     break;
                 }
             }
@@ -214,7 +226,7 @@ public class Bezier
     /// </summary>
     /// <param name="controlPoints">The control points defining the curve</param>
     /// <param name="accuracy">The number of points on the curve to be calculated including start and end</param>
-    public void RecalculateCurve(List<Vector2> controlPoints, int accuracy)
+    public void RecalculateCurve(List<System.Numerics.Vector2> controlPoints, int accuracy)
     {
         if (accuracy <= 0)
         {

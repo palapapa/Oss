@@ -1,9 +1,93 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using OsuParsers.Beatmaps.Objects;
+using OsuHitObjects = OsuParsers.Beatmaps.Objects;
+using OsuParsers.Enums.Beatmaps;
 
 public class Slider : MonoBehaviour
 {
-    
+    private OsuHitObjects.Slider slider;
+    private List<Bezier> curves;
+    private LineRenderer lineRenderer;
+    private RectTransform rectTransform;
+    private const int ACCURACY = 50;
+
+    private void Awake()
+    {
+        lineRenderer = GetComponent<LineRenderer>();
+        slider = (OsuHitObjects.Slider)MusicPlayer.CurrentPlaying.HitObjects[PlayField.CurrentHitObject];
+        slider.SliderPoints.Insert(0, slider.Position);
+        rectTransform = GetComponent<RectTransform>();
+        curves = new List<Bezier>();
+        List<Vector3> points = new List<Vector3>();
+        lineRenderer.widthCurve = AnimationCurve.Linear(0, 0.1f, 1, 0.1f);
+        lineRenderer.numCornerVertices = 10;
+        lineRenderer.numCapVertices = 10;
+        switch (slider.CurveType)
+        {
+            case CurveType.Bezier:
+                name = "Bezier Slider(Clone)";
+                int start = 0;
+                bool isMultipleCurves = false;
+                for (int i = 0; i < slider.SliderPoints.Count; i++)
+                {
+                    if (i != 0)
+                    {
+                        if (slider.SliderPoints[i] == slider.SliderPoints[i - 1])
+                        {
+                            isMultipleCurves = true;
+                            List<System.Numerics.Vector2> controlPoints = new List<System.Numerics.Vector2>();
+                            for (int j = start; j < i; j++) // split the SliderPoint list into separate curves(a bezier can be composed of multiple curves)
+                            {
+                                controlPoints.Add(Utilities.OsuPixelToScreenPoint(slider.SliderPoints[j]));
+                            }
+                            curves.Add(new Bezier(controlPoints, ACCURACY));
+                            start = i;
+                        }
+                    }
+                }
+                if (!isMultipleCurves)
+                {
+                    curves.Add(new Bezier(Utilities.OsuPixelsToScreenPoints(slider.SliderPoints), ACCURACY));
+                }
+                lineRenderer.positionCount = ACCURACY * curves.Count;
+                for (int i = 0; i < curves.Count; i++) // unpack all calculated points into the line renderer
+                {
+                    for (int j = 0; j < curves[i].Points.Count; j++)
+                    {
+                        Vector3 point = Camera.main.ScreenToWorldPoint(new Vector3(curves[i].Points[j].X, curves[i].Points[j].Y, 0));
+                        point = new Vector3(point.x, point.y, 0);
+                        points.Add(point);
+                    }
+                }
+                lineRenderer.SetPositions(points.ToArray());
+                break;
+            case CurveType.Catmull:
+                name = "Catmull Slider(Clone)";
+                Destroy(gameObject);
+                break;
+            case CurveType.Linear:
+                name = "Linear Slider(Clone)";
+                lineRenderer.positionCount = 2;
+                System.Numerics.Vector2 pointA2D = Utilities.OsuPixelToScreenPoint(new System.Numerics.Vector2(slider.SliderPoints[0].X, slider.SliderPoints[0].Y));
+                Vector3 pointA = Camera.main.ScreenToWorldPoint(new Vector3(pointA2D.X, pointA2D.Y, 0));
+                pointA = new Vector3(pointA.x, pointA.y, 0);
+                points.Add(pointA);
+                System.Numerics.Vector2 pointB2D = Utilities.OsuPixelToScreenPoint(new System.Numerics.Vector2(slider.SliderPoints[slider.SliderPoints.Count - 1].X, slider.SliderPoints[slider.SliderPoints.Count - 1].Y));
+                Vector3 pointB = Camera.main.ScreenToWorldPoint(new Vector3(pointB2D.X, pointB2D.Y, 0));
+                pointB = new Vector3(pointB.x, pointB.y, 0);
+                points.Add(pointB);
+                lineRenderer.SetPositions(points.ToArray());
+                break;
+            case CurveType.PerfectCurve:
+                name = "Circle Slider(Clone)";
+                Destroy(gameObject);
+                break;
+        }
+    }
+
+    private void Update()
+    {
+        
+    }
 }

@@ -9,7 +9,7 @@ public class Circle : MonoBehaviour
     public GameObject HitCircleOverlay;
     public GameObject Number;
     public GameObject ApproachCircle;
-    public HitCircle HitCircle { get; set; }
+    private HitCircle hitCircle { get; set; }
     private float ar;
     private float cs;
     private float hp;
@@ -42,13 +42,13 @@ public class Circle : MonoBehaviour
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
         canvasGroup.alpha = 0;
-        HitCircle = (HitCircle)MusicPlayer.CurrentPlaying.HitObjects[PlayField.CurrentHitObject];
+        hitCircle = (HitCircle)MusicPlayer.CurrentPlaying.HitObjects[PlayField.CurrentHitObject];
         ar = MusicPlayer.CurrentPlaying.DifficultySection.ApproachRate;
         cs = MusicPlayer.CurrentPlaying.DifficultySection.CircleSize;
         hp = MusicPlayer.CurrentPlaying.DifficultySection.HPDrainRate;
         od = MusicPlayer.CurrentPlaying.DifficultySection.OverallDifficulty;
-        spawnDelay = (int)PlayField.GameTimer.ElapsedMilliseconds - HitCircle.StartTime;
-        Vector2 screenPoint = Utilities.OsuPixelToScreenPoint(HitCircle.Position.X, HitCircle.Position.Y);
+        spawnDelay = (int)PlayField.GameTimer.ElapsedMilliseconds - hitCircle.StartTime;
+        Vector2 screenPoint = Utilities.OsuPixelToScreenPointUnity(hitCircle.Position);
         transform.position = Camera.main.ScreenToWorldPoint
         (
             new Vector3
@@ -82,13 +82,13 @@ public class Circle : MonoBehaviour
     private void Update()
     {
         elapsedTimeSinceSpawn += (int)(Time.deltaTime * 1000);
-        canvasGroup.alpha = Mathf.Clamp((float)(PlayField.GameTimer.ElapsedMilliseconds - (HitCircle.StartTime - preempt)) / fadeIn, 0, 1);
-        float approachCircleScaleMultiplier = 1 - Mathf.Clamp((float)(PlayField.GameTimer.ElapsedMilliseconds - (HitCircle.StartTime - preempt)) / preempt, 0, 1);
-        if (!(approachCircleScaleMultiplier == 0 && PlayField.GameTimer.ElapsedMilliseconds < HitCircle.StartTime - preempt))
+        canvasGroup.alpha = Mathf.Clamp((float)(PlayField.GameTimer.ElapsedMilliseconds - (hitCircle.StartTime - preempt)) / fadeIn, 0, 1);
+        float approachCircleScaleMultiplier = 1 - Mathf.Clamp((float)(PlayField.GameTimer.ElapsedMilliseconds - (hitCircle.StartTime - preempt)) / preempt, 0, 1);
+        if (!(approachCircleScaleMultiplier == 0 && PlayField.GameTimer.ElapsedMilliseconds < hitCircle.StartTime - preempt))
         {
             ApproachCircle.transform.localScale = originalApproachCircleScale * approachCircleScaleMultiplier + HitCircleTexture.transform.localScale;
         }
-        if (PlayField.GameTimer.ElapsedMilliseconds > HitCircle.StartTime)
+        if (PlayField.GameTimer.ElapsedMilliseconds > hitCircle.StartTime)
         {
             Destroy(gameObject);
         }

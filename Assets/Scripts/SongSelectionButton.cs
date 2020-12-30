@@ -33,6 +33,10 @@ public class SongSelectionButton : MonoBehaviour, ILeftClickable, IDeselectHandl
             {
                 MusicPlayer.PlaySelected(Song, 1.0f);
             }
+            else if (MusicPlayer.CurrentPlaying.MetadataSection.Title == Song.MetadataSection.Title && MusicPlayer.CurrentPlaying.MetadataSection.Version != Song.MetadataSection.Version)
+            {
+                MusicPlayer.CurrentPlaying = Song;
+            }
             isSelected = true;
         }
         else
