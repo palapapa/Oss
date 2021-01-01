@@ -39,10 +39,6 @@ public class Bezier
         {
             return controlPoints[0];
         }
-        if (controlPoints.Count == 2)
-        {
-            return System.Numerics.Vector2.Lerp(controlPoints[0], controlPoints[1], interpolation);
-        }
         else
         {
             System.Numerics.Vector2 p1 = GetPointByInterpolationIndependent(controlPoints.GetRange(0, controlPoints.Count - 1), interpolation);
@@ -59,7 +55,7 @@ public class Bezier
         }
         for (int i = 0; i < accuracy; i++)
         {
-            Points.Add(GetPointByInterpolation(1 / accuracy * i));
+            Points.Add(GetPointByInterpolation(1 / (float)accuracy * i));
         }
     }
 
@@ -73,14 +69,14 @@ public class Bezier
         interpolationToSegment.Add(0, 0);
         System.Numerics.Vector2 currentPoint, nextPoint;
         float result = 0;
-        for (int i = 0; i <= accuracy; i++)
+        for (int i = 0; i < accuracy; i++)
         {
-            currentPoint = GetPointByInterpolation(1 / accuracy * i);
-            nextPoint = GetPointByInterpolation(1 / accuracy * (i + 1));
+            currentPoint = GetPointByInterpolation(1 / (float)accuracy * i);
+            nextPoint = GetPointByInterpolation(1 / (float)accuracy * (i + 1));
             result += System.Numerics.Vector2.Distance(currentPoint, nextPoint);
             try
             {
-                interpolationToSegment.Add(1 / accuracy * (i + 1), result);
+                interpolationToSegment.Add(1 / (float)accuracy * (i + 1), result);
             }
             catch (ArgumentException)
             {
@@ -111,10 +107,6 @@ public class Bezier
         if (ControlPoints.Count == 1)
         {
             return ControlPoints[0];
-        }
-        if (ControlPoints.Count == 2)
-        {
-            return System.Numerics.Vector2.Lerp(ControlPoints[0], ControlPoints[1], interpolation);
         }
         else
         {
