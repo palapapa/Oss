@@ -29,11 +29,11 @@ public class Bezier
     {
         if (interpolation < 0 || interpolation > 1)
         {
-            throw new ArgumentException("\'interpolation\' value can only range from 0 to 1");
+            throw new ArgumentException("Value can only range from 0 to 1", nameof(interpolation));
         }
         if (controlPoints.Count == 0)
         {
-            throw new ArgumentException("\'controlPoints\' doesn't contain any points");
+            throw new ArgumentException("Doesn't contain any points", nameof(controlPoints));
         }
         if (controlPoints.Count == 1)
         {
@@ -51,7 +51,7 @@ public class Bezier
     {
         if (accuracy <= 0)
         {
-            throw new ArgumentException("\'accuracy\' must be larger than 0");
+            throw new ArgumentException("Must be larger than 0", nameof(accuracy));
         }
         for (int i = 0; i < accuracy; i++)
         {
@@ -63,7 +63,7 @@ public class Bezier
     {
         if (accuracy <= 0)
         {
-            throw new ArgumentException("\'accuracy\' must be larger than 0");
+            throw new ArgumentException("Must be larger than 0", nameof(accuracy));
         }
         interpolationToSegment.Clear();
         interpolationToSegment.Add(0, 0);
@@ -98,11 +98,11 @@ public class Bezier
     {
         if (interpolation < 0 || interpolation > 1)
         {
-            throw new ArgumentException("\'interpolation\' value can only range from 0 to 1");
+            throw new ArgumentException("Value can only range from 0 to 1", nameof(interpolation));
         }
         if (ControlPoints.Count == 0)
         {
-            throw new ArgumentException("\'controlPoints\' doesn't contain any points");
+            throw new ArgumentException("Doesn't contain any points", nameof(ControlPoints));
         }
         if (ControlPoints.Count == 1)
         {
@@ -125,11 +125,11 @@ public class Bezier
     {
         if (segments < 2)
         {
-            throw new ArgumentException("\'segments\' cannot be less than 2");
+            throw new ArgumentException("Cannot be less than 2", nameof(segments));
         }
         if (pointIndex > segments - 1 || pointIndex < 0)
         {
-            throw new ArgumentOutOfRangeException("\'pointIndex\' out of range");
+            throw new ArgumentOutOfRangeException("Out of range", nameof(pointIndex));
         }
         float unitLength = Length / segments;
         for (int i = 0; i < segments; i++)
@@ -204,7 +204,7 @@ public class Bezier
     {
         if (accuracy <= 0)
         {
-            throw new ArgumentException("\'accuracy\' must be larger than 0");
+            throw new ArgumentException("Must be larger than 0", nameof(accuracy));
         }
         Points.Clear();
         EvenlySpacedPoints.Clear();
@@ -222,7 +222,7 @@ public class Bezier
     {
         if (accuracy <= 0)
         {
-            throw new ArgumentException("\'accuracy\' must be larger than 0");
+            throw new ArgumentException("Must be larger than 0", nameof(accuracy));
         }
         ControlPoints = controlPoints;
         Points.Clear();

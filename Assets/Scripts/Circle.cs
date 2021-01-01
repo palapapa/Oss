@@ -9,7 +9,7 @@ public class Circle : MonoBehaviour
     public GameObject HitCircleOverlay;
     public GameObject Number;
     public GameObject ApproachCircle;
-    private HitCircle hitCircle { get; set; }
+    private HitCircle hitCircle;
     private float ar;
     private float cs;
     private float hp;

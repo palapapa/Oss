@@ -66,11 +66,11 @@ public static class Utilities
     {
         if (from > 1.0f || from < 0.0f || to > 1.0f || to < 0.0f)
         {
-            throw new ArgumentException("\"from\" and \"to\" can only range from 1.0 to 0.0");
+            throw new ArgumentException("Can only range from 1.0 to 0.0", nameof(from) + ", " + nameof(to));
         }
         if (time < 0.0f)
         {
-            throw new ArgumentException("\"speed\" cannot be less than 0.0");
+            throw new ArgumentException("Cannot be less than 0.0", nameof(time));
         }
         CanvasGroup canvasGroup = gameObject.GetComponent<CanvasGroup>();
         canvasGroup.alpha = from;
@@ -96,11 +96,11 @@ public static class Utilities
     {
         if (to > 1.0f || to < 0.0f)
         {
-            throw new ArgumentException("\"to\" can only range from 1.0 to 0.0");
+            throw new ArgumentException("Can only range from 1.0 to 0.0", nameof(to));
         }
         if (time < 0.0f)
         {
-            throw new ArgumentException("\"speed\" cannot be less than 0.0");
+            throw new ArgumentException("Cannot be less than 0.0", nameof(time));
         }
         CanvasGroup canvasGroup = gameObject.GetComponent<CanvasGroup>();
         float from = canvasGroup.alpha;
