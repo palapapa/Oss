@@ -6,6 +6,24 @@ using OsuParsers.Enums.Beatmaps;
 
 public class Slider : MonoBehaviour
 {
+    private float ar;
+    private float cs;
+    private float hp;
+    private float od;
+    /*
+                                             HitCircle.StartTime = hit/collect
+                    p r e e m p t            ↓
+      ├───────────────────────┬──────────────┤
+      0%        fadeIn          100% opacity
+    */
+    /// <summary>
+    /// The amount of time it takes for the hit object to completely fade in in milliseconds
+    /// </summary>
+    private int fadeIn;
+    /// <summary>
+    /// The amount of time before the circle's start time that the circle starts to fade in in milliseconds
+    /// </summary>
+    private int preempt;
     private OsuHitObjects.Slider slider;
     private List<Bezier> curves;
     private LineRenderer lineRenderer;
@@ -14,6 +32,20 @@ public class Slider : MonoBehaviour
 
     private void Awake()
     {
+        ar = MusicPlayer.CurrentPlaying.DifficultySection.ApproachRate;
+        cs = MusicPlayer.CurrentPlaying.DifficultySection.CircleSize;
+        hp = MusicPlayer.CurrentPlaying.DifficultySection.HPDrainRate;
+        od = MusicPlayer.CurrentPlaying.DifficultySection.OverallDifficulty;
+        if (ar <= 5)
+        {
+            fadeIn = (int)(800 + 400 * (5 - ar) / 5);
+            preempt = (int)(1200 + 600 * (5 - ar) / 5);
+        }
+        else
+        {
+            fadeIn = (int)(800 - 500 * (ar - 5) / 5);
+            preempt = (int)(1200 - 750 * (ar - 5) / 5);
+        }
         lineRenderer = GetComponent<LineRenderer>();
         slider = (OsuHitObjects.Slider)MusicPlayer.CurrentPlaying.HitObjects[PlayField.CurrentHitObject];
         slider.SliderPoints.Insert(0, slider.Position);
@@ -88,6 +120,35 @@ public class Slider : MonoBehaviour
 
     private void Update()
     {
-        
+        /*
+        Gradient gradient = new Gradient();
+        gradient.SetKeys
+        (
+            new GradientColorKey[]
+            {
+                new GradientColorKey(new Color(255, 255, 0), 1.0f)
+            },
+            new GradientAlphaKey[]
+            {
+                new GradientAlphaKey(Mathf.Clamp((float)(PlayField.GameTimer.ElapsedMilliseconds - (slider.StartTime - preempt)) / fadeIn, 0, 1), 1.0f)
+            }
+        );
+        lineRenderer.colorGradient = gradient;
+        */
+        lineRenderer.material.SetColor
+        (
+            "_Color",
+            new Color
+            (
+                lineRenderer.material.color.r,
+                lineRenderer.material.color.g,
+                lineRenderer.material.color.b,
+                Mathf.Clamp((float)(PlayField.GameTimer.ElapsedMilliseconds - (slider.StartTime - preempt)) / fadeIn, 0, 1)
+            )
+        );
+        if (PlayField.GameTimer.ElapsedMilliseconds > slider.EndTime)
+        {
+            Destroy(gameObject);
+        }
     }
 }
