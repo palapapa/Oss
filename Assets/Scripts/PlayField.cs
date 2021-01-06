@@ -52,7 +52,6 @@ public class PlayField : MonoBehaviour
 
     private IEnumerator StartGame()
     {
-        GameTimer.Start();
         CurrentHitObject = 0;
         foreach (HitObject hitObject in song.HitObjects)
         {
@@ -69,6 +68,7 @@ public class PlayField : MonoBehaviour
             CurrentHitObject++;
         }
         MusicPlayer.Play();
+        GameTimer.Start();
         while (GameTimer.ElapsedMilliseconds <= song.GeneralSection.Length)
         {
             yield return null;
