@@ -49,7 +49,7 @@ public class SongSelectionButton : MonoBehaviour, ILeftClickable, IDeselectHandl
     {
         SongSelection.Instance.SongName.text = Title.text;
         SongSelection.Instance.Mapper.text = "Mapped by " + Song.MetadataSection.Creator;
-        SongSelection.Instance.Length.text = "Length: " + TimeSpan.FromSeconds(Song.GeneralSection.Length).ToString(@"m\:ss");
+        SongSelection.Instance.Length.text = "Length: " + TimeSpan.FromMilliseconds(Song.GeneralSection.Length).ToString(@"m\:ss");
         SongSelection.Instance.Bpm.text = "BPM: " + (1 / Song.TimingPoints[0].BeatLength * 60000).ToString();
         SongSelection.Instance.Objects.text = "Objects: " + Song.HitObjects.Count.ToString();
         SongSelection.Instance.Circles.text = "Circles: " + Song.GeneralSection.CirclesCount.ToString();
