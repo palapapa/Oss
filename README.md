@@ -10,7 +10,7 @@ A student project dedicated to replicate osu! in Unity.
 For now, this game will only work in 16:9 and using any other aspect ratios is very likely to break the game.
 <br>
 # How to play
-1. Download the binaries in (Release)[https://github.com/palapapa/Oss/releases]
+1. Download the binaries in [Release](https://github.com/palapapa/Oss/releases)
 1. Extract and run Oss.exe.
 2. Click the Oss logo and click "Options".
 3. Click "Select Beatmap Location" and choose an osu! song folder(**Do not load too many songs at once as the game currently stores all beatmap data in RAM. Choosing an entire osu! Song folder will freeze your computer!**)
