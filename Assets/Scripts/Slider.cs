@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using OsuHitObjects = OsuParsers.Beatmaps.Objects;
@@ -47,6 +48,17 @@ public class Slider : MonoBehaviour
             preempt = (int)(1200 - 750 * (ar - 5) / 5);
         }
         lineRenderer = GetComponent<LineRenderer>();
+        lineRenderer.material.SetColor
+        (
+            "_Color",
+            new Color
+            (
+                lineRenderer.material.color.r,
+                lineRenderer.material.color.g,
+                lineRenderer.material.color.b,
+                0
+            )
+        );
         slider = (OsuHitObjects.Slider)MusicPlayer.CurrentPlaying.HitObjects[PlayField.CurrentHitObject];
         slider.SliderPoints.Insert(0, slider.Position);
         rectTransform = GetComponent<RectTransform>();
@@ -58,6 +70,7 @@ public class Slider : MonoBehaviour
         switch (slider.CurveType)
         {
             case CurveType.Bezier:
+            {
                 name = "Bezier Slider(Clone)";
                 int start = 0;
                 bool isMultipleCurves = false;
@@ -94,11 +107,16 @@ public class Slider : MonoBehaviour
                 }
                 lineRenderer.SetPositions(points.ToArray());
                 break;
+            }
             case CurveType.Catmull:
+            {
                 name = "Catmull Slider(Clone)";
+                Debug.Log("Catmull sliders are not supproted.");
                 Destroy(gameObject);
                 break;
+            }
             case CurveType.Linear:
+            {
                 name = "Linear Slider(Clone)";
                 lineRenderer.positionCount = 2;
                 System.Numerics.Vector2 pointA2D = Utilities.OsuPixelToScreenPoint(new System.Numerics.Vector2(slider.SliderPoints[0].X, slider.SliderPoints[0].Y));
@@ -111,10 +129,58 @@ public class Slider : MonoBehaviour
                 points.Add(pointB);
                 lineRenderer.SetPositions(points.ToArray());
                 break;
+            }
             case CurveType.PerfectCurve:
+            {
+                /*
                 name = "Circle Slider(Clone)";
-                Destroy(gameObject);
+                if (Utilities.IsCollinear(slider.SliderPoints[0], slider.SliderPoints[1], slider.SliderPoints[2]))
+                {
+                    lineRenderer.positionCount = 2;
+                    System.Numerics.Vector2 pointA2D = Utilities.OsuPixelToScreenPoint(new System.Numerics.Vector2(slider.SliderPoints[0].X, slider.SliderPoints[0].Y));
+                    Vector3 pointA = Camera.main.ScreenToWorldPoint(new Vector3(pointA2D.X, pointA2D.Y, 0));
+                    pointA = new Vector3(pointA.x, pointA.y, 0);
+                    points.Add(pointA);
+                    System.Numerics.Vector2 pointB2D = Utilities.OsuPixelToScreenPoint(new System.Numerics.Vector2(slider.SliderPoints[slider.SliderPoints.Count - 1].X, slider.SliderPoints[slider.SliderPoints.Count - 1].Y));
+                    Vector3 pointB = Camera.main.ScreenToWorldPoint(new Vector3(pointB2D.X, pointB2D.Y, 0));
+                    pointB = new Vector3(pointB.x, pointB.y, 0);
+                    points.Add(pointB);
+                    lineRenderer.SetPositions(points.ToArray());
+                    break;
+                }
+                System.Numerics.Vector2 center = Utilities.OsuPixelToScreenPoint(Utilities.CalculateCircleCenter(slider.SliderPoints[0], slider.SliderPoints[1], slider.SliderPoints[2]));
+                float radius = System.Numerics.Vector2.Distance(center, Utilities.OsuPixelToScreenPoint(slider.SliderPoints[0]));
+                Debug.Log($"{center}, r={radius}, A={Utilities.OsuPixelToScreenPoint(slider.SliderPoints[0])}, B={Utilities.OsuPixelToScreenPoint(slider.SliderPoints[1])}, C={Utilities.OsuPixelToScreenPoint(slider.SliderPoints[2])}");
+                float angleCcwAB = Utilities.CalculateOrientedAngle(slider.SliderPoints[0], slider.SliderPoints[1]);
+                if (angleCcwAB < 0)
+                {
+                    angleCcwAB += 2 * (float)Math.PI;
+                }
+                float angleCcwAC = Utilities.CalculateOrientedAngle(slider.SliderPoints[0], slider.SliderPoints[2]);
+                if (angleCcwAC < 0)
+                {
+                    angleCcwAC += 2 * (float)Math.PI;
+                }
+                if (angleCcwAB > angleCcwAC)
+                {
+                    angleCcwAC -= 2 * (float)Math.PI;
+                }
+                float segmentAngle = angleCcwAC / ACCURACY;
+                float currentAngle = Mathf.Atan2(slider.SliderPoints[0].Y, slider.SliderPoints[0].X);
+                lineRenderer.positionCount = ACCURACY;
+                for (int i = 0; i < ACCURACY; i++)
+                {
+                    System.Numerics.Vector2 point2D = new System.Numerics.Vector2(center.X + radius * Mathf.Cos(currentAngle), center.Y + radius * Mathf.Sin(currentAngle));
+                    Vector3 point = Camera.main.ScreenToWorldPoint(new Vector3(point2D.X, point2D.Y, 0));
+                    point = new Vector3(point.x, point.y, 0);
+                    points.Add(point);
+                    currentAngle += segmentAngle;
+                }
+                lineRenderer.SetPositions(points.ToArray());
+                */
+                Destroy(gameObject); // This part refuses to work. Even though the coordinates are all correct, some circle centers will still fail the calculation and return NaN etc.
                 break;
+            }
         }
     }
 

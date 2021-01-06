@@ -12,7 +12,7 @@ public class Song : Beatmap
     public Song() : base()
     {
         AudioClip = null;
-        Background = Texture2D.whiteTexture;
+        Background = new Texture2D(0, 0);
         for (int x = 0; x < Background.width; x++)
         {
             for (int y = 0; y < Background.height; y++)

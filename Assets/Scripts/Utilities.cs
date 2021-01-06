@@ -189,4 +189,28 @@ public static class Utilities
         };
         return result;
     }
+
+    public static System.Numerics.Vector2 CalculateCircleCenter(System.Numerics.Vector2 A, System.Numerics.Vector2 B, System.Numerics.Vector2 C)
+    {
+        float YDelta_a = B.Y - A.Y;
+        float XDelta_a = B.X - A.X;
+        float YDelta_b = C.Y - B.Y;
+        float XDelta_b = C.X - B.X;
+        System.Numerics.Vector2 center = new System.Numerics.Vector2();
+        float aSlope = YDelta_a / XDelta_a;
+        float bSlope = YDelta_b / XDelta_b;
+        center.X = (aSlope * bSlope * (A.Y - C.Y) + bSlope * (A.X + B.X) - aSlope * (B.X + C.X)) / (2 * (bSlope - aSlope));
+        center.Y = -1 * (center.X - (A.X + B.X) / 2) / aSlope + (A.Y + B.Y) / 2;
+        return center;
+    }
+
+    public static float CalculateOrientedAngle(System.Numerics.Vector2 from, System.Numerics.Vector2 to)
+    {
+        return (float)Math.Atan2(from.X * to.Y - to.X * from.Y, from.X * to.X + from.Y * to.Y);
+    }
+
+    public static bool IsCollinear(System.Numerics.Vector2 a, System.Numerics.Vector2 b, System.Numerics.Vector2 c)
+    {
+        return (c.Y - b.Y) * (b.X - a.X) == (b.Y - a.Y) * (c.X - b.X);
+    }
 }

@@ -22,6 +22,8 @@ public class SongSelection : MonoBehaviour
     public Text Hp;
     public Text Stars;
     public static SongSelection Instance;
+    private Image background;
+
     public void UpdateSongList()
     {
         for (int i = Content.transform.childCount - 1; i >= 0; i--)
@@ -44,8 +46,9 @@ public class SongSelection : MonoBehaviour
         }
     }
 
-    void Start()
+    private void Start()
     {
         Instance = this;
+        background = Background.GetComponent<Image>();
     }
 }
