@@ -140,6 +140,16 @@ public static class Utilities
         return new System.Numerics.Vector2(x * Screen.width / 512, y * Screen.height / 384);
     }
 
+    public static float OsuPixelToScreenPointX(float x)
+    {
+        return x * Screen.width / 512;
+    }
+
+    public static float OsuPixelToScreenPointY(float y)
+    {
+        return y * Screen.height / 384;
+    }
+
     public static Vector2 OsuPixelToScreenPointUnity(System.Numerics.Vector2 osuPixel)
     {
         return new Vector2(osuPixel.X * Screen.width / 512, osuPixel.Y * Screen.height / 384);
@@ -192,15 +202,57 @@ public static class Utilities
 
     public static System.Numerics.Vector2 CalculateCircleCenter(System.Numerics.Vector2 A, System.Numerics.Vector2 B, System.Numerics.Vector2 C)
     {
-        float YDelta_a = B.Y - A.Y;
-        float XDelta_a = B.X - A.X;
-        float YDelta_b = C.Y - B.Y;
-        float XDelta_b = C.X - B.X;
-        System.Numerics.Vector2 center = new System.Numerics.Vector2();
-        float aSlope = YDelta_a / XDelta_a;
-        float bSlope = YDelta_b / XDelta_b;
-        center.X = (aSlope * bSlope * (A.Y - C.Y) + bSlope * (A.X + B.X) - aSlope * (B.X + C.X)) / (2 * (bSlope - aSlope));
-        center.Y = -1 * (center.X - (A.X + B.X) / 2) / aSlope + (A.Y + B.Y) / 2;
+        float yDeltaA = B.Y - A.Y;
+        float xDeltaA = B.X - A.X;
+        float yDeltaB = C.Y - B.Y;
+        float xDeltaB = C.X - B.X;
+        System.Numerics.Vector2 center = new System.Numerics.Vector2(0, 0);
+
+        float aSlope = yDeltaA / xDeltaA;
+        float bSlope = yDeltaB / xDeltaB;
+
+        System.Numerics.Vector2 ABMid = new System.Numerics.Vector2((A.X + B.X) / 2, (A.Y + B.Y) / 2);
+        System.Numerics.Vector2 BCMid = new System.Numerics.Vector2((B.X + C.X) / 2, (B.Y + C.Y) / 2);
+
+        if (yDeltaA == 0) // aSlope == 0
+        {
+            center.X = ABMid.X;
+            if (xDeltaB == 0) // bSlope == INFINITY
+            {
+                center.Y = BCMid.Y;
+            }
+            else
+            {
+                center.Y = BCMid.Y + (BCMid.X - center.X) / bSlope;
+            }
+        }
+        else if (yDeltaB == 0) // bSlope == 0
+        {
+            center.X = BCMid.X;
+            if (xDeltaA == 0) // aSlope == INFINITY
+            {
+                center.Y = ABMid.Y;
+            }
+            else
+            {
+                center.Y = ABMid.Y + (ABMid.X - center.X) / aSlope;
+            }
+        }
+        else if (xDeltaA == 0) // aSlope == INFINITY
+        {
+            center.Y = ABMid.Y;
+            center.X = bSlope * (BCMid.Y - center.Y) + BCMid.X;
+        }
+        else if (xDeltaB == 0) // bSlope == INFINITY
+        {
+            center.Y = BCMid.Y;
+            center.X = aSlope * (ABMid.Y - center.Y) + ABMid.X;
+        }
+        else
+        {
+            center.X = (aSlope * bSlope * (ABMid.Y - BCMid.Y) - aSlope * BCMid.X + bSlope * ABMid.X) / (bSlope - aSlope);
+            center.Y = ABMid.Y - (center.X - ABMid.X) / aSlope;
+        }
         return center;
     }
 
@@ -209,8 +261,19 @@ public static class Utilities
         return (float)Math.Atan2(from.X * to.Y - to.X * from.Y, from.X * to.X + from.Y * to.Y);
     }
 
+    public static float CalculateOrientedAngle(float x1, float y1, float x2, float y2)
+    {
+        return (float)Math.Atan2(x1 * y2 - y1 * x2, x1 * x2 + y1 * y2);
+    }
+
     public static bool IsCollinear(System.Numerics.Vector2 a, System.Numerics.Vector2 b, System.Numerics.Vector2 c)
     {
         return (c.Y - b.Y) * (b.X - a.X) == (b.Y - a.Y) * (c.X - b.X);
     }
+
+    public static bool IsCollinear(System.Numerics.Vector2 a, System.Numerics.Vector2 b, System.Numerics.Vector2 c, float slopeLeniency)
+    {
+        return Math.Abs((a.Y - b.Y) / (a.X - b.X) - (b.Y - c.Y) / (b.X - c.X)) <= slopeLeniency;
+    }
+    
 }

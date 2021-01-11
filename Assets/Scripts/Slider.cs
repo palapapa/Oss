@@ -65,8 +65,8 @@ public class Slider : MonoBehaviour
         curves = new List<Bezier>();
         List<Vector3> points = new List<Vector3>();
         lineRenderer.widthCurve = AnimationCurve.Linear(0, 0.1f, 1, 0.1f);
-        lineRenderer.numCornerVertices = 10;
-        lineRenderer.numCapVertices = 10;
+        lineRenderer.numCornerVertices = 32;
+        lineRenderer.numCapVertices = 32;
         switch (slider.CurveType)
         {
             case CurveType.Bezier:
@@ -132,9 +132,9 @@ public class Slider : MonoBehaviour
             }
             case CurveType.PerfectCurve:
             {
-                /*
+                
                 name = "Circle Slider(Clone)";
-                if (Utilities.IsCollinear(slider.SliderPoints[0], slider.SliderPoints[1], slider.SliderPoints[2]))
+                if (Utilities.IsCollinear(Utilities.OsuPixelToScreenPoint(slider.SliderPoints[0]), Utilities.OsuPixelToScreenPoint(slider.SliderPoints[1]), Utilities.OsuPixelToScreenPoint(slider.SliderPoints[2])))
                 {
                     lineRenderer.positionCount = 2;
                     System.Numerics.Vector2 pointA2D = Utilities.OsuPixelToScreenPoint(new System.Numerics.Vector2(slider.SliderPoints[0].X, slider.SliderPoints[0].Y));
@@ -148,37 +148,38 @@ public class Slider : MonoBehaviour
                     lineRenderer.SetPositions(points.ToArray());
                     break;
                 }
-                System.Numerics.Vector2 center = Utilities.OsuPixelToScreenPoint(Utilities.CalculateCircleCenter(slider.SliderPoints[0], slider.SliderPoints[1], slider.SliderPoints[2]));
-                float radius = System.Numerics.Vector2.Distance(center, Utilities.OsuPixelToScreenPoint(slider.SliderPoints[0]));
-                Debug.Log($"{center}, r={radius}, A={Utilities.OsuPixelToScreenPoint(slider.SliderPoints[0])}, B={Utilities.OsuPixelToScreenPoint(slider.SliderPoints[1])}, C={Utilities.OsuPixelToScreenPoint(slider.SliderPoints[2])}");
-                float angleCcwAB = Utilities.CalculateOrientedAngle(slider.SliderPoints[0], slider.SliderPoints[1]);
-                if (angleCcwAB < 0)
+                System.Numerics.Vector2 center = Utilities.CalculateCircleCenter(slider.SliderPoints[0], slider.SliderPoints[1], slider.SliderPoints[2]);
+                // Debug.Log($"{center:F6}, r={radius:F6}, A={Utilities.OsuPixelToScreenPoint(slider.SliderPoints[0]):F6}, B={Utilities.OsuPixelToScreenPoint(slider.SliderPoints[1]):F6}, C={Utilities.OsuPixelToScreenPoint(slider.SliderPoints[2]):F6}");
+                System.Numerics.Vector2 OA = Utilities.OsuPixelToScreenPoint(new System.Numerics.Vector2(slider.SliderPoints[0].X - center.X, slider.SliderPoints[0].Y - center.Y));
+                System.Numerics.Vector2 OB = Utilities.OsuPixelToScreenPoint(new System.Numerics.Vector2(slider.SliderPoints[1].X - center.X, slider.SliderPoints[1].Y - center.Y));
+                System.Numerics.Vector2 OC = Utilities.OsuPixelToScreenPoint(new System.Numerics.Vector2(slider.SliderPoints[2].X - center.X, slider.SliderPoints[2].Y - center.Y));
+                float radius = OA.Length();
+                float angleCcwOaOb = Utilities.CalculateOrientedAngle(OA, OB);
+                if (angleCcwOaOb < 0)
                 {
-                    angleCcwAB += 2 * (float)Math.PI;
+                    angleCcwOaOb += 2 * (float)Math.PI;
                 }
-                float angleCcwAC = Utilities.CalculateOrientedAngle(slider.SliderPoints[0], slider.SliderPoints[2]);
-                if (angleCcwAC < 0)
+                float angleCcwOaOc = Utilities.CalculateOrientedAngle(OA, OC);
+                if (angleCcwOaOc < 0)
                 {
-                    angleCcwAC += 2 * (float)Math.PI;
+                    angleCcwOaOc += 2 * (float)Math.PI;
                 }
-                if (angleCcwAB > angleCcwAC)
+                if (angleCcwOaOb > angleCcwOaOc)
                 {
-                    angleCcwAC -= 2 * (float)Math.PI;
+                    angleCcwOaOc -= 2 * (float)Math.PI;
                 }
-                float segmentAngle = angleCcwAC / ACCURACY;
-                float currentAngle = Mathf.Atan2(slider.SliderPoints[0].Y, slider.SliderPoints[0].X);
+                float segmentAngle = angleCcwOaOc / ACCURACY;
+                float currentAngle = Mathf.Atan2(OA.Y, OA.X);
                 lineRenderer.positionCount = ACCURACY;
                 for (int i = 0; i < ACCURACY; i++)
                 {
-                    System.Numerics.Vector2 point2D = new System.Numerics.Vector2(center.X + radius * Mathf.Cos(currentAngle), center.Y + radius * Mathf.Sin(currentAngle));
+                    System.Numerics.Vector2 point2D = new System.Numerics.Vector2(Utilities.OsuPixelToScreenPointX(center.X) + radius * Mathf.Cos(currentAngle), Utilities.OsuPixelToScreenPointY(center.Y) + radius * Mathf.Sin(currentAngle));
                     Vector3 point = Camera.main.ScreenToWorldPoint(new Vector3(point2D.X, point2D.Y, 0));
                     point = new Vector3(point.x, point.y, 0);
                     points.Add(point);
                     currentAngle += segmentAngle;
                 }
                 lineRenderer.SetPositions(points.ToArray());
-                */
-                Destroy(gameObject); // This part refuses to work. Even though the coordinates are all correct, some circle centers will still fail the calculation and return NaN etc.
                 break;
             }
         }
@@ -186,21 +187,6 @@ public class Slider : MonoBehaviour
 
     private void Update()
     {
-        /*
-        Gradient gradient = new Gradient();
-        gradient.SetKeys
-        (
-            new GradientColorKey[]
-            {
-                new GradientColorKey(new Color(255, 255, 0), 1.0f)
-            },
-            new GradientAlphaKey[]
-            {
-                new GradientAlphaKey(Mathf.Clamp((float)(PlayField.GameTimer.ElapsedMilliseconds - (slider.StartTime - preempt)) / fadeIn, 0, 1), 1.0f)
-            }
-        );
-        lineRenderer.colorGradient = gradient;
-        */
         lineRenderer.material.SetColor
         (
             "_Color",
