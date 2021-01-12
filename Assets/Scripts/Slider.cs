@@ -100,7 +100,7 @@ public class Slider : MonoBehaviour
                 {
                     for (int j = 0; j < curves[i].Points.Count; j++)
                     {
-                        Vector3 point = Camera.main.ScreenToWorldPoint(new Vector3(curves[i].Points[j].X, curves[i].Points[j].Y, 0));
+                        Vector3 point = Camera.main.ScreenToWorldPoint(new Vector3(curves[i].Points[j].X, Screen.height - curves[i].Points[j].Y, 0));
                         point = new Vector3(point.x, point.y, 0);
                         points.Add(point);
                     }
@@ -111,7 +111,7 @@ public class Slider : MonoBehaviour
             case CurveType.Catmull:
             {
                 name = "Catmull Slider(Clone)";
-                Debug.Log("Catmull sliders are not supproted.");
+                Debug.LogWarning("Catmull sliders are not supproted.");
                 Destroy(gameObject);
                 break;
             }
@@ -120,11 +120,11 @@ public class Slider : MonoBehaviour
                 name = "Linear Slider(Clone)";
                 lineRenderer.positionCount = 2;
                 System.Numerics.Vector2 pointA2D = Utilities.OsuPixelToScreenPoint(new System.Numerics.Vector2(slider.SliderPoints[0].X, slider.SliderPoints[0].Y));
-                Vector3 pointA = Camera.main.ScreenToWorldPoint(new Vector3(pointA2D.X, pointA2D.Y, 0));
+                Vector3 pointA = Camera.main.ScreenToWorldPoint(new Vector3(pointA2D.X, Screen.height - pointA2D.Y, 0));
                 pointA = new Vector3(pointA.x, pointA.y, 0);
                 points.Add(pointA);
                 System.Numerics.Vector2 pointB2D = Utilities.OsuPixelToScreenPoint(new System.Numerics.Vector2(slider.SliderPoints[slider.SliderPoints.Count - 1].X, slider.SliderPoints[slider.SliderPoints.Count - 1].Y));
-                Vector3 pointB = Camera.main.ScreenToWorldPoint(new Vector3(pointB2D.X, pointB2D.Y, 0));
+                Vector3 pointB = Camera.main.ScreenToWorldPoint(new Vector3(pointB2D.X, Screen.height - pointB2D.Y, 0));
                 pointB = new Vector3(pointB.x, pointB.y, 0);
                 points.Add(pointB);
                 lineRenderer.SetPositions(points.ToArray());
@@ -138,11 +138,11 @@ public class Slider : MonoBehaviour
                 {
                     lineRenderer.positionCount = 2;
                     System.Numerics.Vector2 pointA2D = Utilities.OsuPixelToScreenPoint(new System.Numerics.Vector2(slider.SliderPoints[0].X, slider.SliderPoints[0].Y));
-                    Vector3 pointA = Camera.main.ScreenToWorldPoint(new Vector3(pointA2D.X, pointA2D.Y, 0));
+                    Vector3 pointA = Camera.main.ScreenToWorldPoint(new Vector3(pointA2D.X, Screen.height - pointA2D.Y, 0));
                     pointA = new Vector3(pointA.x, pointA.y, 0);
                     points.Add(pointA);
                     System.Numerics.Vector2 pointB2D = Utilities.OsuPixelToScreenPoint(new System.Numerics.Vector2(slider.SliderPoints[slider.SliderPoints.Count - 1].X, slider.SliderPoints[slider.SliderPoints.Count - 1].Y));
-                    Vector3 pointB = Camera.main.ScreenToWorldPoint(new Vector3(pointB2D.X, pointB2D.Y, 0));
+                    Vector3 pointB = Camera.main.ScreenToWorldPoint(new Vector3(pointB2D.X, Screen.height - pointB2D.Y, 0));
                     pointB = new Vector3(pointB.x, pointB.y, 0);
                     points.Add(pointB);
                     lineRenderer.SetPositions(points.ToArray());
@@ -174,7 +174,7 @@ public class Slider : MonoBehaviour
                 for (int i = 0; i < ACCURACY; i++)
                 {
                     System.Numerics.Vector2 point2D = new System.Numerics.Vector2(Utilities.OsuPixelToScreenPointX(center.X) + radius * Mathf.Cos(currentAngle), Utilities.OsuPixelToScreenPointY(center.Y) + radius * Mathf.Sin(currentAngle));
-                    Vector3 point = Camera.main.ScreenToWorldPoint(new Vector3(point2D.X, point2D.Y, 0));
+                    Vector3 point = Camera.main.ScreenToWorldPoint(new Vector3(point2D.X, Screen.height - point2D.Y, 0));
                     point = new Vector3(point.x, point.y, 0);
                     points.Add(point);
                     currentAngle += segmentAngle;

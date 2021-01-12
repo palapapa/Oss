@@ -54,7 +54,7 @@ public class Circle : MonoBehaviour
             new Vector3
             (
                 screenPoint.x,
-                screenPoint.y
+                Screen.height - screenPoint.y // Unity treats the bottom left as origin wtf
             )
         );
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
