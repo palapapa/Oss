@@ -132,12 +132,12 @@ public static class Utilities
 
     public static System.Numerics.Vector2 OsuPixelToScreenPoint(System.Numerics.Vector2 osuPixel)
     {
-        return new System.Numerics.Vector2(osuPixel.X * Screen.width / 512, osuPixel.Y * Screen.height / 384);
+        return new System.Numerics.Vector2(OsuPixelToScreenPointX(osuPixel.X), OsuPixelToScreenPointY(osuPixel.Y));
     }
 
     public static System.Numerics.Vector2 OsuPixelToScreenPoint(float x, float y)
     {
-        return new System.Numerics.Vector2(x * Screen.width / 512, y * Screen.height / 384);
+        return new System.Numerics.Vector2(OsuPixelToScreenPointX(x), OsuPixelToScreenPointY(y));
     }
 
     public static float OsuPixelToScreenPointX(float x)
@@ -152,7 +152,7 @@ public static class Utilities
 
     public static Vector2 OsuPixelToScreenPointUnity(System.Numerics.Vector2 osuPixel)
     {
-        return new Vector2(osuPixel.X * Screen.width / 512, osuPixel.Y * Screen.height / 384);
+        return new Vector2(OsuPixelToScreenPointX(osuPixel.X), OsuPixelToScreenPointY(osuPixel.Y));
     }
 
     public static List<System.Numerics.Vector2> OsuPixelsToScreenPoints(List<System.Numerics.Vector2> osuPixels)
@@ -160,7 +160,7 @@ public static class Utilities
         List<System.Numerics.Vector2> result = new List<System.Numerics.Vector2>();
         foreach (System.Numerics.Vector2 coordinate in osuPixels)
         {
-            result.Add(new System.Numerics.Vector2(coordinate.X * Screen.width / 512, coordinate.Y * Screen.height / 384));
+            result.Add(new System.Numerics.Vector2(OsuPixelToScreenPointX(coordinate.X), OsuPixelToScreenPointY(coordinate.Y)));
         }
         return result;
     }

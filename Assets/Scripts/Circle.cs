@@ -96,7 +96,7 @@ public class Circle : MonoBehaviour
 
     private void SetCircleSize(float cs)
     {
-        float targetSize = (float)((Screen.width / 16) * (1 - (0.7 * (cs - 5) / 5))); // target circle size in pixels
+        float targetSize = (float)((3840 / 16) * (1 - (0.7 * (cs - 5) / 5))); // target circle size in pixels
         float currentSize = rectTransform.rect.width * transform.localScale.x;
         float targetScale = targetSize / currentSize;
         transform.localScale *= targetScale;
