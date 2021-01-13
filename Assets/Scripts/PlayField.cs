@@ -85,6 +85,7 @@ public class PlayField : MonoBehaviour
             Destroy(t.gameObject);
         }
         GameTimer.Reset();
+        StartCoroutine(SwitchToSongSelection());
         UnityEngine.Debug.Log("Game stopped");
     }
 }
