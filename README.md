@@ -1,5 +1,6 @@
 # Oss
 [![GitHub all releases](https://img.shields.io/github/downloads/palapapa/Oss/total?style=for-the-badge)](https://github.com/palapapa/Oss/releases)
+[![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/palapapa/Oss?include_prereleases&style=for-the-badge)](https://github.com/palapapa/Oss/releases)
 [![GitHub issues](https://img.shields.io/github/issues-raw/palapapa/Oss?color=red&style=for-the-badge)](https://github.com/palapapa/Oss/issues)
 [![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/palapapa/Oss?style=for-the-badge)](https://www.codefactor.io/repository/github/palapapa/oss)
 [![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability-percentage/palapapa/Oss?style=for-the-badge)](https://codeclimate.com/github/palapapa/Oss)
