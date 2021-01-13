@@ -10,6 +10,7 @@ public class SongSelection : MonoBehaviour
     public GameObject SongButton;
     public Text SongName;
     public Text Mapper;
+    public Text Artist;
     public Text Length;
     public Text Bpm;
     public Text Objects;
