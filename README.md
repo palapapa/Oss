@@ -9,7 +9,7 @@ A student project dedicated to replicate osu! in Unity.
 <br>
 For now, this game will only work in 16:9 and using any other aspect ratios is very likely to break the game.
 <br>
-# How to play
+# How To Play
 1. Download the binaries in [Release](https://github.com/palapapa/Oss/releases)
 1. Extract and run Oss.exe.
 2. Click the Oss logo and click "Options".
