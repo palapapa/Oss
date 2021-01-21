@@ -4,19 +4,37 @@ using UnityEngine;
 using System.Linq;
 using System;
 
-public class CirclePath
+public class CirclePath : SliderPath
 {
+    private System.Numerics.Vector2 start;
+    private System.Numerics.Vector2 middle;
+    private System.Numerics.Vector2 end;
     /// <summary>
-    /// Evenly spaced points on the arc
+    /// The angle of the arc.
     /// </summary>
-    public List<System.Numerics.Vector2> Points { get; private set; } = new List<System.Numerics.Vector2>();
+    private float angle;
 
     public CirclePath(System.Numerics.Vector2 start, System.Numerics.Vector2 middle, System.Numerics.Vector2 end, int accuracy)
     {
+        this.start = start;
+        this.middle = middle;
+        this.end = end;
+        Points = CalculatePoints(start, middle, end, accuracy);
+    }
+
+    public override void CalculateEvenlySpacedPoints(int segments)
+    {
+        EvenlySpacedPoints.Clear();
+        EvenlySpacedPoints = CalculatePoints(start, middle, end, segments);
+    }
+
+    private List<System.Numerics.Vector2> CalculatePoints(System.Numerics.Vector2 start, System.Numerics.Vector2 middle, System.Numerics.Vector2 end, int accuracy)
+    {
+        List<System.Numerics.Vector2> result = new List<System.Numerics.Vector2>();
         if (Utilities.IsCollinear(start, middle, end))
         {
-            Points.Add(start);
-            Points.Add(middle);
+            result.Add(start);
+            result.Add(middle);
         }
         else
         {
@@ -42,11 +60,13 @@ public class CirclePath
             }
             float segmentAngle = angleCcwOaOc / accuracy;
             float currentAngle = Mathf.Atan2(OA.Y, OA.X);
+            angle = Math.Abs(angleCcwOaOc - currentAngle);
             for (int i = 0; i < accuracy; i++)
             {
-                Points.Add(new System.Numerics.Vector2(center.X + radius * Mathf.Cos(currentAngle), center.Y + radius * Mathf.Sin(currentAngle)));
+                result.Add(new System.Numerics.Vector2(center.X + radius * Mathf.Cos(currentAngle), center.Y + radius * Mathf.Sin(currentAngle)));
                 currentAngle += segmentAngle;
             }
         }
+        return result;
     }
 }

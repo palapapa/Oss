@@ -4,18 +4,13 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-public class BezierPath
+public class BezierPath : SliderPath
 {
     public List<System.Numerics.Vector2> ControlPoints { get; private set; } = new List<System.Numerics.Vector2>();
-    public List<System.Numerics.Vector2> Points { get; private set; } = new List<System.Numerics.Vector2>();
-    /// <summary>
-    /// This property has no elements until <see cref="CalculateEvenlySpacedPoints(int)"/> is called
-    /// </summary>
-    public List<System.Numerics.Vector2> EvenlySpacedPoints { get; private set; } = new List<System.Numerics.Vector2>();
     public float Length { get; private set; }
     private int segments;
     /// <summary>
-    /// Correspond each interpolation value to a ratio(0 ~ 1) of the total length of the curve
+    /// Correspond each interpolation value to a ratio(0 ~ 1) of the total length of the curve.
     /// </summary>
     private Dictionary<float, float> interpolationToSegment = new Dictionary<float, float>();
     public BezierPath(List<System.Numerics.Vector2> controlPoints, int accuracy)
@@ -82,9 +77,9 @@ public class BezierPath
     }
 
     /// <summary>
-    /// Get a point on the curve using interpolation
+    /// Get a point on the curve using interpolation.
     /// </summary>
-    /// <param name="interpolation">A value from 0 to 1</param>
+    /// <param name="interpolation">A value from 0 to 1.</param>
     /// <returns></returns>
     public System.Numerics.Vector2 GetPointByInterpolation(float interpolation)
     {
@@ -111,8 +106,8 @@ public class BezierPath
     /// <summary>
     /// Calculate <paramref name="segments"/> number of evenly spaced points on the curve, then get the <paramref name="pointIndex"/>th point. Does not update propreties.
     /// </summary>
-    /// <param name="segments">The number of evenly spaced points(including start and end) to be calculated</param>
-    /// <param name="pointIndex">The index of the calculated point to return</param>
+    /// <param name="segments">The number of evenly spaced points(including start and end) to be calculated.</param>
+    /// <param name="pointIndex">The index of the calculated point to return.</param>
     public System.Numerics.Vector2 GetPointBySegment(int segments, int pointIndex)
     {
         if (segments < 2)
@@ -151,12 +146,12 @@ public class BezierPath
     }
 
     /// <summary>
-    /// Calculate <paramref name="segments"/> number of evenly spaced points on the curve and updates <see cref="EvenlySpacedPoints"/>
+    /// Calculate <paramref name="segments"/> number of evenly spaced points on the curve and updates <see cref="EvenlySpacedPoints"/>.
     /// <br/>
-    /// <paramref name="segments"/> will be cached and will be used to recalculate <see cref="EvenlySpacedPoints"/> when <see cref="UpdateAccuracy(int)"/> or <see cref="RecalculateCurve(List{System.Numerics.Vector2}, int)"/> is called
+    /// <paramref name="segments"/> will be cached and will be used to recalculate <see cref="EvenlySpacedPoints"/> when <see cref="UpdateAccuracy(int)"/> or <see cref="RecalculateCurve(List{System.Numerics.Vector2}, int)"/> is called.
     /// </summary>
-    /// <param name="segments">The number of evenly spaced points(including start and end) to be calculated</param>
-    public void CalculateEvenlySpacedPoints(int segments)
+    /// <param name="segments">The number of evenly spaced points(including start and end) to be calculated.</param>
+    public override void CalculateEvenlySpacedPoints(int segments)
     {
         if (segments < 2)
         {
@@ -189,9 +184,9 @@ public class BezierPath
     }
 
     /// <summary>
-    /// Recalculate the curve using the new resolution and update <see cref="ControlPoints"/>, <see cref="Points"/>, and <see cref="EvenlySpacedPoints"/>
+    /// Recalculate the curve using the new resolution and update <see cref="ControlPoints"/>, <see cref="Points"/>, and <see cref="EvenlySpacedPoints"/>.
     /// </summary>
-    /// <param name="accuracy">The number of points on the curve to be calculated including start and end</param>
+    /// <param name="accuracy">The number of points on the curve to be calculated including start and end.</param>
     public void UpdateAccuracy(int accuracy)
     {
         if (accuracy <= 0)
@@ -206,10 +201,10 @@ public class BezierPath
     }
 
     /// <summary>
-    /// Recalculate the curve and update <see cref="ControlPoints"/>, <see cref="Points"/>, and <see cref="EvenlySpacedPoints"/>
+    /// Recalculate the curve and update <see cref="ControlPoints"/>, <see cref="Points"/>, and <see cref="EvenlySpacedPoints"/>.
     /// </summary>
-    /// <param name="controlPoints">The control points defining the curve</param>
-    /// <param name="accuracy">The number of points on the curve to be calculated including start and end</param>
+    /// <param name="controlPoints">The control points defining the curve.</param>
+    /// <param name="accuracy">The number of points on the curve to be calculated including start and end.</param>
     public void RecalculateCurve(List<System.Numerics.Vector2> controlPoints, int accuracy)
     {
         if (accuracy <= 0)
