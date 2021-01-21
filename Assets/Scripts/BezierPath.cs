@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System;
 using System.Linq;
-using System.Numerics;
 using UnityEngine;
 
-public class Bezier
+public class BezierPath
 {
     public List<System.Numerics.Vector2> ControlPoints { get; private set; } = new List<System.Numerics.Vector2>();
     public List<System.Numerics.Vector2> Points { get; private set; } = new List<System.Numerics.Vector2>();
@@ -19,7 +18,7 @@ public class Bezier
     /// Correspond each interpolation value to a ratio(0 ~ 1) of the total length of the curve
     /// </summary>
     private Dictionary<float, float> interpolationToSegment = new Dictionary<float, float>();
-    public Bezier(List<System.Numerics.Vector2> controlPoints, int accuracy)
+    public BezierPath(List<System.Numerics.Vector2> controlPoints, int accuracy)
     {
         ControlPoints = controlPoints;
         RecalculateCurve(controlPoints, accuracy);
@@ -74,14 +73,7 @@ public class Bezier
             currentPoint = GetPointByInterpolation(1 / (float)accuracy * i);
             nextPoint = GetPointByInterpolation(1 / (float)accuracy * (i + 1));
             result += System.Numerics.Vector2.Distance(currentPoint, nextPoint);
-            try
-            {
-                interpolationToSegment.Add(1 / (float)accuracy * (i + 1), result);
-            }
-            catch (ArgumentException)
-            {
-
-            }
+            interpolationToSegment.Add(1 / (float)accuracy * (i + 1), result);
         }
         Length = result;
         interpolationToSegment.Remove(interpolationToSegment.Keys.ElementAt(interpolationToSegment.Count - 1)); // remove last pair

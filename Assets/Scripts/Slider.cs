@@ -26,7 +26,8 @@ public class Slider : MonoBehaviour
     /// </summary>
     private int preempt;
     private OsuHitObjects.Slider slider;
-    private List<Bezier> curves;
+    private List<BezierPath> curves;
+    private CirclePath circlePath;
     private LineRenderer lineRenderer;
     private RectTransform rectTransform;
     private const int ACCURACY = 50;
@@ -62,7 +63,7 @@ public class Slider : MonoBehaviour
         slider = (OsuHitObjects.Slider)MusicPlayer.CurrentPlaying.HitObjects[PlayField.CurrentHitObject];
         slider.SliderPoints.Insert(0, slider.Position);
         rectTransform = GetComponent<RectTransform>();
-        curves = new List<Bezier>();
+        curves = new List<BezierPath>();
         List<Vector3> points = new List<Vector3>();
         lineRenderer.widthCurve = AnimationCurve.Linear(0, 0.1f, 1, 0.1f);
         lineRenderer.numCornerVertices = 32;
@@ -74,26 +75,23 @@ public class Slider : MonoBehaviour
                 name = "Bezier Slider(Clone)";
                 int start = 0;
                 bool isMultipleCurves = false;
-                for (int i = 0; i < slider.SliderPoints.Count; i++)
+                for (int i = 1; i < slider.SliderPoints.Count; i++)
                 {
-                    if (i != 0)
+                    if (slider.SliderPoints[i] == slider.SliderPoints[i - 1])
                     {
-                        if (slider.SliderPoints[i] == slider.SliderPoints[i - 1])
+                        isMultipleCurves = true;
+                        List<System.Numerics.Vector2> controlPoints = new List<System.Numerics.Vector2>();
+                        for (int j = start; j < i; j++) // split the SliderPoint list into separate curves(a bezier can be composed of multiple curves)
                         {
-                            isMultipleCurves = true;
-                            List<System.Numerics.Vector2> controlPoints = new List<System.Numerics.Vector2>();
-                            for (int j = start; j < i; j++) // split the SliderPoint list into separate curves(a bezier can be composed of multiple curves)
-                            {
-                                controlPoints.Add(Utilities.OsuPixelToScreenPoint(slider.SliderPoints[j]));
-                            }
-                            curves.Add(new Bezier(controlPoints, ACCURACY));
-                            start = i;
+                            controlPoints.Add(Utilities.OsuPixelToScreenPoint(slider.SliderPoints[j]));
                         }
+                        curves.Add(new BezierPath(controlPoints, ACCURACY));
+                        start = i;
                     }
                 }
                 if (!isMultipleCurves)
                 {
-                    curves.Add(new Bezier(Utilities.OsuPixelsToScreenPoints(slider.SliderPoints), ACCURACY));
+                    curves.Add(new BezierPath(Utilities.OsuPixelsToScreenPoints(slider.SliderPoints), ACCURACY));
                 }
                 lineRenderer.positionCount = ACCURACY * curves.Count;
                 for (int i = 0; i < curves.Count; i++) // unpack all calculated points into the line renderer
@@ -132,53 +130,15 @@ public class Slider : MonoBehaviour
             }
             case CurveType.PerfectCurve:
             {
-                
                 name = "Circle Slider(Clone)";
-                if (Utilities.IsCollinear(Utilities.OsuPixelToScreenPoint(slider.SliderPoints[0]), Utilities.OsuPixelToScreenPoint(slider.SliderPoints[1]), Utilities.OsuPixelToScreenPoint(slider.SliderPoints[2])))
+                circlePath = new CirclePath(Utilities.OsuPixelToScreenPoint(slider.SliderPoints[0]), Utilities.OsuPixelToScreenPoint(slider.SliderPoints[1]), Utilities.OsuPixelToScreenPoint(slider.SliderPoints[2]), ACCURACY);
+                foreach (System.Numerics.Vector2 v in circlePath.Points)
                 {
-                    lineRenderer.positionCount = 2;
-                    System.Numerics.Vector2 pointA2D = Utilities.OsuPixelToScreenPoint(new System.Numerics.Vector2(slider.SliderPoints[0].X, slider.SliderPoints[0].Y));
-                    Vector3 pointA = Camera.main.ScreenToWorldPoint(new Vector3(pointA2D.X, Screen.height - pointA2D.Y, 0));
-                    pointA = new Vector3(pointA.x, pointA.y, 0);
-                    points.Add(pointA);
-                    System.Numerics.Vector2 pointB2D = Utilities.OsuPixelToScreenPoint(new System.Numerics.Vector2(slider.SliderPoints[slider.SliderPoints.Count - 1].X, slider.SliderPoints[slider.SliderPoints.Count - 1].Y));
-                    Vector3 pointB = Camera.main.ScreenToWorldPoint(new Vector3(pointB2D.X, Screen.height - pointB2D.Y, 0));
-                    pointB = new Vector3(pointB.x, pointB.y, 0);
-                    points.Add(pointB);
-                    lineRenderer.SetPositions(points.ToArray());
-                    break;
-                }
-                System.Numerics.Vector2 center = Utilities.CalculateCircleCenter(slider.SliderPoints[0], slider.SliderPoints[1], slider.SliderPoints[2]);
-                // Debug.Log($"{center:F6}, r={radius:F6}, A={Utilities.OsuPixelToScreenPoint(slider.SliderPoints[0]):F6}, B={Utilities.OsuPixelToScreenPoint(slider.SliderPoints[1]):F6}, C={Utilities.OsuPixelToScreenPoint(slider.SliderPoints[2]):F6}");
-                System.Numerics.Vector2 OA = Utilities.OsuPixelToScreenPoint(new System.Numerics.Vector2(slider.SliderPoints[0].X - center.X, slider.SliderPoints[0].Y - center.Y));
-                System.Numerics.Vector2 OB = Utilities.OsuPixelToScreenPoint(new System.Numerics.Vector2(slider.SliderPoints[1].X - center.X, slider.SliderPoints[1].Y - center.Y));
-                System.Numerics.Vector2 OC = Utilities.OsuPixelToScreenPoint(new System.Numerics.Vector2(slider.SliderPoints[2].X - center.X, slider.SliderPoints[2].Y - center.Y));
-                float radius = OA.Length();
-                float angleCcwOaOb = Utilities.CalculateOrientedAngle(OA, OB);
-                if (angleCcwOaOb < 0)
-                {
-                    angleCcwOaOb += 2 * (float)Math.PI;
-                }
-                float angleCcwOaOc = Utilities.CalculateOrientedAngle(OA, OC);
-                if (angleCcwOaOc < 0)
-                {
-                    angleCcwOaOc += 2 * (float)Math.PI;
-                }
-                if (angleCcwOaOb > angleCcwOaOc)
-                {
-                    angleCcwOaOc -= 2 * (float)Math.PI;
-                }
-                float segmentAngle = angleCcwOaOc / ACCURACY;
-                float currentAngle = Mathf.Atan2(OA.Y, OA.X);
-                lineRenderer.positionCount = ACCURACY;
-                for (int i = 0; i < ACCURACY; i++)
-                {
-                    System.Numerics.Vector2 point2D = new System.Numerics.Vector2(Utilities.OsuPixelToScreenPointX(center.X) + radius * Mathf.Cos(currentAngle), Utilities.OsuPixelToScreenPointY(center.Y) + radius * Mathf.Sin(currentAngle));
-                    Vector3 point = Camera.main.ScreenToWorldPoint(new Vector3(point2D.X, Screen.height - point2D.Y, 0));
+                    Vector3 point = Camera.main.ScreenToWorldPoint(new Vector3(v.X, Screen.height - v.Y, 0));
                     point = new Vector3(point.x, point.y, 0);
                     points.Add(point);
-                    currentAngle += segmentAngle;
                 }
+                lineRenderer.positionCount = circlePath.Points.Count;
                 lineRenderer.SetPositions(points.ToArray());
                 break;
             }
