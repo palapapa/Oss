@@ -85,13 +85,13 @@ public class Slider : MonoBehaviour
                         {
                             controlPoints.Add(Utilities.OsuPixelToScreenPoint(slider.SliderPoints[j]));
                         }
-                        curves.Add(new BezierPath(controlPoints, ACCURACY));
+                        curves.Add(new BezierPath(controlPoints, ACCURACY, ACCURACY));
                         start = i;
                     }
                 }
                 if (!isMultipleCurves)
                 {
-                    curves.Add(new BezierPath(Utilities.OsuPixelsToScreenPoints(slider.SliderPoints), ACCURACY));
+                    curves.Add(new BezierPath(Utilities.OsuPixelsToScreenPoints(slider.SliderPoints), ACCURACY, ACCURACY));
                 }
                 lineRenderer.positionCount = ACCURACY * curves.Count;
                 for (int i = 0; i < curves.Count; i++) // unpack all calculated points into the line renderer
@@ -131,7 +131,7 @@ public class Slider : MonoBehaviour
             case CurveType.PerfectCurve:
             {
                 name = "Circle Slider(Clone)";
-                circlePath = new CirclePath(Utilities.OsuPixelToScreenPoint(slider.SliderPoints[0]), Utilities.OsuPixelToScreenPoint(slider.SliderPoints[1]), Utilities.OsuPixelToScreenPoint(slider.SliderPoints[2]), ACCURACY);
+                circlePath = new CirclePath(Utilities.OsuPixelToScreenPoint(slider.SliderPoints[0]), Utilities.OsuPixelToScreenPoint(slider.SliderPoints[1]), Utilities.OsuPixelToScreenPoint(slider.SliderPoints[2]), ACCURACY, ACCURACY);
                 foreach (System.Numerics.Vector2 v in circlePath.Points)
                 {
                     Vector3 point = Camera.main.ScreenToWorldPoint(new Vector3(v.X, Screen.height - v.Y, 0));

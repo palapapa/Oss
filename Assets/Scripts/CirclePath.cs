@@ -9,20 +9,17 @@ public class CirclePath : SliderPath
     private System.Numerics.Vector2 start;
     private System.Numerics.Vector2 middle;
     private System.Numerics.Vector2 end;
-    /// <summary>
-    /// The angle of the arc.
-    /// </summary>
-    private float angle;
 
-    public CirclePath(System.Numerics.Vector2 start, System.Numerics.Vector2 middle, System.Numerics.Vector2 end, int accuracy)
+    public CirclePath(System.Numerics.Vector2 start, System.Numerics.Vector2 middle, System.Numerics.Vector2 end, int accuracy, int segments)
     {
         this.start = start;
         this.middle = middle;
         this.end = end;
         Points = CalculatePoints(start, middle, end, accuracy);
+        CalculateEvenlySpacedPoints(segments);
     }
 
-    public override void CalculateEvenlySpacedPoints(int segments)
+    protected override void CalculateEvenlySpacedPoints(int segments)
     {
         EvenlySpacedPoints.Clear();
         EvenlySpacedPoints = CalculatePoints(start, middle, end, segments);
@@ -60,7 +57,6 @@ public class CirclePath : SliderPath
             }
             float segmentAngle = angleCcwOaOc / accuracy;
             float currentAngle = Mathf.Atan2(OA.Y, OA.X);
-            angle = Math.Abs(angleCcwOaOc - currentAngle);
             for (int i = 0; i < accuracy; i++)
             {
                 result.Add(new System.Numerics.Vector2(center.X + radius * Mathf.Cos(currentAngle), center.Y + radius * Mathf.Sin(currentAngle)));
