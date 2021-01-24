@@ -28,7 +28,11 @@ public class Slider : MonoBehaviour
     private OsuHitObjects.Slider slider;
     private List<BezierPath> curves;
     private CirclePath circlePath;
+    private LinearPath linearPath;
     private LineRenderer lineRenderer;
+    private List<Vector3> points = new List<Vector3>();
+    private float sliderSnakingInterval;
+    private int originalPositionCount;
     private RectTransform rectTransform;
     private const int ACCURACY = 50;
 
@@ -64,8 +68,7 @@ public class Slider : MonoBehaviour
         slider.SliderPoints.Insert(0, slider.Position);
         rectTransform = GetComponent<RectTransform>();
         curves = new List<BezierPath>();
-        List<Vector3> points = new List<Vector3>();
-        lineRenderer.widthCurve = AnimationCurve.Linear(0, 0.1f, 1, 0.1f);
+        lineRenderer.widthCurve = AnimationCurve.Linear(0, 0.2f, 1, 0.2f);
         lineRenderer.numCornerVertices = 32;
         lineRenderer.numCapVertices = 32;
         switch (slider.CurveType)
@@ -98,9 +101,7 @@ public class Slider : MonoBehaviour
                 {
                     for (int j = 0; j < curves[i].Points.Count; j++)
                     {
-                        Vector3 point = Camera.main.ScreenToWorldPoint(new Vector3(curves[i].Points[j].X, Screen.height - curves[i].Points[j].Y, 0));
-                        point = new Vector3(point.x, point.y, 0);
-                        points.Add(point);
+                        points.Add(Utilities.ScreenToWorldPoint2D(curves[i].Points[j].X, curves[i].Points[j].Y));
                     }
                 }
                 lineRenderer.SetPositions(points.ToArray());
@@ -116,15 +117,12 @@ public class Slider : MonoBehaviour
             case CurveType.Linear:
             {
                 name = "Linear Slider(Clone)";
-                lineRenderer.positionCount = 2;
-                System.Numerics.Vector2 pointA2D = Utilities.OsuPixelToScreenPoint(new System.Numerics.Vector2(slider.SliderPoints[0].X, slider.SliderPoints[0].Y));
-                Vector3 pointA = Camera.main.ScreenToWorldPoint(new Vector3(pointA2D.X, Screen.height - pointA2D.Y, 0));
-                pointA = new Vector3(pointA.x, pointA.y, 0);
-                points.Add(pointA);
-                System.Numerics.Vector2 pointB2D = Utilities.OsuPixelToScreenPoint(new System.Numerics.Vector2(slider.SliderPoints[slider.SliderPoints.Count - 1].X, slider.SliderPoints[slider.SliderPoints.Count - 1].Y));
-                Vector3 pointB = Camera.main.ScreenToWorldPoint(new Vector3(pointB2D.X, Screen.height - pointB2D.Y, 0));
-                pointB = new Vector3(pointB.x, pointB.y, 0);
-                points.Add(pointB);
+                linearPath = new LinearPath(Utilities.OsuPixelToScreenPoint(slider.SliderPoints[0]), Utilities.OsuPixelToScreenPoint(slider.SliderPoints[slider.SliderPoints.Count - 1]), ACCURACY, ACCURACY);
+                lineRenderer.positionCount = ACCURACY;
+                foreach (System.Numerics.Vector2 v in linearPath.Points)
+                {
+                    points.Add(Utilities.ScreenToWorldPoint2D(v.X, v.Y));
+                }
                 lineRenderer.SetPositions(points.ToArray());
                 break;
             }
@@ -134,15 +132,16 @@ public class Slider : MonoBehaviour
                 circlePath = new CirclePath(Utilities.OsuPixelToScreenPoint(slider.SliderPoints[0]), Utilities.OsuPixelToScreenPoint(slider.SliderPoints[1]), Utilities.OsuPixelToScreenPoint(slider.SliderPoints[2]), ACCURACY, ACCURACY);
                 foreach (System.Numerics.Vector2 v in circlePath.Points)
                 {
-                    Vector3 point = Camera.main.ScreenToWorldPoint(new Vector3(v.X, Screen.height - v.Y, 0));
-                    point = new Vector3(point.x, point.y, 0);
-                    points.Add(point);
+                    points.Add(Utilities.ScreenToWorldPoint2D(v.X, v.Y));
                 }
-                lineRenderer.positionCount = circlePath.Points.Count;
+                lineRenderer.positionCount = ACCURACY;
                 lineRenderer.SetPositions(points.ToArray());
                 break;
             }
         }
+        sliderSnakingInterval = (float)fadeIn / lineRenderer.positionCount;
+        originalPositionCount = lineRenderer.positionCount;
+        Debug.Log($"fadeIn={fadeIn}, positionCount={lineRenderer.positionCount}, sliderSnakingInterval={sliderSnakingInterval:F6}");
     }
 
     private void Update()
@@ -158,6 +157,10 @@ public class Slider : MonoBehaviour
                 Mathf.Clamp((float)(PlayField.GameTimer.ElapsedMilliseconds - (slider.StartTime - preempt)) / fadeIn, 0, 1)
             )
         );
+        int positionCount = (int)Math.Max(0, (PlayField.GameTimer.ElapsedMilliseconds - (slider.StartTime - preempt)) / sliderSnakingInterval);
+        positionCount = Mathf.Clamp(positionCount, 0, originalPositionCount);
+        lineRenderer.positionCount = positionCount;
+        lineRenderer.SetPositions(points.ToArray());
         if (PlayField.GameTimer.ElapsedMilliseconds > slider.EndTime)
         {
             Destroy(gameObject);

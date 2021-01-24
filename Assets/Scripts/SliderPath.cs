@@ -12,5 +12,4 @@ public abstract class SliderPath
     /// Evenly spaced points on the path.
     /// </summary>
     public List<System.Numerics.Vector2> EvenlySpacedPoints { get; protected set; } = new List<System.Numerics.Vector2>();
-    protected abstract void CalculateEvenlySpacedPoints(int segments);
 }

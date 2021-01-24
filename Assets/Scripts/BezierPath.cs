@@ -22,7 +22,7 @@ public class BezierPath : SliderPath
     public BezierPath(List<System.Numerics.Vector2> controlPoints, int accuracy, int segments)
     {
         ControlPoints = controlPoints;
-        CalculateCurve(controlPoints, accuracy);
+        CalculatePoints(controlPoints, accuracy);
         CalculateEvenlySpacedPoints(segments);
     }
     
@@ -155,10 +155,10 @@ public class BezierPath : SliderPath
     /// <summary>
     /// Calculate <paramref name="segments"/> number of evenly spaced points on the curve and updates <see cref="EvenlySpacedPoints"/>.
     /// <br/>
-    /// <paramref name="segments"/> will be cached and will be used to recalculate <see cref="EvenlySpacedPoints"/> when <see cref="UpdateAccuracy(int)"/> or <see cref="CalculateCurve(List{System.Numerics.Vector2}, int)"/> is called.
+    /// <paramref name="segments"/> will be cached and will be used to recalculate <see cref="EvenlySpacedPoints"/> when <see cref="UpdateAccuracy(int)"/> or <see cref="CalculatePoints(List{System.Numerics.Vector2}, int)"/> is called.
     /// </summary>
     /// <param name="segments">The number of evenly spaced points(including start and end) to be calculated.</param>
-    protected override void CalculateEvenlySpacedPoints(int segments)
+    protected void CalculateEvenlySpacedPoints(int segments)
     {
         if (segments < 2)
         {
@@ -212,7 +212,7 @@ public class BezierPath : SliderPath
     /// </summary>
     /// <param name="controlPoints">The control points defining the curve.</param>
     /// <param name="accuracy">The number of points on the curve to be calculated including start and end.</param>
-    private void CalculateCurve(List<System.Numerics.Vector2> controlPoints, int accuracy)
+    private void CalculatePoints(List<System.Numerics.Vector2> controlPoints, int accuracy)
     {
         if (accuracy <= 0)
         {

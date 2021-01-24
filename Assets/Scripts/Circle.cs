@@ -49,14 +49,7 @@ public class Circle : MonoBehaviour
         od = MusicPlayer.CurrentPlaying.DifficultySection.OverallDifficulty;
         spawnDelay = (int)PlayField.GameTimer.ElapsedMilliseconds - hitCircle.StartTime;
         Vector2 screenPoint = Utilities.OsuPixelToScreenPointUnity(hitCircle.Position);
-        transform.position = Camera.main.ScreenToWorldPoint
-        (
-            new Vector3
-            (
-                screenPoint.x,
-                Screen.height - screenPoint.y // Unity treats the bottom left as origin wtf
-            )
-        );
+        transform.position = Utilities.ScreenToWorldPoint2D(screenPoint.x, screenPoint.y);
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
         if (ar <= 5)
         {
@@ -82,8 +75,8 @@ public class Circle : MonoBehaviour
     private void Update()
     {
         elapsedTimeSinceSpawn += (int)(Time.deltaTime * 1000);
-        canvasGroup.alpha = Mathf.Clamp((float)(PlayField.GameTimer.ElapsedMilliseconds - (hitCircle.StartTime - preempt)) / fadeIn, 0, 1);
-        float approachCircleScaleMultiplier = 1 - Mathf.Clamp((float)(PlayField.GameTimer.ElapsedMilliseconds - (hitCircle.StartTime - preempt)) / preempt, 0, 1);
+        canvasGroup.alpha = Mathf.Clamp01((float)(PlayField.GameTimer.ElapsedMilliseconds - (hitCircle.StartTime - preempt)) / fadeIn);
+        float approachCircleScaleMultiplier = 1 - Mathf.Clamp01((float)(PlayField.GameTimer.ElapsedMilliseconds - (hitCircle.StartTime - preempt)) / preempt);
         if (!(approachCircleScaleMultiplier == 0 && PlayField.GameTimer.ElapsedMilliseconds < hitCircle.StartTime - preempt))
         {
             ApproachCircle.transform.localScale = originalApproachCircleScale * approachCircleScaleMultiplier + HitCircleTexture.transform.localScale;

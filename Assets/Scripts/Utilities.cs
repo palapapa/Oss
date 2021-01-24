@@ -165,6 +165,13 @@ public static class Utilities
         return result;
     }
 
+    public static Vector3 ScreenToWorldPoint2D(float x, float y)
+    {
+        Vector3 result = Camera.main.ScreenToWorldPoint(new Vector3(x, Screen.height - y, 0));
+        result = new Vector3(result.x, result.y, 0);
+        return result;
+    }
+
     public static List<float> SolveThreeVariableLinearEquation(ThreeVariableLinearEquation A, ThreeVariableLinearEquation B, ThreeVariableLinearEquation C)
     {
         float delta = new Matrix3x3

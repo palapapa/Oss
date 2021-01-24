@@ -19,7 +19,7 @@ public class CirclePath : SliderPath
         CalculateEvenlySpacedPoints(segments);
     }
 
-    protected override void CalculateEvenlySpacedPoints(int segments)
+    protected void CalculateEvenlySpacedPoints(int segments)
     {
         EvenlySpacedPoints.Clear();
         EvenlySpacedPoints = CalculatePoints(start, middle, end, segments);
