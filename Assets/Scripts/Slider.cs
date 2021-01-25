@@ -141,7 +141,6 @@ public class Slider : MonoBehaviour
         }
         sliderSnakingInterval = (float)fadeIn / lineRenderer.positionCount;
         originalPositionCount = lineRenderer.positionCount;
-        Debug.Log($"fadeIn={fadeIn}, positionCount={lineRenderer.positionCount}, sliderSnakingInterval={sliderSnakingInterval:F6}");
     }
 
     private void Update()

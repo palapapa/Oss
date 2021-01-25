@@ -1,7 +1,0 @@
-
-WARNING
-
-Your play field boundary will be cleared.
-
-
-(set by “osu - playfield boundary”)
