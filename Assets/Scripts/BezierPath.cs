@@ -158,7 +158,7 @@ public class BezierPath : SliderPath
     /// <paramref name="segments"/> will be cached and will be used to recalculate <see cref="EvenlySpacedPoints"/> when <see cref="UpdateAccuracy(int)"/> or <see cref="CalculatePoints(List{System.Numerics.Vector2}, int)"/> is called.
     /// </summary>
     /// <param name="segments">The number of evenly spaced points(including start and end) to be calculated.</param>
-    protected void CalculateEvenlySpacedPoints(int segments)
+    private void CalculateEvenlySpacedPoints(int segments)
     {
         if (segments < 2)
         {

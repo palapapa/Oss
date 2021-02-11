@@ -50,7 +50,6 @@ public class Circle : MonoBehaviour
         spawnDelay = (int)PlayField.GameTimer.ElapsedMilliseconds - hitCircle.StartTime;
         Vector2 screenPoint = Utilities.OsuPixelToScreenPointUnity(hitCircle.Position);
         transform.position = Utilities.ScreenToWorldPoint2D(screenPoint.x, screenPoint.y);
-        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
         if (ar <= 5)
         {
             fadeIn = (int)(800 + 400 * (5 - ar) / 5);
@@ -69,7 +68,10 @@ public class Circle : MonoBehaviour
 
     private void Start()
     {
-        SetCircleSize(cs);
+        float targetSize = (float)(150 * (1 - 0.7 * (cs - 5) / 5)); // target circle size in pixels
+        float currentSize = rectTransform.rect.width * transform.localScale.x;
+        float targetScale = targetSize / currentSize;
+        transform.localScale *= targetScale;
     }
 
     private void Update()
@@ -85,13 +87,5 @@ public class Circle : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    private void SetCircleSize(float cs)
-    {
-        float targetSize = (float)((3840 / 16) * (1 - (0.7 * (cs - 5) / 5))); // target circle size in pixels
-        float currentSize = rectTransform.rect.width * transform.localScale.x;
-        float targetScale = targetSize / currentSize;
-        transform.localScale *= targetScale;
     }
 }

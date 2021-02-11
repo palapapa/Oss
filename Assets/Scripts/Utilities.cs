@@ -283,4 +283,8 @@ public static class Utilities
         return Math.Abs((a.Y - b.Y) / (a.X - b.X) - (b.Y - c.Y) / (b.X - c.X)) <= slopeLeniency;
     }
     
+    public static T Last<T>(this List<T> list)
+    {
+        return list[list.Count - 1];
+    }
 }

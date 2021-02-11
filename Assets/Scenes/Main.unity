@@ -609,7 +609,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -480, y: -95}
+  m_AnchoredPosition: {x: -479.99994, y: -95}
   m_SizeDelta: {x: -959.99994, y: -190}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &121255919
@@ -1462,7 +1462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SongSelection: {fileID: 103840390}
   Circle: {fileID: 57556950124259240, guid: 0689f9df20d914148bed1735b3dceef7, type: 3}
-  Slider: {fileID: 1048003521124695406, guid: 345e91ca8eadcb54698bb7aa73946e13, type: 3}
+  Slider: {fileID: 4745184788181836608, guid: 2745238868b4ab8419fdcf367e99f637, type: 3}
   HitObjects: {fileID: 240964082}
 --- !u!1 &523329797
 GameObject:
@@ -6029,7 +6029,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 729358601}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 10
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -7385,7 +7385,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -374.75, y: 0}
+  m_AnchoredPosition: {x: -374.74994, y: 0}
   m_SizeDelta: {x: 187.32776, y: -810.0141}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &2090397675
