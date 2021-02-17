@@ -61,7 +61,7 @@ public class KeyInputDetector : MonoBehaviour
             }
             else
             {
-                Audio.PlayAudio(Audio.Instance.KeyDownSounds[new System.Random().Next(0, Audio.Instance.KeyDownSounds.Length)], 1.0f, AudioChannels.SoundEffects);//plays a random keydown sound
+                Audio.PlayAudio(Audio.Instance.KeyDownSounds[new System.Random().Next(0, Audio.Instance.KeyDownSounds.Length)], 1.0f, AudioChannels.SoundEffects); // plays a random keydown sound
             }
         }
     }

@@ -191,7 +191,7 @@ public class Slider : MonoBehaviour
         transform.localScale *= targetScale;
         Vector3[] worldCorners = new Vector3[4];
         rectTransform.GetWorldCorners(worldCorners);
-        lineRenderer.widthCurve = AnimationCurve.Linear(0, worldCorners[0].x - worldCorners[3].x, 1, worldCorners[0].x - worldCorners[3].x);
+        lineRenderer.widthCurve = AnimationCurve.Linear(0, Math.Abs(worldCorners[0].x - worldCorners[3].x), 1, Math.Abs(worldCorners[0].x - worldCorners[3].x));
         pathWidth = worldCorners[0].x - worldCorners[3].x;
         gameObject.transform.position = points[0];
         sliderHead.transform.position = points[0];

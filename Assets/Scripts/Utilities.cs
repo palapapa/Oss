@@ -165,11 +165,29 @@ public static class Utilities
         return result;
     }
 
+    /// <summary>
+    /// Convert a 2D screen point to a 3D world point. The returned Vector3 will always have its z set to 0.
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <returns></returns>
     public static Vector3 ScreenToWorldPoint2D(float x, float y)
     {
         Vector3 result = Camera.main.ScreenToWorldPoint(new Vector3(x, Screen.height - y, 0));
         result = new Vector3(result.x, result.y, 0);
         return result;
+    }
+
+    /// <summary>
+    /// Convert a 2D screen point to a 2D world point.
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <returns></returns>
+    public static Vector2 ScreenTo2DWorldPoint(float x, float y)
+    {
+        Vector3 result = Camera.main.ScreenToWorldPoint(new Vector3(x, Screen.height - y, 0));
+        return new Vector2(result.x, result.y);
     }
 
     public static List<float> SolveThreeVariableLinearEquation(ThreeVariableLinearEquation A, ThreeVariableLinearEquation B, ThreeVariableLinearEquation C)

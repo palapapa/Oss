@@ -14,7 +14,7 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: palapapa
   productName: Oss
-  defaultCursor: {fileID: 0}
+  defaultCursor: {fileID: 2800000, guid: a8416cf51c438014bbe8839a106313a1, type: 3}
   cursorHotspot: {x: 55, y: 55}
   m_SplashScreenBackgroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_ShowUnitySplashScreen: 1

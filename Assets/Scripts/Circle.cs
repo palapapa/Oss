@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using OsuParsers.Beatmaps.Objects;
 
@@ -83,9 +84,36 @@ public class Circle : MonoBehaviour
         {
             ApproachCircle.transform.localScale = originalApproachCircleScale * approachCircleScaleMultiplier + HitCircleTexture.transform.localScale;
         }
+        if
+        (
+            (
+                Input.GetKeyDown(KeyCode.Mouse0) ||
+                Input.GetKeyDown(KeyCode.Mouse1) ||
+                Input.GetKeyDown(KeyCode.Z) ||
+                Input.GetKeyDown(KeyCode.X)
+            ) &&
+            IsActive()
+        )
+        {
+            Vector2 click = new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y);
+            click = Utilities.ScreenTo2DWorldPoint(click.x, click.y);
+            Vector2 circle = new Vector2(transform.position.x, transform.position.y);
+            Vector3[] worldCorners = new Vector3[4];
+            rectTransform.GetWorldCorners(worldCorners);
+            Debug.Log($"click={click}, circle={circle}, radius={Math.Abs((worldCorners[0].x - worldCorners[3].x) / 2)}, distance={Vector2.Distance(click, circle)}");
+            if (Vector2.Distance(click, circle) <= Math.Abs((worldCorners[0].x - worldCorners[3].x) / 2))
+            {
+                Destroy(gameObject);
+            }
+        }
         if (PlayField.GameTimer.ElapsedMilliseconds > hitCircle.StartTime)
         {
             Destroy(gameObject);
         }
+    }
+
+    private bool IsActive()
+    {
+        return canvasGroup.alpha != 0;
     }
 }
