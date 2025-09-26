@@ -6,11 +6,13 @@
 [![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability-percentage/palapapa/Oss?style=for-the-badge)](https://codeclimate.com/github/palapapa/Oss)
 [![Code Climate technical debt](https://img.shields.io/codeclimate/tech-debt/palapapa/Oss?style=for-the-badge)](https://codeclimate.com/github/palapapa/Oss)
 [![GitHub repo size](https://img.shields.io/github/repo-size/palapapa/Oss?style=for-the-badge)](https://github.com/palapapa/Oss/releases)
-<br>
+
 A student project dedicated to replicate osu! in Unity.
-<br>
+
 For now, this game will only work in 16:9 and using any other aspect ratios is very likely to break the game.
-<br>
+
+To see this game in action, please watch [this demostration video](https://www.youtube.com/watch?v=1v4i-1gI6DA).
+
 # How To Play
 1. Download the binaries in [Release](https://github.com/palapapa/Oss/releases)
 1. Extract and run Oss.exe.
